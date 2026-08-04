@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="tr">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="images/favicon.ico">
+		<title> &#304;&#350;te Y&#246;netim - Proje Raporu </title>
+		<!-- Bootstrap 4.0--><link rel="stylesheet" href="assets/vendor_components/bootstrap/dist/css/bootstrap.css">
+		<!-- c3 CSS --><link rel="stylesheet" type="text/css" href="assets/vendor_components/c3/c3.min.css">
+		<!-- daterange picker --><link rel="stylesheet" href="assets/vendor_components/bootstrap-daterangepicker/daterangepicker.css">
+		<!-- fullCalendar --><link rel="stylesheet" href="assets/vendor_components/fullcalendar/fullcalendar.min.css"><link rel="stylesheet" href="assets/vendor_components/fullcalendar/fullcalendar.print.min.css" media="print">
+		<!-- Bootstrap switch--><link rel="stylesheet" href="assets/vendor_components/bootstrap-switch/switch.css">
+		<!-- theme style --><link rel="stylesheet" href="css/style.css">
+		<!-- CrmX Admin skins --><link rel="stylesheet" href="css/skin_color.css">
+	</head>
+<body class="hold-transition light-skin sidebar-mini theme-fruit">
+<!-- Site wrapper -->
+<div class="wrapper">
+	<div class="art-bg">
+		<img src="images/art1.svg" alt="" class="art-img light-img">
+		<img src="images/art2.svg" alt="" class="art-img dark-img">
+	</div>
+	
+	<header class="main-header"><!-- Logo -->
+	<a href="panel.html" class="logo"><!-- mini logo -->
+		<div class="logo-mini">
+			<span class="light-logo"><img src="images/logo-light.png" alt="logo"></span>
+			<span class="dark-logo"><img src="images/logo-dark.png" alt="logo"></span>
+		</div><!-- logo-->
+		<div class="logo-lg">
+			<span class="light-logo"><img src="images/logo-light-text.png" alt="logo"></span>
+			<span class="dark-logo"><img src="images/logo-dark-text.png" alt="logo"></span>
+		</div>
+	</a><!-- Header Navbar -->
+    <nav class="navbar navbar-static-top"><!-- Sidebar toggle button-->
+	<div>
+		<a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button"><i class="ti-align-left"></i></a>
+		<a href="#" data-provide="fullscreen" class="sidebar-toggle" title="Full Screen"><i class="mdi mdi-crop-free"></i></a>
+	</div>
+	
+	<div class="navbar-custom-menu r-side">
+		<ul class="nav navbar-nav"><!-- full Screen -->
+			<li class="search-bar"><div class="lookup lookup-circle lookup-right"><input type="text" name="s"></div></li>
+			<!-- Messages -->
+			<li class="dropdown messages-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Messages"><i class="mdi mdi-email"></i></a>
+				<ul class="dropdown-menu animated bounceIn">
+					<li class="header"><div class="p-20">
+							<div class="flexbox">
+							<div><h4 class="mb-0 mt-0">Mesajlar</h4></div>
+							<div><a href="#" class="text-danger">T&#252;m&#252;n&#252; Sil</a>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li><!-- inner menu: contains the actual data -->
+				<ul class="menu sm-scrol">
+					<li><a href="#">
+						<div class="pull-left"><img src="images/user2-160x160.png" class="rounded-circle" alt="User Image"></div>
+						<div class="mail-contnet"><h4>Ali BOLAT<small><i class="fa fa-clock-o"></i> 15 Dk</small></h4><span>Test Mesaj&#305; mesaj k&#305;sa i&#231;eri&#287;i burada</span></div></a>
+					</li>
+					<li><a href="#">
+						<div class="pull-left"><img src="images/user3-128x128.png" class="rounded-circle" alt="User Image"></div>
+						<div class="mail-contnet"><h4>Emre KINACI<small><i class="fa fa-clock-o"></i> 4 Saat</small></h4><span>Test Mesaj&#305; mesaj k&#305;sa i&#231;eri&#287;i burada</span></div></a>
+					</li>
+					<li><a href="#">
+						<div class="pull-left"><img src="images/user4-128x128.png" class="rounded-circle" alt="User Image"></div>
+						<div class="mail-contnet"><h4>Elif &#220;NVER<small><i class="fa fa-clock-o"></i> Bug&#252;n</small></h4><span>Test Mesaj&#305; mesaj k&#305;sa i&#231;eri&#287;i burada</span></div></a>
+					</li>
+					<li><a href="#">
+						<div class="pull-left"><img src="images/user3-128x128.png" class="rounded-circle" alt="User Image"></div>
+						<div class="mail-contnet"><h4>Mert BUZ<small><i class="fa fa-clock-o"></i> D&#252;n</small></h4><span>Test Mesaj&#305; mesaj k&#305;sa i&#231;eri&#287;i burada</span></div></a>
+					</li>
+					<li><a href="#">
+						<div class="pull-left"><img src="images/user4-128x128.png" class="rounded-circle" alt="User Image"></div>
+						<div class="mail-contnet"><h4>Serhat ARSLAN<small><i class="fa fa-clock-o"></i> 2 G&#252;n</small></h4><span>Test Mesaj&#305; mesaj k&#305;sa i&#231;eri&#287;i burada</span></div></a>
+					</li>
+				</ul>
+			</li>
+			<li class="footer"><a href="#">T&#252;m Mesajlar</a></li>
+		</ul>
+	</li>
+	<!-- Notifications -->
+	<li class="dropdown notifications-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Notifications"><i class="mdi mdi-bell"></i></a>
+		<ul class="dropdown-menu animated bounceIn">
+			<li class="header"><div class="p-20">
+				<div class="flexbox">
+							<div><h4 class="mb-0 mt-0">Bildirimler</h4></div>
+							<div><a href="#" class="text-danger">T&#252;m&#252;n&#252; Sil</a></div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<!-- inner menu: contains the actual data -->
+					<ul class="menu sm-scrol">
+						<li><a href="#"><i class="fa fa-users text-info"></i> Toplant&#305; Plan&#305; Yap&#305;ld&#305;.</a></li>
+						<li><a href="#"><i class="fa fa-warning text-warning"></i> Sipari&#351;leri Onaylay&#305;n.</a></li>
+						<li><a href="#"><i class="fa fa-users text-danger"></i> Teknik Servis Ar&#305;zas&#305;.</a></li>
+						<li><a href="#"><i class="fa fa-shopping-cart text-success"></i> Sipari&#351; &#214;demesi Geldi.</a></li>
+						<li><a href="#"><i class="fa fa-user text-danger"></i> G&#246;rev Olumsuz.</a></li>
+						<li><a href="#"><i class="fa fa-user text-primary"></i> G&#246;rev Onayland&#305;.</a></li>
+						<li><a href="#"><i class="fa fa-user text-success"></i> G&#246;rev Beklemede.</a></li>
+					</ul>
+				</li>
+				<li class="footer"><a href="#">T&#252;m&#252;n&#252; G&#246;r</a></li>
+			</ul>
+		</li>
+		<!-- User Account-->
+		<li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="User"><img src="images/avatar/7.jpg" class="user-image rounded-circle" alt="User Image"></a>
+			<ul class="dropdown-menu animated flipInX"><!-- User image -->
+				<li class="user-header bg-img" style="background-image: url(images/user-info.jpg)" data-overlay="3">
+					<div class="flexbox align-self-center"><img src="../../images/avatar/7.jpg" class="float-left rounded-circle" alt="User Image">					  
+					<h4 class="user-name align-self-center">
+					<span>Fatih AKYILDIZ</span>
+					<small>fatih@isteyonetim.com</small>
+					</h4></div>
+				</li>
+				<!-- Menu Body -->
+				<li class="user-body">
+					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-person"></i> Profil</a>
+					<a class="dropdown-item" href="mailbox_inbox.html"><i class="ion ion-email-unread"></i> Mesajlar</a>
+					<a class="dropdown-item" href="javascript:void(0)"><i class="ion ion-settings"></i> Ayarlar</a>
+					<a class="dropdown-item" href="javascript:void(0)"><i class="ion-log-out"></i> &#199;&#305;k&#305;&#351;</a>
+					<div class="p-10"><a href="javascript:void(0)" class="btn btn-sm btn-rounded btn-success">Profili G&#246;r&#252;nt&#252;le</a></div>
+				</li>
+			</ul>
+		</li>
+		<!-- Control Sidebar Toggle Button -->
+		<li><a href="#" data-toggle="control-sidebar" title="Setting"><i class="fa fa-cog fa-spin"></i></a></li>
+	</ul>
+</div>
+</nav>
+</header>
+
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar">
+<!-- sidebar-->
+<section class="sidebar">
+
+<div class="user-profile">
+	<div class="ulogo"><a href="panel.html"><!-- logo for regular state and mobile devices --><h3><b>&#304;&#350;</b>te Y&#246;netim</h3></a></div>
+	<div class="profile-pic"><img src="images/user5-128x128.jpg" alt="user">
+		<div class="profile-info"><h4>Fatih AKYILDIZ</h4>
+			<div class="list-icons-item dropdown">
+				<a href="#" class="list-icons-item dropdown-toggle" data-toggle="dropdown"><span class="badge badge-ring fill badge-primary mr-2"></span>&#199;evrimi&#231;i</a>
+					<div class="dropdown-menu dropdown-menu-right">
+					<a href="#" class="dropdown-item">&#199;evrimd&#305;&#351;&#305;</a>
+					<a href="#" class="dropdown-item">Me&#351;gul</a>
+					</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- sidebar menu-->
+<ul class="sidebar-menu" data-widget="tree">
+	<li><a href="panel.html"><i class="ti-dashboard"></i><span>Giri&#351; Paneli</span></a></li>
+	<li class="treeview"><a href="#"><i class="ti-email"></i><span>Mesajlar</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="mesaj-gelen.html"><i class="ti-more"></i>Gelen Mesajlar</a></li>
+			<li><a href="mesaj-yaz.html"><i class="ti-more"></i>Mesaj Yaz</a></li>
+			<li><a href="online-mesajlasma.html"><i class="ti-more"></i>Online Mesajla&#351;ma</a></li>
+		</ul>
+	</li>
+	<li class="treeview"><a href="#"><i class="ti-direction-alt"></i><span>G&#246;rev Paneli</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="gorev-olustur.html"><i class="ti-more"></i>G&#246;rev Olu&#351;tur</a></li>
+			<li><a href="gorev-listesi.html"><i class="ti-more"></i>G&#246;rev Listesi</a></li>
+		</ul>
+	</li>
+	<li class="treeview"><a href="#"><i class="ti-shield"></i><span>Proje Paneli</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="proje-olustur.html"><i class="ti-more"></i>Proje Olu&#351;tur</a></li>
+			<li><a href="proje-listesi.html"><i class="ti-more"></i>Proje Listesi</a></li>
+		</ul>
+	</li>
+	<li class="treeview"><a href="#"><i class="ti-user"></i><span>M&#252;&#351;teri Paneli</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="musteri-olustur.html"><i class="ti-more"></i>M&#252;&#351;teri Olu&#351;tur</a></li>
+			<li><a href="musteri-listesi.html"><i class="ti-more"></i>M&#252;&#351;teri Listesi</a></li>
+		</ul>
+	</li>
+	<li class="treeview"><a href="#"><i class="ti-receipt"></i><span>Teklif Paneli</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="teklif-musteriye-teklif-olustur.html"><i class="ti-more"></i>M&#252;&#351;teriye Teklif Olu&#351;tur</a></li>
+			<li><a href="teklif-musteriye-verilen-teklifler.html"><i class="ti-more"></i>Verilen Teklifler</a></li>
+			<li><a href="teklif-teklif-iste.html"><i class="ti-more"></i>Teklif &#304;ste</a></li>
+			<li><a href="teklif-alinan-teklifler.html"><i class="ti-more"></i>Al&#305;nan Teklifler</a></li>
+			<li><a href="teklif-toptanci-listesi.html"><i class="ti-more"></i>Toptanc&#305; Listesi</a></li>
+			<li><a href="teklif-sablonu.html"><i class="ti-more"></i>Teklif &#350;ablonu</a></li>
+		</ul>
+	</li>
+	<li class="treeview"><a href="#"><i class="ti-view-list"></i><span>Finans Paneli</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="finans-olustur.html"><i class="ti-more"></i>Hareket Ekle</a></li>
+			<li><a href="finans-banka.html"><i class="ti-more"></i>Bankalar</a></li>
+			<li><a href="finans-cek.html"><i class="ti-more"></i>&#199;ekler</a></li>
+		</ul>
+	</li>
+	<li class="treeview"><a href="#"><i class="ti-plug"></i><span>Teknik Servis Paneli</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="servis-ekle.html"><i class="ti-more"></i>Servis Ekle</a></li>
+			<li><a href="servis-personel.html"><i class="ti-more"></i>Servis Personeli</a></li>
+			<li><a href="servis-liste.html"><i class="ti-more"></i>Servis Listesi</a></li>
+		</ul>
+	</li>
+	<li class="header nav-small-cap">Online</li>
+	<li class="treeview"><a href="#"><i class="ti-user"></i><span>Online &#304;&#351;lemler</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="onlinehiz-takvim.html"><i class="ti-layout-grid4"></i><span>Takvim</span></a></li>
+			<li><a href="onlinehiz-personeller.html"><i class="ti-receipt"></i><span>Personeller</span></a></a></li>
+			<li><a href="onlinehiz-hesap-yukseltme.html"><i class="ti-panel"></i><span>Hesap Y&#252;kseltme</span></a></li>
+		</ul>
+	</li>
+	<li class="header nav-small-cap">Rapor</li>
+	<li class="treeview active"><a href="#"><i class="ti-layout-grid4"></i><span>Raporlar</span><span class="pull-right-container"><i class="fa fa-angle-right pull-right"></i></span></a>
+		<ul class="treeview-menu">
+			<li><a href="rapor-gorev.html"><i class="ti-more"></i>G&#246;rev Raporlar&#305;</a></li>
+			<li class="active"><a href="rapor-proje.html"><i class="ti-more"></i>Proje Raporlar&#305;</a></li>
+			<li><a href="rapor-musteri.html"><i class="ti-more"></i>M&#252;&#351;teri Raporlar&#305;</a></li>
+			<li><a href="rapor-teklif.html"><i class="ti-more"></i>Teklif Raporlar&#305;</a></li>
+			<li><a href="rapor-finans.html"><i class="ti-more"></i>Finans Raporlar&#305;</a></li>
+			<li><a href="rapor-servis.html"><i class="ti-more"></i>Servis Raporlar&#305;</a></li>
+		</ul>
+	</li>
+	<li><a href="index.html"><i class="ti-power-off"></i><span>&#199;&#305;k&#305;&#351;</span></a></li>
+</ul>
+</section>
+</aside>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+	<div class="container-full"><!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="d-flex align-items-center">
+				<div class="mr-auto w-p50"><h3 class="page-title br-0">Proje Raporu</h3>
+					<div class="d-inline-block align-items-center">
+						<nav>
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="#"><i class="mdi mdi-home-outline"></i></a></li>
+								<li class="breadcrumb-item" aria-current="page">Raporlar</li>
+								<li class="breadcrumb-item active" aria-current="page">Proje Raporu</li>
+							</ol>
+						</nav>
+					</div>
+				</div>
+				<div class="right-title">
+					<div class="dropdown">
+						<button class="btn btn-outline dropdown-toggle no-caret" type="button" data-toggle="dropdown"><i class="mdi mdi-dots-horizontal"></i></button>
+						<div class="dropdown-menu dropdown-menu-right">
+							<a class="dropdown-item" href="#"><i class="mdi mdi-share"></i>Geri Bildirim</a>
+							<a class="dropdown-item" href="#"><i class="mdi mdi-email"></i>Mesajlar</a>
+							<a class="dropdown-item" href="#"><i class="mdi mdi-help-circle-outline"></i>S.S.S.</a>
+							<a class="dropdown-item" href="#"><i class="mdi mdi-settings"></i>Destek</a>
+							<div class="dropdown-divider"></div>
+							<button type="button" class="btn btn-rounded btn-success">Submit</button>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+		</div>
+		<!-- Main content -->
+		<section class="content">
+		
+		<div class="row">
+			<!-- ///////////////// -->
+			<div class="col-12 col-xl-4">
+				<div class="box overflow-h">
+					<div class="box-body">
+						<div class="flexbox">
+							<h6 class="text-uppercase">Yeni Proje</h6>
+							<h6><i class="ion-android-arrow-dropup text-success font-size-18 mr-1"></i> %20</h6>
+						</div>
+					</div>
+					<div id="spark1"></div>
+					<div class="box-body py-0">
+						<ul class="list-inline my-10">
+							<li class="px-10"><h6 class="mb-0 text-bold">20%</h6><small>Genel</small></li>
+							<li class="br-1 bl-1 px-10"><h6 class="mb-0 text-bold">70%</h6><small>Ay</small></li>
+							<li class="px-10"><h6 class="mb-0 text-bold">10%</h6><small>G&#252;n</small></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- ///////////////// -->
+			<div class="col-12 col-xl-4">
+				<div class="box overflow-h">
+					<div class="box-body">
+						<div class="flexbox">
+							<h6 class="text-uppercase">Devaml&#305; Proje</h6>
+							<h6><i class="ion-android-arrow-dropdown text-danger font-size-18 mr-1"></i> %18</h6>
+						</div>
+					</div>
+					<div id="spark2"></div>
+					<div class="box-body py-0">
+						<ul class="list-inline my-10">
+							<li class="px-10"><h6 class="mb-0 text-bold">20%</h6><small>Genel</small></li>
+							<li class="br-1 bl-1 px-10"><h6 class="mb-0 text-bold">70%</h6><small>Ay</small></li>
+							<li class="px-10"><h6 class="mb-0 text-bold">10%</h6><small>G&#252;n</small></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- ///////////////// -->
+			<div class="col-12 col-xl-4">
+				<div class="box overflow-h">
+					<div class="box-body">
+						<div class="flexbox">
+							<h6 class="text-uppercase">Eski Proje</h6>
+							<h6><i class="ion-android-arrow-dropup text-success font-size-18 mr-1"></i> %20</h6>
+						</div>
+					</div>
+					<div id="spark3"></div>
+					<div class="box-body py-0">
+						<ul class="list-inline my-10">
+							<li class="px-10"><h6 class="mb-0 text-bold">20%</h6><small>Genel</small></li>
+							<li class="br-1 bl-1 px-10"><h6 class="mb-0 text-bold">70%</h6><small>Ay</small></li>
+							<li class="px-10"><h6 class="mb-0 text-bold">10%</h6><small>G&#252;n</small></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<!-- ///////////////// -->
+			<div class="col-xl-12 col-12">
+				<div class="box">
+					<div class="box-header"><h4 class="box-title">Proje Grafi&#287;i</h4>
+						<div class="box-controls pull-right">
+							<div class="lookup lookup-circle lookup-right"><input type="text" name="s" placeholder="Patients id"></div>
+						</div>
+					</div>
+					<div class="box-body">
+						<div id="chart-lca"></div>
+					</div>
+				</div>
+			</div>
+			<!-- ///////////////// -->
+			<div class="col-xl-6 col-12">
+				<div class="box">
+					<div class="box-body"><h4 class="box-title">Yeni Proje Listesi</h4>
+						<div class="table-responsive">
+							<table class="table">
+							<thead>
+							<tr>
+								<th>#</th>
+								<th>Firma</th>
+								<th>S&#246;zle&#351;me Tarihi</th>
+								<th>Bakiye</th>
+								<th>&#304;&#351;lem</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>1</td><td><a href="musteri-detay.html">Iku Cafe Firmas&#305;</a></td>
+								<td><span class="text-muted"><i class="fa fa-clock-o"></i> 16 Ocak 2019</span></td><td Align="right">170,02 TL</td>
+								<td><span class="badge badge-pill badge-success">&#304;&#351;lemde</span></td>
+							</tr>
+							<tr>
+								<td>2</td><td>Ixapolo Firmas&#305;</td>
+								<td><span class="text-muted"><i class="fa fa-clock-o"></i> 16 Ocak 2019</span></td><td Align="right">170,02 TL</td>
+								<td><span class="badge badge-pill badge-success">&#304;&#351;lemde</span></td>
+							</tr>
+							<tr>
+								<td>3</td><td>Expotus Firmas&#305;</td>
+								<td><span class="text-muted"><i class="fa fa-clock-o"></i> 16 Ocak 2019</span></td><td Align="right">180,02 TL</td>
+								<td><span class="badge badge-pill badge-success">&#304;&#351;lemde</span></td>
+								
+							</tr>
+							<tr>
+								<td>4</td><td>Iku Cafe Firmas&#305;</td>
+								<td><span class="text-muted"><i class="fa fa-clock-o"></i> 16 Ocak 2019</span></td><td Align="right">190,02 TL</td>
+								<td><span class="badge badge-pill badge-success">&#304;&#351;lemde</span></td>
+							</tr>
+							<tr>
+								<td>5</td><td>Pvp Vision Firmas&#305;</td>
+								<td><span class="text-muted"><i class="fa fa-clock-o"></i> 16 Ocak 2019</span></td><td Align="right">200,02 TL</td>
+								<td><span class="badge badge-pill badge-success">&#304;&#351;lemde</span></td>
+							</tr>
+							<tr>
+								<td>6</td><td>Cowdsensin Firmas&#305;</td>
+								<td><span class="text-muted"><i class="fa fa-clock-o"></i> 16 Ocak 2019</span></td><td Align="right">210,02 TL</td>
+								<td><span class="badge badge-pill badge-success">&#304;&#351;lemde</span></td>
+							</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ///////////////// -->
+			<div class="col-xl-6 col-12">
+				<div class="box">
+					<div class="box-header"><h4 class="box-title">Proje</h4></div>
+					<div class="box-body"><div id="chart-sa"></div></div>
+				</div>
+			</div>
+			<!-- ///////////////// -->
+			<div class="col-12 col-md-6 col-lg-4 col-xl-2">
+				<div class="box bg-primary pull-up">
+					<div class="box-body text-center">
+						<span><i class="fa fa-wheelchair pb-10 font-size-50"></i></span><br><h1>4,569</h1><span>Patient</span></div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-4 col-xl-2">
+					<div class="box bg-success pull-up">
+						<div class="box-body text-center"><span><i class="fa fa-file pb-10 font-size-50"></i></span><br><h1>23,009</h1><span>Encounters</span></div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6 col-lg-4 col-xl-2">
+					<div class="box bg-warning pull-up">
+						<div class="box-body text-center"><span><i class="fa fa-calendar pb-10 font-size-50"></i></span><br><h1>56</h1><span>Appointments</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-2">
+				<div class="box bg-info pull-up">
+					<div class="box-body text-center"><span><i class="fa fa-heartbeat pb-10 font-size-50"></i></span><br><h1>12,100</h1><span>Lab &amp; Radiology</span></div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-2">
+				<div class="box bg-danger pull-up">
+					<div class="box-body text-center"><span><i class="fa fa-file-text pb-10 font-size-50"></i></span><br><h1>14,023</h1><span>Prescription</span></div>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 col-lg-4 col-xl-2">
+				<div class="box bg-dark pull-up">
+					<div class="box-body text-center"><span><i class="fa fa-share pb-10 font-size-50"></i></span><br><h1>4,567</h1><span>Referral</span></div>
+				</div>
+			</div>
+			<!-- ///////////////// -->
+			<div class="col-12">
+				<div class="box">
+					<div class="box-body"><h4 class="box-title">Proje Listesi</h4>
+						<div class="table-responsive">
+							<table class="table table-striped table-hover">
+							<thead>
+							<tr>
+								<th class="bb-2">No.</th>
+								<th class="bb-2">Test</th>
+								<th class="bb-2">Lab</th>
+								<th class="bb-2">Priority</th>
+								<th class="bb-2">Cost</th>
+								<th class="bb-2">Handling</th>
+								<th class="bb-2">Coll. By</th>
+								<th class="bb-2">Status</th>
+								<th class="bb-2">Result</th>
+								<th class="bb-2">Signed</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>1</td>
+								<td>Blood Count</td>
+								<td>Microbiology</td>
+								<td><span class="badge badge-warning">Law</span></td>
+								<td>N500</td>
+								<td>Johen Doe</td>
+								<td>5.45pm 11/05</td>
+								<td><span class="badge badge-success">Result Added</span></td>
+								<td><a href="#" data-toggle="modal" data-target="#result" class="text-info">Result</a><a href="#" data-toggle="modal" data-target="#comment-dialog" class="text-info">Comment</a></td>
+								<td><button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off"><div class="handle"></div></button></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Blood Count</td>
+								<td>Microbiology</td>
+								<td><span class="badge badge-danger">High</span></td>
+								<td>N500</td>
+								<td>Johen Doe</td>
+								<td>5.45pm 11/05</td>
+								<td><span class="badge badge-success">Result Added</span></td>
+								<td><a href="#" data-toggle="modal" data-target="#result" class="text-info">Result</a><a href="#" data-toggle="modal" data-target="#comment-dialog" class="text-info">Comment</a></td>
+								<td><button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off"><div class="handle"></div></button></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Blood Count</td>
+								<td>Microbiology</td>
+								<td><span class="badge badge-warning">Law</span></td>
+								<td>N500</td>
+								<td>Johen Doe</td>
+								<td>5.45pm 11/05</td>
+								<td><span class="badge badge-success">Result Added</span></td>
+								<td><a href="#" data-toggle="modal" data-target="#result" class="text-info">Result</a><a href="#" data-toggle="modal" data-target="#comment-dialog" class="text-info">Comment</a></td>
+								<td><button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off"><div class="handle"></div></button></td>
+							</tr>
+							<tr>
+								<td>1</td>
+								<td>Blood Count</td>
+								<td>Microbiology</td>
+								<td><span class="badge badge-danger">High</span></td>
+								<td>N500</td>
+								<td>Johen Doe</td>
+								<td>5.45pm 11/05</td>
+								<td><span class="badge badge-success">Result Added</span></td>
+								<td><a href="#" data-toggle="modal" data-target="#result" class="text-info">Result</a><a href="#" data-toggle="modal" data-target="#comment-dialog" class="text-info">Comment</a></td>
+								<td><button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off"><div class="handle"></div></button></td>
+							</tr>
+							<tr>
+								<td>2</td>
+								<td>Blood Count</td>
+								<td>Microbiology</td>
+								<td><span class="badge badge-danger">High</span></td>
+								<td>N500</td>
+								<td>Johen Doe</td>
+								<td>5.45pm 11/05</td>
+								<td><span class="badge badge-success">Result Added</span></td>
+								<td><a href="#" data-toggle="modal" data-target="#result" class="text-info">Result</a><a href="#" data-toggle="modal" data-target="#comment-dialog" class="text-info">Comment</a></td>
+								<td><button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off"><div class="handle"></div></button></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>Blood Count</td>
+								<td>Microbiology</td>
+								<td><span class="badge badge-warning">Law</span></td>
+								<td>N500</td>
+								<td>Johen Doe</td>
+								<td>5.45pm 11/05</td>
+								<td><span class="badge badge-success">Result Added</span></td>
+								<td><a href="#" data-toggle="modal" data-target="#result" class="text-info">Result</a><a href="#" data-toggle="modal" data-target="#comment-dialog" class="text-info">Comment</a></td>
+								<td><button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off"><div class="handle"></div></button></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>Blood Count</td>
+								<td>Microbiology</td>
+								<td><span class="badge badge-warning">Law</span></td>
+								<td>N500</td>
+								<td>Johen Doe</td>
+								<td>5.45pm 11/05</td>
+								<td><span class="badge badge-success">Result Added</span></td>
+								<td><a href="#" data-toggle="modal" data-target="#result" class="text-info">Result</a><a href="#" data-toggle="modal" data-target="#comment-dialog" class="text-info">Comment</a></td>
+								<td><button type="button" class="btn btn-sm btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off"><div class="handle"></div></button></td>
+							</tr>
+							</tbody>
+							</table>
+						</div>
+					</div><!-- /.box-body -->
+				</div><!-- /.box -->
+			</div>
+			<!-- /////////////////// -->
+			<div class="col-xl-5 col-12"> 
+				<div class="box">
+					<div class="box-header with-border"><h4 class="box-title">Appointment</h4>
+						<ul class="box-controls pull-right">
+							<li class="dropdown"><a data-toggle="dropdown" href="#" aria-expanded="false"><i class="ti-more-alt rotate-90"></i></a>
+								<div class="dropdown-menu dropdown-menu-right" x-placement="bottom-end" style="position: absolute; transform: translate3d(-114px, 21px, 0px); top: 0px; left: 0px; will-change: transform;">
+									<a class="dropdown-item" href="#"><i class="ti-import"></i> Import</a>
+									<a class="dropdown-item" href="#"><i class="ti-export"></i> Export</a>
+									<a class="dropdown-item" href="#"><i class="ti-printer"></i> Print</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#"><i class="ti-settings"></i> Settings</a>
+								</div>
+							</li>
+							<li><a class="box-btn-close" href="#"></a></li>
+							<li><a class="box-btn-slide" href="#"></a></li>
+							<li><a class="box-btn-fullscreen" href="#"></a></li>
+						</ul>
+					</div>
+					<div class="box-body p-0"><!-- THE CALENDAR -->
+						<div id="calendar" class="dask"></div>
+					</div><!-- /.box-body -->
+				</div><!-- /.box --> 
+			</div>
+			<!-- col -->
+			<div class="col-xl-7 col-12"> 
+				<div class="box">
+					<div class="box-body"><h4 class="box-title">Hospital Overview</h4>
+					<div id="nested-pie" style="height:540px;"></div>
+				</div><!-- /.box-body -->
+			</div><!-- /.box -->
+		</div>
+	</div><!-- /.row -->	      
+	</section><!-- /.content -->
+</div>
+</div>
+<!-- /.content-wrapper -->
+<!--Model Popup Area-->
+<!-- result modal content -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="result-popup" aria-hidden="true" style="display: none;" id="result">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header"><h4 class="modal-title" id="result-popup">Radiology Investigations - Result</h4><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div>
+			<div class="modal-body">
+				<div class="row justify-content-between">
+					<div class="col-md-7 col-12"><h4>Test Name - Neck Scan</h4></div>
+					<div class="col-md-5 col-12"><h4 class="text-right">Lab Order Id : L0000002821</h4></div>
+				</div>
+				<div class="table-responsive">
+					<table class="table table-bordered">
+					<thead class="bg-secondary">
+					<tr>
+						<th scope="col">Test</th>
+						<th scope="col">Result</th>
+						<th scope="col">Range</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Swelling Diameter</td>
+						<td>45 - 1000</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+					</tr>
+					</tbody>
+					</table>
+				</div>
+				<div class="comment"><p><span class="font-weight-600">Comment</span> : <span class="comment-here text-fade">Lorem ipsum dolor sit amet, consectetur adipisicing elit. </span></p></div>
+				<div class="table-responsive">
+					<table class="table">
+					<tbody>
+					<tr>
+						<th colspan="2" class="b-0">Test By</th>
+						<th colspan="2" class="b-0">Signed By</th>
+					</tr>
+					<tr class="bg-secondary">
+						<td>Donald jr</td>
+						<td>Time : 11-8-2017   04:22</td>
+						<td>Lous Clark</td>
+						<td>Time : 11-8-2017   04:22</td>
+					</tr>
+					</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-info pull-right">Print</button>
+				<button type="button" class="btn btn-success pull-right">Save</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- comment modal content -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="comment-popup" aria-hidden="true" style="display: none;" id="comment-dialog">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header"><h4 class="modal-title" id="comment-popup">Radiology Investigations - Comment</h4><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button></div>
+			<div class="modal-body">
+				<div class="row justify-content-between">
+					<div class="col-12"><h4>Comment</h4></div>
+				</div>
+				<form>
+				<div class="form-group"><textarea class="form-control" id="comment-area" rows="3"></textarea></div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-success pull-right mr-10">Save</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<footer class="main-footer">
+<div class="pull-right d-none d-sm-inline-block">
+	<ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+		<li class="nav-item"><a class="nav-link" href="javascript:void(0)">S.S.S.</a></li>
+		<li class="nav-item"><a class="nav-link" href="hesap-yukseltme.html">Hesap Y&#252;kselt</a></li>
+	</ul>
+</div>
+	&copy; 2020 <a href="https://www.bulut.digital/">Bulut.Digital</a> / T&#252;m Haklar&#305; Sakl&#305;d&#305;r.
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-light">
+<div class="rpanel-title"><span class="pull-right btn btn-circle btn-danger"><i class="ion ion-close text-white" data-toggle="control-sidebar"></i></span></div><!-- Create the tabs -->
+	<ul class="nav nav-tabs control-sidebar-tabs">
+		<li class="nav-item"><a href="#control-sidebar-home-tab" data-toggle="tab">Chat</a></li>
+		<li class="nav-item"><a href="#control-sidebar-settings-tab" data-toggle="tab">Liste</a></li>
+	</ul>
+	<!-- Tab panes -->
+	<div class="tab-content"><!-- Home tab content -->
+		<div class="tab-pane" id="control-sidebar-home-tab">
+			<div class="flexbox"><a href="javascript:void(0)" class="text-grey"><i class="ti-more"></i></a>	
+				<p>Kullanýcýlar</p>
+				<a href="javascript:void(0)" class="text-right text-grey"><i class="ti-plus"></i></a>
+			</div>
+			<div class="lookup lookup-sm lookup-right d-none d-lg-block"><input type="text" name="s" placeholder="Search" class="w-p100"></div>
+			<div class="media-list media-list-hover mt-20">
+				<div class="media py-10 px-0"><a class="avatar avatar-lg status-success" href="#"><img src="images/avatar/1.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Ahmet</strong></a></p><p>Online</p><span>Þimdi</span></div>
+			</div>
+			
+			<div class="media py-10 px-0"><a class="avatar avatar-lg status-danger" href="#"><img src="images/avatar/2.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Ayþe</strong></a></p><p>Online...</p><span>33 dk</span></div>
+			</div>
+			
+			<div class="media py-10 px-0"><a class="avatar avatar-lg status-warning" href="#"><img src="images/avatar/3.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Elvan</strong></a></p><p>Online...</p><span>42 dk</span></div>
+			</div>
+			
+			<div class="media py-10 px-0"><a class="avatar avatar-lg status-primary" href="#"><img src="images/avatar/4.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Murat</strong></a></p><p>Online...</p><span>43 dk</span></div>
+			</div>
+			
+			<div class="media py-10 px-0"><a class="avatar avatar-lg status-success" href="#"><img src="images/avatar/1.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Orhan</strong></a></p><p>Online...</p><span>Þimdi</span></div>
+			</div>
+			
+			<div class="media py-10 px-0"><a class="avatar avatar-lg status-danger" href="#"><img src="images/avatar/2.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Deniz</strong></a></p><p>Online...</p><span>33 dk</span></div>
+			</div>
+			
+			<div class="media py-10 px-0"><a class="avatar avatar-lg status-warning" href="#"><img src="images/avatar/3.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Evan</strong></a></p><p>Online...</p><span>42 dk</span></div>
+			</div>
+			
+			<div class="media py-10 px-0"><a class="avatar avatar-lg status-primary" href="#"><img src="images/avatar/4.png" alt="..."></a>
+				<div class="media-body"><p class="font-size-16"><a class="hover-primary" href="#"><strong>Evan</strong></a></p><p>Online...</p><span>42 dk</span></div>
+			</div>
+		
+		</div>
+	</div>
+	<!-- /.tab-pane -->
+	<!-- Settings tab content -->
+	<div class="tab-pane" id="control-sidebar-settings-tab">
+		<div class="flexbox">
+			<a href="javascript:void(0)" class="text-grey"><i class="ti-more"></i></a><p>Yap&#305;lacaklar Listesi</p>
+			<a href="javascript:void(0)" class="text-right text-grey"><i class="ti-plus"></i></a>
+		</div>
+		<ul class="todo-list mt-20">
+			<li class="py-15 px-5 by-1"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_1" class="filled-in"><label for="basic_checkbox_1" class="mb-0 h-15"></label><!-- todo text --><span class="text-line">Teklif Haz&#305;rlanacak</span><!-- Emphasis label --><small class="badge bg-danger"><i class="fa fa-clock-o"></i> 14:20</small><!-- General tools such as edit or delete--><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_2" class="filled-in"><label for="basic_checkbox_2" class="mb-0 h-15"></label><span class="text-line">Sipari&#351; Listesi Haz&#305;rla</span><small class="badge bg-info"><i class="fa fa-clock-o"></i> 15:30</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5 by-1"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_3" class="filled-in"><label for="basic_checkbox_3" class="mb-0 h-15"></label><span class="text-line">Raporlar&#305; Haz&#305;rla</span><small class="badge bg-warning"><i class="fa fa-clock-o"></i> 14:09</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_4" class="filled-in"><label for="basic_checkbox_4" class="mb-0 h-15"></label><span class="text-line">Teklif Haz&#305;rlanacak</span><small class="badge bg-success"><i class="fa fa-clock-o"></i> 3 G&#252;n</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5 by-1"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_5" class="filled-in"><label for="basic_checkbox_5" class="mb-0 h-15"></label><span class="text-line">Sipari&#351; Listesi Haz&#305;rla</span><small class="badge bg-primary"><i class="fa fa-clock-o"></i> 1 Hafta</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_6" class="filled-in"><label for="basic_checkbox_6" class="mb-0 h-15"></label><span class="text-line">Raporlar&#305; Haz&#305;rla</span><small class="badge bg-info"><i class="fa fa-clock-o"></i> 1 Ay</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5 by-1"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_7" class="filled-in"><label for="basic_checkbox_7" class="mb-0 h-15"></label><!-- todo text --><span class="text-line">Teklif Haz&#305;rlanacak</span><!-- Emphasis label --><small class="badge bg-danger"><i class="fa fa-clock-o"></i> 2 Ay</small><!-- General tools such as edit or delete--><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_8" class="filled-in"><label for="basic_checkbox_8" class="mb-0 h-15"></label><span class="text-line">Sipari&#351; Listesi Haz&#305;rla</span><small class="badge bg-info"><i class="fa fa-clock-o"></i> 4 Hafta</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5 by-1"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_9" class="filled-in"><label for="basic_checkbox_9" class="mb-0 h-15"></label><span class="text-line">Raporlar&#305; Haz&#305;rla</span><small class="badge bg-warning"><i class="fa fa-clock-o"></i> 1 G&#252;n</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+			<li class="py-15 px-5"><!-- checkbox -->
+				<input type="checkbox" id="basic_checkbox_10" class="filled-in"><label for="basic_checkbox_10" class="mb-0 h-15"></label><span class="text-line">Teklif Haz&#305;rlanacak</span><small class="badge bg-success"><i class="fa fa-clock-o"></i> 3 G&#252;n</small><div class="tools"><i class="fa fa-edit"></i><i class="fa fa-trash-o"></i></div>
+			</li>
+		</ul>
+		</div><!-- /.tab-pane -->
+	</div>
+	</aside>
+	<!-- /.control-sidebar -->
+	
+	<!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+	<div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 --><script src="assets/vendor_components/jquery-3.3.1/jquery-3.3.1.js"></script>
+<!-- fullscreen --><script src="assets/vendor_components/screenfull/screenfull.js"></script>
+<!-- popper --><script src="assets/vendor_components/popper/dist/popper.min.js"></script>
+<!-- Bootstrap 4.0--><script src="assets/vendor_components/bootstrap/dist/js/bootstrap.js"></script>	
+<!-- Slimscroll --><script src="assets/vendor_components/jquery-slimscroll/jquery.slimscroll.js"></script>
+<!-- date-range-picker --><script src="assets/vendor_components/moment/min/moment.min.js"></script><script src="assets/vendor_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- fullCalendar --><script src="assets/vendor_components/fullcalendar/fullcalendar.js"></script><script src="js/pages/calendar.js"></script>
+<!-- C3 Plugins --><script src="assets/vendor_components/c3/d3.min.js"></script><script src="assets/vendor_components/c3/c3.min.js"></script>
+<!-- eChart Plugins --><script src="assets/vendor_components/echarts/dist/echarts-en.min.js"></script>
+<!-- FastClick --><script src="assets/vendor_components/fastclick/lib/fastclick.js"></script>
+<!-- apexcharts --><script src="assets/vendor_components/apexcharts-bundle/irregular-data-series.js"></script><script src="assets/vendor_components/apexcharts-bundle/dist/apexcharts.js"></script>
+<!-- CrmX Admin App --><script src="js/template.js"></script>
+<!-- CrmX Admin dashboard demo (This is only for demo purposes) --><script src="js/pages/dashboard4.js"></script>
+<!-- CrmX Admin for demo purposes --><script src="js/demo.js"></script>	
+
+</body>
+</html>

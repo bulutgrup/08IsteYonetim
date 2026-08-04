@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İşteYönetim — İş takibi tek ekranda</title>
+<link rel="stylesheet" href="styles.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DL0WBQF4ZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DL0WBQF4ZS');
+</script>
+</head>
+<body data-direction="sicak">
+
+<!-- ===== HEADER ===== -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand"><img src="assets/logo-mark.png" alt="İşteYönetim"><span>İşteYönetim</span></a>
+    <nav class="nav-links">
+      <a href="#features" data-i18n="nav.features">Özellikler</a>
+      <a href="#how" data-i18n="nav.how">Nasıl Çalışır</a>
+      <a href="fiyatlandirma.html" data-i18n="nav.pricing">Paketler</a>
+      <a href="indir.html" data-i18n="nav.download">İndir</a>
+      <a href="#faq" data-i18n="nav.faq">SSS</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-actions">
+      <div class="lang-toggle desktop-lang">
+        <button data-lang-btn="tr">TR</button>
+        <button data-lang-btn="en">EN</button>
+      </div>
+      <a href="https://panel.isteyonetim.com/login" class="btn" style="background:transparent;border:none;color:var(--ink);padding:11px 15px;font-size:15px;font-weight:600;margin-right:10px" data-i18n="nav.login">Giriş Yap</a>
+      <a href="https://panel.isteyonetim.com/register" class="btn btn-primary" style="padding:11px 20px;font-size:15px" data-i18n="nav.cta">Ücretsiz Başla</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- mobile drawer -->
+<div class="drawer" id="drawer">
+  <div class="drawer-bg"></div>
+  <div class="drawer-panel">
+    <button class="drawer-close" aria-label="Kapat">×</button>
+    <a href="#features" data-i18n="nav.features">Özellikler</a>
+    <a href="#how" data-i18n="nav.how">Nasıl Çalışır</a>
+    <a href="fiyatlandirma.html" data-i18n="nav.pricing">Paketler</a>
+    <a href="indir.html" data-i18n="nav.download">İndir</a>
+    <a href="#faq" data-i18n="nav.faq">SSS</a>
+    <a href="#contact" data-i18n="nav.contact">İletişim</a>
+    <div class="lang-toggle" style="margin-top:14px;align-self:flex-start">
+      <button data-lang-btn="tr">TR</button>
+      <button data-lang-btn="en">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-blobs"><span class="blob b1"></span><span class="blob b2"></span></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="pill"><b data-i18n="hero.badge">YENİ</b><span data-i18n="hero.pill">İş takibi artık tek ekranda</span></span>
+      <h1 data-i18n="hero.title">İşinizin her adımı <span class="hl">kontrol altında</span></h1>
+      <p class="hero-sub" data-i18n="hero.sub">İş akışlarını, personel görevlerini ve işleyişin her aşamasını tek yerden yönetin.</p>
+      <div class="hero-cta">
+        <a href="https://panel.isteyonetim.com/register" class="btn btn-primary btn-lg" data-i18n="hero.cta1">Ücretsiz Dene</a>
+        <a href="indir.html" class="btn btn-ghost btn-lg" data-i18n="hero.cta2">Uygulamayı İndir</a>
+      </div>
+      <div class="hero-trust">
+        <div class="avatars"><span>AK</span><span>MY</span><span>SD</span><span>EÇ</span></div>
+        <div>
+          <div class="stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.9 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          </div>
+          <div class="trust-txt" data-i18n="hero.trust"><b>2.400+</b> ekip İşteYönetim ile çalışıyor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <!-- floating badges -->
+      <div class="float-badge fb-1">
+        <span class="fb-ic" style="background:var(--grad)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div class="fb-t">Adım tamamlandı</div><div class="fb-s">Kontrol · Mehmet Y.</div></div>
+      </div>
+      <div class="float-badge fb-2">
+        <span class="fb-ic" style="background:var(--ink)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 8v4l3 2" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg></span>
+        <div><div class="fb-t">3 iş bugün teslim</div><div class="fb-s">Zamanında ✓</div></div>
+      </div>
+      <!-- phone -->
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+          <div class="app-top">
+            <div><div class="at-title">İş Panosu</div><div class="at-sub">Bugün · 8 aktif iş</div></div>
+            <div class="app-av">AK</div>
+          </div>
+          <div class="app-body">
+            <div class="kpi-row">
+              <div class="kpi accent"><div class="k-num">8</div><div class="k-lbl">Aktif iş</div></div>
+              <div class="kpi"><div class="k-num">24</div><div class="k-lbl">Bu hafta biten</div></div>
+            </div>
+            <div class="flow-card">
+              <div class="fc-h"><b>Sipariş #1042</b><span class="tag work">Devam ediyor</span></div>
+              <div class="step"><span class="si ok">✓</span><div><div class="st-t">Teklif onayı</div><div class="st-s">Ayşe K. · tamamlandı</div></div></div>
+              <div class="step-line"></div>
+              <div class="step"><span class="si ok">✓</span><div><div class="st-t">Üretim</div><div class="st-s">Atölye · tamamlandı</div></div></div>
+              <div class="step-line"></div>
+              <div class="step"><span class="si cur">3</span><div><div class="st-t">Kalite kontrol</div><div class="st-s">Mehmet Y. · şu an</div></div></div>
+              <div class="step-line"></div>
+              <div class="step muted"><span class="si todo">4</span><div><div class="st-t">Teslimat</div><div class="st-s">Bekliyor</div></div></div>
+            </div>
+          </div>
+          <div class="app-nav">
+            <i class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>Pano</i>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6h11M9 12h11M9 18h11" stroke-linecap="round"/><circle cx="4" cy="6" r="1.4"/><circle cx="4" cy="12" r="1.4"/><circle cx="4" cy="18" r="1.4"/></svg>İşler</i>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke-linecap="round"/><circle cx="17" cy="8" r="2.4"/></svg>Ekip</i>
+            <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" stroke-linecap="round"/></svg>Profil</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LOGO STRIP ===== -->
+<div class="logos">
+  <div class="wrap">
+    <span class="ll-label" data-i18n="logos.label">Sektörden ekipler güveniyor</span>
+    <span class="ll">Atölye 34</span><span class="ll">KahveDükkan</span><span class="ll">TeknikServis</span><span class="ll">MarketZinciri</span><span class="ll">YapıGrup</span>
+  </div>
+</div>
+
+<!-- ===== FEATURES ===== -->
+<section class="section" id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="feat.eyebrow">Neler Sunuyor</span>
+      <h2 data-i18n="feat.title">Tek uygulama, tüm işleyiş</h2>
+      <p data-i18n="feat.sub">Kafeden atölyeye, sahadan ofise — ekibinizin işini tek panelde toplayın.</p>
+    </div>
+    <div class="feature-grid">
+      <div class="fcard reveal">
+        <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><path d="M9 6h6a3 3 0 0 1 3 3v6" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="f1.t">İş Akışı Yönetimi</h3>
+        <p data-i18n="f1.d">Her işi adımlara bölün, sıraya koyun ve sürükle-bırak ile taşıyın.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" stroke-linecap="round"/><circle cx="17.5" cy="8" r="2.6"/><path d="M21.5 19c0-2.6-1.7-4.8-4-5.6" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="f2.t">Personel İş Takibi</h3>
+        <p data-i18n="f2.d">Kim hangi görevde, ne kadar ilerledi? Tüm ekibin yükünü tek bakışta görün.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h2l1.5 1.5M4 12h2l1.5 1.5M4 18h2l1.5 1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 6.5h9M11 13.5h9M11 19.5h9" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="f3.t">Adım Adım İşleyiş</h3>
+        <p data-i18n="f3.d">İşin en son hangi aşamada olduğunu, eksik kalan adımı net görün.</p>
+      </div>
+      <div class="fcard dark span2 reveal">
+        <div>
+          <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3" stroke-linecap="round"/></svg></div>
+          <h3 data-i18n="f4.t">Her Yerden Erişim</h3>
+          <p data-i18n="f4.d">Mobil uygulama sayesinde tüm personel sahada, yolda veya ofiste işine ulaşır.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-shrink:0">
+          <div style="text-align:center"><div style="font-family:var(--font-head);font-weight:800;font-size:34px;color:#fff">iOS</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.15)"></div>
+          <div style="text-align:center"><div style="font-family:var(--font-head);font-weight:800;font-size:34px;color:#fff">Android</div></div>
+          <div style="width:1px;background:rgba(255,255,255,.15)"></div>
+          <div style="text-align:center"><div style="font-family:var(--font-head);font-weight:800;font-size:34px;color:#fff">Web</div></div>
+        </div>
+      </div>
+      <div class="fcard reveal">
+        <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.7 21a2 2 0 0 1-3.4 0" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="f5.t">Bildirim & Hatırlatma</h3>
+        <p data-i18n="f5.d">Görev atandığında veya bir iş geciktiğinde anında haber alın.</p>
+      </div>
+      <div class="fcard reveal">
+        <div class="fic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke-linecap="round"/></svg></div>
+        <h3 data-i18n="f6.t">Raporlama</h3>
+        <p data-i18n="f6.d">Tamamlanan iş, gecikme ve ekip performansını otomatik raporlarla ölçün.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="section" id="how" style="background:var(--surface-alt)">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="how.eyebrow">Nasıl Çalışır</span>
+      <h2 data-i18n="how.title">Dört adımda işleyişi kurun</h2>
+      <p data-i18n="how.sub">Kurulum dakikalar sürer. Karmaşık ayar yok.</p>
+    </div>
+    <div class="steps-wrap">
+      <div class="steps-list reveal">
+        <div class="howstep active" data-howstep="1">
+          <div class="hs-n">1</div>
+          <div><h3 data-i18n="h1.t">İş akışını tanımlayın</h3><p data-i18n="h1.d">İşinizin adımlarını oluşturun: teklif, üretim, kontrol, teslimat.</p></div>
+        </div>
+        <div class="howstep" data-howstep="2">
+          <div class="hs-n">2</div>
+          <div><h3 data-i18n="h2.t">Ekibi davet edin</h3><p data-i18n="h2.d">Personeli rolleriyle ekleyin. Herkes görevlerini telefonundan görür.</p></div>
+        </div>
+        <div class="howstep" data-howstep="3">
+          <div class="hs-n">3</div>
+          <div><h3 data-i18n="h3.t">Görevleri atayın</h3><p data-i18n="h3.d">Her adımı bir kişiye atayın, son tarih verin.</p></div>
+        </div>
+        <div class="howstep" data-howstep="4">
+          <div class="hs-n">4</div>
+          <div><h3 data-i18n="h4.t">İlerlemeyi izleyin</h3><p data-i18n="h4.d">Canlı panelde işin hangi aşamada olduğunu görün, gecikmeleri yakalayın.</p></div>
+        </div>
+      </div>
+      <div class="how-visual reveal">
+        <!-- panel 1 -->
+        <div data-howpanel="1" class="phone">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="app-top"><div><div class="at-title">Yeni İş Akışı</div><div class="at-sub">4 adım</div></div><div class="app-av">+</div></div>
+            <div class="app-body">
+              <div class="flow-card"><div class="fc-h"><b>Adımlar</b></div>
+                <div class="step"><span class="si ok">1</span><div><div class="st-t">Teklif</div></div></div><div class="step-line"></div>
+                <div class="step"><span class="si ok">2</span><div><div class="st-t">Üretim</div></div></div><div class="step-line"></div>
+                <div class="step"><span class="si ok">3</span><div><div class="st-t">Kontrol</div></div></div><div class="step-line"></div>
+                <div class="step"><span class="si ok">4</span><div><div class="st-t">Teslimat</div></div></div>
+              </div>
+              <div class="kpi accent" style="text-align:center"><div class="k-lbl" style="font-size:13px">+ Adım Ekle</div></div>
+            </div>
+          </div>
+        </div>
+        <!-- panel 2 -->
+        <div data-howpanel="2" class="phone" style="display:none">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="app-top"><div><div class="at-title">Ekip</div><div class="at-sub">6 üye</div></div><div class="app-av">+</div></div>
+            <div class="app-body">
+              <div class="flow-card"><div class="step"><span class="app-av" style="width:32px;height:32px">AK</span><div><div class="st-t">Ayşe Kaya</div><div class="st-s">Yönetici</div></div></div></div>
+              <div class="flow-card"><div class="step"><span class="app-av" style="width:32px;height:32px">MY</span><div><div class="st-t">Mehmet Yıldız</div><div class="st-s">Kalite kontrol</div></div></div></div>
+              <div class="flow-card"><div class="step"><span class="app-av" style="width:32px;height:32px">SD</span><div><div class="st-t">Selin Demir</div><div class="st-s">Atölye</div></div></div></div>
+              <div class="kpi accent" style="text-align:center"><div class="k-lbl" style="font-size:13px">+ Personel Davet Et</div></div>
+            </div>
+          </div>
+        </div>
+        <!-- panel 3 -->
+        <div data-howpanel="3" class="phone" style="display:none">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="app-top"><div><div class="at-title">Görev Ata</div><div class="at-sub">Sipariş #1042</div></div></div>
+            <div class="app-body">
+              <div class="flow-card"><div class="fc-h"><b>Kalite kontrol</b><span class="tag work">Atanıyor</span></div>
+                <div class="step"><span class="app-av" style="width:32px;height:32px">MY</span><div><div class="st-t">Mehmet Yıldız</div><div class="st-s">Son tarih: Bugün 17:00</div></div></div>
+              </div>
+              <div class="flow-card"><div class="step"><span class="si cur">!</span><div><div class="st-t">Hatırlatma açık</div><div class="st-s">2 saat kala bildirim</div></div></div></div>
+              <div class="kpi accent" style="text-align:center"><div class="k-lbl" style="font-size:13px">Görevi Ata</div></div>
+            </div>
+          </div>
+        </div>
+        <!-- panel 4 -->
+        <div data-howpanel="4" class="phone" style="display:none">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="app-top"><div><div class="at-title">Canlı Pano</div><div class="at-sub">Gerçek zamanlı</div></div><div class="app-av">AK</div></div>
+            <div class="app-body">
+              <div class="kpi-row">
+                <div class="kpi accent"><div class="k-num">92%</div><div class="k-lbl">Zamanında</div></div>
+                <div class="kpi"><div class="k-num">2</div><div class="k-lbl">Geciken</div></div>
+              </div>
+              <div class="flow-card"><div class="fc-h"><b>Sipariş #1042</b><span class="tag work">%75</span></div>
+                <div style="height:8px;border-radius:6px;background:var(--line);overflow:hidden"><div style="width:75%;height:100%;background:var(--grad)"></div></div>
+              </div>
+              <div class="flow-card"><div class="fc-h"><b>Sipariş #1043</b><span class="tag done">Bitti</span></div>
+                <div style="height:8px;border-radius:6px;background:var(--line);overflow:hidden"><div style="width:100%;height:100%;background:#1E8A5B"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCREENSHOTS ===== -->
+<section class="section" id="screens">
+  <div class="wrap">
+    <div class="shots reveal">
+      <div class="sec-head">
+        <span class="eyebrow" data-i18n="shots.eyebrow">Uygulama</span>
+        <h2 data-i18n="shots.title">Cebinizdeki kontrol merkezi</h2>
+        <p data-i18n="shots.sub">Sade, hızlı ve Türkçe arayüz.</p>
+      </div>
+      <div class="shot-row">
+        <!-- workflow board -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="app-top"><div><div class="at-title">İşler</div><div class="at-sub">Sürükle-bırak pano</div></div></div>
+            <div class="app-body">
+              <div class="flow-card"><div class="fc-h"><b>Sırada</b><span class="tag" style="background:#EDE6D8;color:var(--muted)">3</span></div>
+                <div class="step"><span class="si todo">·</span><div><div class="st-t">Sipariş #1051</div><div class="st-s">Teklif bekliyor</div></div></div>
+                <div class="step"><span class="si todo">·</span><div><div class="st-t">Sipariş #1052</div><div class="st-s">Teklif bekliyor</div></div></div>
+              </div>
+              <div class="flow-card"><div class="fc-h"><b>Devam ediyor</b><span class="tag work">2</span></div>
+                <div class="step"><span class="si cur">▶</span><div><div class="st-t">Sipariş #1042</div><div class="st-s">Kalite kontrol</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- dashboard (mid) -->
+        <div class="phone mid">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="app-top"><div><div class="at-title">İş Panosu</div><div class="at-sub">Bugün · 8 aktif iş</div></div><div class="app-av">AK</div></div>
+            <div class="app-body">
+              <div class="kpi-row">
+                <div class="kpi accent"><div class="k-num">8</div><div class="k-lbl">Aktif iş</div></div>
+                <div class="kpi"><div class="k-num">24</div><div class="k-lbl">Bu hafta biten</div></div>
+              </div>
+              <div class="flow-card"><div class="fc-h"><b>Sipariş #1042</b><span class="tag work">Devam</span></div>
+                <div class="step"><span class="si ok">✓</span><div><div class="st-t">Teklif onayı</div></div></div><div class="step-line"></div>
+                <div class="step"><span class="si cur">3</span><div><div class="st-t">Kalite kontrol</div><div class="st-s">Mehmet Y.</div></div></div><div class="step-line"></div>
+                <div class="step muted"><span class="si todo">4</span><div><div class="st-t">Teslimat</div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- reports -->
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="ps-status"><span>9:41</span><span class="dots"><i></i><i></i><i></i></span></div>
+            <div class="app-top"><div><div class="at-title">Raporlar</div><div class="at-sub">Bu ay</div></div></div>
+            <div class="app-body">
+              <div class="kpi-row">
+                <div class="kpi"><div class="k-num">142</div><div class="k-lbl">Tamamlanan</div></div>
+                <div class="kpi accent"><div class="k-num">92%</div><div class="k-lbl">Zamanında</div></div>
+              </div>
+              <div class="flow-card"><div class="fc-h"><b>Haftalık performans</b></div>
+                <div style="display:flex;align-items:flex-end;gap:7px;height:90px;padding-top:8px">
+                  <div style="flex:1;height:45%;background:var(--line);border-radius:5px"></div>
+                  <div style="flex:1;height:70%;background:var(--line);border-radius:5px"></div>
+                  <div style="flex:1;height:55%;background:var(--line);border-radius:5px"></div>
+                  <div style="flex:1;height:85%;background:var(--grad);border-radius:5px"></div>
+                  <div style="flex:1;height:65%;background:var(--line);border-radius:5px"></div>
+                  <div style="flex:1;height:95%;background:var(--grad);border-radius:5px"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section class="section" id="pricing" style="background:var(--surface-alt)">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" data-i18n="price.eyebrow">Paketler</span>
+      <h2 data-i18n="price.title">İşletmenize uygun paket</h2>
+      <p data-i18n="price.sub">14 gün ücretsiz deneyin, kredi kartı gerekmez.</p>
+      <div class="billing-toggle">
+        <button data-bill-btn="m" class="active" data-i18n="price.monthly">Aylık</button>
+        <button data-bill-btn="y" data-i18n="price.yearly">Yıllık</button>
+        <span class="save" data-i18n="price.save">2 ay bedava</span>
+      </div>
+    </div>
+    <div class="price-grid">
+      <div class="pcard reveal">
+        <div class="pc-name" data-i18n="p1.name">KOBİ</div>
+        <div class="pc-desc" data-i18n="p1.desc">Küçük ekipler ve yeni başlayanlar için.</div>
+        <div class="pc-price"><span class="amt" data-price="p1">₺299</span><span class="per" data-price-unit>/ ay</span></div>
+        <div class="pc-note" data-price-note>aylık faturalandırılır</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f1">5 kullanıcıya kadar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f2">3 iş akışı şablonu</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f3">Mobil uygulama</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f4">Temel raporlar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f5">E-posta desteği</span></li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg><span data-i18n="p1.f6">Gelişmiş yetkilendirme</span></li>
+          <li class="off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg><span data-i18n="p1.f7">API erişimi</span></li>
+        </ul>
+        <a href="https://panel.isteyonetim.com/register" class="btn btn-ghost" data-i18n="p1.cta">Ücretsiz Başla</a>
+      </div>
+
+      <div class="pcard featured reveal">
+        <div class="pc-tag" data-i18n="p2.tag">En Popüler</div>
+        <div class="pc-name" data-i18n="p2.name">Profesyonel</div>
+        <div class="pc-desc" data-i18n="p2.desc">Büyüyen ekipler ve çoklu iş akışları için.</div>
+        <div class="pc-price"><span class="amt" data-price="p2">₺499</span><span class="per" data-price-unit>/ ay</span></div>
+        <div class="pc-note" data-price-note>aylık faturalandırılır</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f1">25 kullanıcıya kadar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f2">Sınırsız iş akışı</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f3">Mobil + web uygulaması</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f4">Gelişmiş raporlar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f5">Bildirim & hatırlatma</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f6">Gelişmiş yetkilendirme</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f7">Öncelikli destek</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-primary" data-i18n="p2.cta">Hemen Dene</a>
+      </div>
+
+      <div class="pcard reveal">
+        <div class="pc-name" data-i18n="p3.name">Kurumsal</div>
+        <div class="pc-desc" data-i18n="p3.desc">Çok şubeli ve büyük operasyonlar için.</div>
+        <div class="pc-price"><span class="amt" data-i18n="p3.price">Özel</span></div>
+        <div class="pc-note">&nbsp;</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f1">Sınırsız kullanıcı</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f2">Sınırsız iş akışı</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f3">Çoklu şube yönetimi</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f4">Özel raporlar & API</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f5">SSO & güvenlik</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f6">Özel eğitim</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f7">7/24 öncelikli destek</span></li>
+        </ul>
+        <a href="#contact" class="btn btn-dark" data-i18n="p3.cta">Bizimle İletişime Geç</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:32px"><a href="fiyatlandirma.html" class="btn btn-ghost" data-i18n="pp.compare">Paket karşılaştırması</a></div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" data-i18n="faq.eyebrow">SSS</span>
+      <h2 data-i18n="faq.title">Sıkça sorulan sorular</h2>
+      <p data-i18n="faq.sub">Aradığınızı bulamadınız mı? Bize yazın.</p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq"><button class="faq-q"><span data-i18n="q1.q">Kurulum ne kadar sürer?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q1.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q2.q">Ücretsiz deneme nasıl çalışıyor?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q2.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q3.q">Verilerim güvende mi?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q3.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q4.q">Personelin kullanması zor mu?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q4.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q5.q">İnternet olmadan çalışır mı?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q5.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q6.q">Paketimi değiştirebilir miyim?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q6.a"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DOWNLOAD ===== -->
+<section class="section" id="download" style="background:var(--surface-alt)">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" data-i18n="dl.eyebrow">İndir</span>
+      <h2 data-i18n="dl.title">Her cihazda yanınızda</h2>
+      <p data-i18n="dl.sub">iOS, Android ve web. Hesabınız tüm cihazlarda anlık eşitlenir.</p>
+    </div>
+    <div class="dl-grid">
+      <div class="dlcard reveal">
+        <div class="dl-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.4s-2.3-.9-2.3-3.5zM14.3 5.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg></div>
+        <h3 data-i18n="dl.ios.t">iPhone & iPad</h3>
+        <p data-i18n="dl.ios.d">iOS 14 ve üzeri</p>
+        <a href="indir.html" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.8-3-.8c-1.5 0-2.9.9-3.7 2.3-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.4 1.2-2.4s-2.3-.9-2.3-3.5zM14.3 5.4c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg><div style="text-align:left"><div class="sb-sm">App Store</div><div class="sb-lg">İndir</div></div></a>
+      </div>
+      <div class="dlcard reveal">
+        <div class="dl-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 20.5l8.4-8.5-8.4-8.5c-.3.2-.6.6-.6 1.2v14.6c0 .6.3 1 .6 1.2zM14 14.1l-2.4 2.4 6.6 3.8c.5.3 1 .1 1.4-.2L14 14.1zM19.6 11l-2.1-1.2-2.6 2.6 2.6 2.6 2.1-1.2c.8-.5.8-2.3 0-2.8zM12 11.9l2.4-2.4-6.6-3.8c-.4-.3-.9-.4-1.4-.2L12 11.9z"/></svg></div>
+        <h3 data-i18n="dl.and.t">Android</h3>
+        <p data-i18n="dl.and.d">Android 8.0 ve üzeri</p>
+        <a href="indir.html" class="store-btn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 20.5l8.4-8.5-8.4-8.5c-.3.2-.6.6-.6 1.2v14.6c0 .6.3 1 .6 1.2zM14 14.1l-2.4 2.4 6.6 3.8c.5.3 1 .1 1.4-.2L14 14.1zM19.6 11l-2.1-1.2-2.6 2.6 2.6 2.6 2.1-1.2c.8-.5.8-2.3 0-2.8zM12 11.9l2.4-2.4-6.6-3.8c-.4-.3-.9-.4-1.4-.2L12 11.9z"/></svg><div style="text-align:left"><div class="sb-sm">Google Play</div><div class="sb-lg">İndir</div></div></a>
+      </div>
+      <div class="dlcard reveal">
+        <div class="dl-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.5 2.5 3.8 6 3.8 9.5S14.5 19 12 21.5c-2.5-2.5-3.8-6-3.8-9.5S9.5 5 12 2.5z"/></svg></div>
+        <h3 data-i18n="dl.web.t">Web Uygulaması</h3>
+        <p data-i18n="dl.web.d">Tüm modern tarayıcılar</p>
+        <a href="#" class="store-btn" data-i18n="dl.web.btn" style="padding:14px 22px;font-weight:700">Tarayıcıda Aç</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-side reveal">
+      <span class="eyebrow" data-i18n="contact.eyebrow">İletişim</span>
+      <h2 style="font-size:clamp(30px,4vw,46px);margin:14px 0 16px" data-i18n="contact.title">Demo talep edin</h2>
+      <p style="font-size:18px;color:var(--muted);line-height:1.6;margin-bottom:36px" data-i18n="contact.sub">Ekibinize özel 20 dakikalık canlı demo ayarlayalım.</p>
+      <div class="ct-item">
+        <div class="ct-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M4 7l8 5.5L20 7" stroke-linecap="round"/></svg></div>
+        <div><h4 data-i18n="contact.i1.t">E-posta</h4><p>admin@isteyonetim.com</p></div>
+      </div>
+      <div class="ct-item">
+        <div class="ct-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L20 13l2 5v3a1 1 0 0 1-1 1A17 17 0 0 1 4 5a1 1 0 0 1 1-1z" stroke-linejoin="round"/></svg></div>
+        <div><h4 data-i18n="contact.i2.t">Telefon</h4><p>+90 850 888 7143</p></div>
+      </div>
+      <div class="ct-item">
+        <div class="ct-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg></div>
+        <div><h4 data-i18n="contact.i3.t">Adres</h4><p data-i18n="contact.i3.d">Mustafa Kemal Mah. Maidan İş Merkezi 4C Blok No:140 Çankaya ANKARA</p></div>
+      </div>
+    </div>
+    <form class="contact-form reveal" id="contactForm">
+      <div class="field"><label data-i18n="contact.name">Ad Soyad</label><input type="text" required></div>
+      <div class="field"><label data-i18n="contact.email">E-posta</label><input type="email" required></div>
+      <div class="field"><label data-i18n="contact.company">Şirket</label><input type="text"></div>
+      <div class="field"><label data-i18n="contact.size">Ekip büyüklüğü</label>
+        <select>
+          <option data-i18n="contact.s1">1-5 kişi</option>
+          <option data-i18n="contact.s2">6-25 kişi</option>
+          <option data-i18n="contact.s3">26-100 kişi</option>
+          <option data-i18n="contact.s4">100+ kişi</option>
+        </select>
+      </div>
+      <div class="field"><label data-i18n="contact.msg">Mesajınız</label><textarea data-i18n-ph="contact.msg_ph" placeholder="Hangi işleri takip etmek istiyorsunuz?"></textarea></div>
+      <button type="submit" class="btn btn-primary" style="width:100%" data-i18n="contact.send">Demo Talep Et</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== CTA BAND ===== -->
+<section class="wrap" style="padding-bottom:96px">
+  <div class="cta-band reveal">
+    <h2 data-i18n="cta.title">İşinizi bugün düzene sokun</h2>
+    <p data-i18n="cta.sub">Dağınık notları, grupları ve tabloları bırakın.</p>
+    <div class="hero-cta">
+      <a href="https://panel.isteyonetim.com/register" class="btn btn-primary btn-lg" data-i18n="cta.btn1">14 Gün Ücretsiz Dene</a>
+      <a href="fiyatlandirma.html" class="btn btn-lg" style="background:rgba(255,255,255,.12);color:#fff" data-i18n="cta.btn2">Paketleri Gör</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><img src="assets/logo-mark.png" alt="">İşteYönetim</div>
+        <p class="fb-desc" data-i18n="foot.desc">İş akışlarını ve personel takibini tek yerden yöneten uygulama.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 3h3l-7 8 8 10h-6l-5-6-5 6H3l8-9L3 3h6l4 5z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 9v10H3V9h3zM4.5 3.5A1.8 1.8 0 1 1 4.5 7a1.8 1.8 0 0 1 0-3.5zM21 13.5V19h-3v-5c0-1.3-.5-2.2-1.7-2.2-1 0-1.5.7-1.7 1.3-.1.2-.1.5-.1.8V19h-3V9h3v1.3c.4-.6 1.1-1.5 2.8-1.5 2 0 3.4 1.3 3.4 4.2z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot.product">Ürün</h5>
+        <a href="#features" data-i18n="nav.features">Özellikler</a>
+        <a href="fiyatlandirma.html" data-i18n="nav.pricing">Paketler</a>
+        <a href="indir.html" data-i18n="nav.download">İndir</a>
+        <a href="#how" data-i18n="nav.how">Nasıl Çalışır</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot.company">Şirket</h5>
+        <a href="hakkimizda.html" data-i18n="foot.about">Hakkımızda</a>
+        <a href="#faq" data-i18n="nav.faq">SSS</a>
+        <a href="#contact" data-i18n="nav.contact">İletişim</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot.support">Destek</h5>
+        <a href="gizlilik-sozlesmesi.html" data-i18n="foot.privacy_sozlesmesi">Gizlilik Sözleşmesi</a>
+        <a href="teslimat-ve-iade.html" data-i18n="foot.delivery_terms">Teslimat ve İade Şartları</a>
+        <a href="mesafeli-satis-sozlesmesi.html" data-i18n="foot.distance_sales">Mesafeli Satış Sözleşmesi</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <span data-i18n="foot.copy">© 2026 İşteYönetim. Tüm hakları saklıdır.</span>
+        <span style="font-size:12px; color:rgba(255,255,255,0.4)">Powered by <a href="https://bulutgrup.tr" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.6); text-decoration:underline">Bulutgrup</a></span>
+      </div>
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap">
+        <img src="assets/iyzico.png" alt="iyzico, Visa, MasterCard" style="height:28px; opacity:0.8; vertical-align:middle">
+        <div class="lang-toggle" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)">
+          <button data-lang-btn="tr">TR</button>
+          <button data-lang-btn="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="tweaks-root"></div>
+
+<script src="app.js"></script>
+<script src="https://unpkg.com/admin@isteyonetim.com/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/admin@isteyonetim.com/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/admin@isteyonetim.com/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks.jsx"></script>
+</body>
+</html>

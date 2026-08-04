@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>İşteYönetim — Paketler & Fiyatlandırma</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.cmp-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.cmp-table th,.cmp-table td{padding:16px 20px;text-align:center;border-bottom:1px solid var(--line);font-size:15px}
+.cmp-table th{font-family:var(--font-head);font-weight:800;font-size:17px;color:var(--ink);background:var(--surface-alt)}
+.cmp-table th:first-child,.cmp-table td:first-child{text-align:left;font-weight:600;color:var(--ink-soft)}
+.cmp-table tr:last-child td{border-bottom:0}
+.cmp-table .feat-col{width:34%}
+.cmp-table td.center{color:var(--ink)}
+.cmp-table .pop{position:relative}
+.cmp-table thead .pop{color:var(--accent)}
+.cmp-check{display:inline-flex;color:#1E8A5B}.cmp-check svg{width:20px;height:20px}
+.cmp-x{color:var(--line)}.cmp-x svg{width:18px;height:18px}
+@media(max-width:760px){.cmp-wrap{overflow-x:auto}.cmp-table{min-width:600px}}
+</style>
+</head>
+<body data-direction="sicak">
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="index.html" class="brand"><img src="assets/logo-mark.png" alt="İşteYönetim"><span>İşteYönetim</span></a>
+    <nav class="nav-links">
+      <a href="index.html#features" data-i18n="nav.features">Özellikler</a>
+      <a href="index.html#how" data-i18n="nav.how">Nasıl Çalışır</a>
+      <a href="fiyatlandirma.html" data-i18n="nav.pricing">Paketler</a>
+      <a href="indir.html" data-i18n="nav.download">İndir</a>
+      <a href="index.html#faq" data-i18n="nav.faq">SSS</a>
+    </nav>
+    <div class="nav-spacer"></div>
+    <div class="nav-actions">
+      <div class="lang-toggle desktop-lang"><button data-lang-btn="tr">TR</button><button data-lang-btn="en">EN</button></div>
+      <a href="https://panel.isteyonetim.com/login" class="btn" style="background:transparent;border:none;color:var(--ink);padding:11px 15px;font-size:15px;font-weight:600;margin-right:10px" data-i18n="nav.login">Giriş Yap</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:11px 20px;font-size:15px" data-i18n="nav.cta">Ücretsiz Başla</a>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18" stroke-linecap="round"/></svg></button>
+    </div>
+  </div>
+</header>
+<div class="drawer" id="drawer">
+  <div class="drawer-bg"></div>
+  <div class="drawer-panel">
+    <button class="drawer-close" aria-label="Kapat">×</button>
+    <a href="index.html#features" data-i18n="nav.features">Özellikler</a>
+    <a href="index.html#how" data-i18n="nav.how">Nasıl Çalışır</a>
+    <a href="fiyatlandirma.html" data-i18n="nav.pricing">Paketler</a>
+    <a href="indir.html" data-i18n="nav.download">İndir</a>
+    <a href="index.html#contact" data-i18n="nav.contact">İletişim</a>
+    <div class="lang-toggle" style="margin-top:14px;align-self:flex-start"><button data-lang-btn="tr">TR</button><button data-lang-btn="en">EN</button></div>
+  </div>
+</div>
+
+<!-- page hero -->
+<section class="page-hero">
+  <div class="hero-blobs"><span class="blob b1"></span><span class="blob b2"></span></div>
+  <div class="wrap">
+    <span class="eyebrow" style="margin-bottom:16px" data-i18n="price.eyebrow">Paketler</span>
+    <h1 data-i18n="pp.title">Şeffaf, basit fiyatlandırma</h1>
+    <p data-i18n="pp.sub">Gizli ücret yok. Ekibiniz büyüdükçe ödeyin, küçüldükçe düşürün.</p>
+    <div class="billing-toggle" style="margin-top:28px">
+      <button data-bill-btn="m" class="active" data-i18n="price.monthly">Aylık</button>
+      <button data-bill-btn="y" data-i18n="price.yearly">Yıllık</button>
+      <span class="save" data-i18n="price.save">2 ay bedava</span>
+    </div>
+  </div>
+</section>
+
+<!-- pricing cards -->
+<section class="section" style="padding-top:24px">
+  <div class="wrap">
+    <div class="price-grid">
+      <div class="pcard reveal">
+        <div class="pc-name" data-i18n="p1.name">KOBİ</div>
+        <div class="pc-desc" data-i18n="p1.desc">Küçük ekipler için.</div>
+        <div class="pc-price"><span class="amt" data-price="p1">₺299</span><span class="per" data-price-unit>/ ay</span></div>
+        <div class="pc-note" data-price-note>aylık faturalandırılır</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f1">5 kullanıcıya kadar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f2">3 iş akışı şablonu</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f3">Mobil uygulama</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f4">Temel raporlar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1.f5">E-posta desteği</span></li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-ghost" data-i18n="p1.cta">Ücretsiz Başla</a>
+      </div>
+      <div class="pcard featured reveal">
+        <div class="pc-tag" data-i18n="p2.tag">En Popüler</div>
+        <div class="pc-name" data-i18n="p2.name">Profesyonel</div>
+        <div class="pc-desc" data-i18n="p2.desc">Büyüyen ekipler için.</div>
+        <div class="pc-price"><span class="amt" data-price="p2">₺499</span><span class="per" data-price-unit>/ ay</span></div>
+        <div class="pc-note" data-price-note>aylık faturalandırılır</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f1">25 kullanıcıya kadar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f2">Sınırsız iş akışı</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f3">Mobil + web uygulaması</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f4">Gelişmiş raporlar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f5">Bildirim & hatırlatma</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f6">Gelişmiş yetkilendirme</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2.f7">Öncelikli destek</span></li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-primary" data-i18n="p2.cta">Hemen Dene</a>
+      </div>
+      <div class="pcard reveal">
+        <div class="pc-name" data-i18n="p3.name">Kurumsal</div>
+        <div class="pc-desc" data-i18n="p3.desc">Büyük operasyonlar için.</div>
+        <div class="pc-price"><span class="amt" data-i18n="p3.price">Özel</span></div>
+        <div class="pc-note">&nbsp;</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f1">Sınırsız kullanıcı</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f3">Çoklu şube yönetimi</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f4">Özel raporlar & API</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f5">SSO & güvenlik</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f6">Özel eğitim</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3.f7">7/24 öncelikli destek</span></li>
+        </ul>
+        <a href="index.html#contact" class="btn btn-dark" data-i18n="p3.cta">İletişime Geç</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- comparison -->
+<section class="section" style="background:var(--surface-alt);padding-top:64px">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <h2 data-i18n="pp.compare">Paket karşılaştırması</h2>
+      <p data-i18n="pp.compare_sub">Hangi paketin size uyduğunu detaylı görün.</p>
+    </div>
+    <div class="cmp-wrap reveal">
+      <table class="cmp-table">
+        <thead><tr>
+          <th class="feat-col" data-i18n="cmp.feature">Özellik</th>
+          <th data-i18n="p1.name">KOBİ</th>
+          <th class="pop" data-i18n="p2.name">Profesyonel</th>
+          <th data-i18n="p3.name">Kurumsal</th>
+        </tr></thead>
+        <tbody>
+          <tr><td data-i18n="cmp.users">Kullanıcı sayısı</td><td class="center">5</td><td class="center">25</td><td class="center">∞</td></tr>
+          <tr><td data-i18n="cmp.flows">İş akışı</td><td class="center">3</td><td class="center">∞</td><td class="center">∞</td></tr>
+          <tr><td data-i18n="cmp.mobile">Mobil uygulama</td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr><td data-i18n="cmp.web">Web uygulaması</td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr><td data-i18n="cmp.reports">Raporlama</td><td class="center" data-i18n="cmp.basic">Temel</td><td class="center" data-i18n="cmp.adv">Gelişmiş</td><td class="center" data-i18n="cmp.custom">Özel</td></tr>
+          <tr><td data-i18n="cmp.notif">Bildirimler</td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr><td data-i18n="cmp.roles">Gelişmiş yetkilendirme</td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr><td data-i18n="cmp.branches">Çoklu şube</td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr><td data-i18n="cmp.api">API erişimi</td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr><td data-i18n="cmp.sso">SSO & güvenlik</td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-x"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg></span></td><td><span class="cmp-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></td></tr>
+          <tr><td data-i18n="cmp.support">Destek</td><td class="center" data-i18n="cmp.email">E-posta</td><td class="center" data-i18n="cmp.priority">Öncelikli</td><td class="center" data-i18n="cmp.support247">7/24</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal" style="text-align:center;margin-left:auto;margin-right:auto">
+      <span class="eyebrow" data-i18n="faq.eyebrow">SSS</span>
+      <h2 data-i18n="faq.title">Sıkça sorulan sorular</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq"><button class="faq-q"><span data-i18n="q2.q">Ücretsiz deneme nasıl çalışıyor?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q2.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q6.q">Paketimi değiştirebilir miyim?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q6.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q3.q">Verilerim güvende mi?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q3.a"></div></div></div>
+      <div class="faq"><button class="faq-q"><span data-i18n="q1.q">Kurulum ne kadar sürer?</span><span class="faq-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14" stroke-linecap="round"/></svg></span></button><div class="faq-a"><div data-i18n="q1.a"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="wrap" style="padding-bottom:96px">
+  <div class="cta-band reveal">
+    <h2 data-i18n="cta.title">İşinizi bugün düzene sokun</h2>
+    <p data-i18n="cta.sub">Dağınık notları, grupları ve tabloları bırakın.</p>
+    <div class="hero-cta">
+      <a href="index.html#contact" class="btn btn-primary btn-lg" data-i18n="cta.btn1">14 Gün Ücretsiz Dene</a>
+      <a href="indir.html" class="btn btn-lg" style="background:rgba(255,255,255,.12);color:#fff" data-i18n="hero.cta2">Uygulamayı İndir</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><img src="assets/logo-mark.png" alt="">İşteYönetim</div>
+        <p class="fb-desc" data-i18n="foot.desc">İş akışlarını ve personel takibini tek yerden yöneten uygulama.</p>
+        <div class="foot-social">
+          <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 3h3l-7 8 8 10h-6l-5-6-5 6H3l8-9L3 3h6l4 5z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 9v10H3V9h3zM4.5 3.5A1.8 1.8 0 1 1 4.5 7a1.8 1.8 0 0 1 0-3.5zM21 13.5V19h-3v-5c0-1.3-.5-2.2-1.7-2.2-1 0-1.5.7-1.7 1.3-.1.2-.1.5-.1.8V19h-3V9h3v1.3c.4-.6 1.1-1.5 2.8-1.5 2 0 3.4 1.3 3.4 4.2z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot.product">Ürün</h5>
+        <a href="index.html#features" data-i18n="nav.features">Özellikler</a>
+        <a href="fiyatlandirma.html" data-i18n="nav.pricing">Paketler</a>
+        <a href="indir.html" data-i18n="nav.download">İndir</a>
+        <a href="index.html#how" data-i18n="nav.how">Nasıl Çalışır</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot.company">Şirket</h5>
+        <a href="hakkimizda.html" data-i18n="foot.about">Hakkımızda</a>
+        <a href="index.html#faq" data-i18n="nav.faq">SSS</a>
+        <a href="index.html#contact" data-i18n="nav.contact">İletişim</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="foot.support">Destek</h5>
+        <a href="gizlilik-sozlesmesi.html" data-i18n="foot.privacy_sozlesmesi">Gizlilik Sözleşmesi</a>
+        <a href="teslimat-ve-iade.html" data-i18n="foot.delivery_terms">Teslimat ve İade Şartları</a>
+        <a href="mesafeli-satis-sozlesmesi.html" data-i18n="foot.distance_sales">Mesafeli Satış Sözleşmesi</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div style="display:flex; flex-direction:column; gap:4px">
+        <span data-i18n="foot.copy">© 2026 İşteYönetim. Tüm hakları saklıdır.</span>
+        <span style="font-size:12px; color:rgba(255,255,255,0.4)">Powered by <a href="https://bulutgrup.tr" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.6); text-decoration:underline">Bulutgrup</a></span>
+      </div>
+      <div style="display:flex; align-items:center; gap:20px; flex-wrap:wrap">
+        <img src="assets/iyzico.png" alt="iyzico, Visa, MasterCard" style="height:28px; opacity:0.8; vertical-align:middle">
+        <div class="lang-toggle" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.12)">
+          <button data-lang-btn="tr">TR</button>
+          <button data-lang-btn="en">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="tweaks-root"></div>
+<script src="app.js"></script>
+<script src="https://unpkg.com/admin@isteyonetim.com/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/admin@isteyonetim.com/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/admin@isteyonetim.com/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="tweaks.jsx"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# 1. Https zorunluluğu (cPanel için önerilir)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. Redirect clean URLs to HTML files (R=301 redirects to ensure they load the actual file)
+RewriteRule ^hakkimizda/?$ hakkimizda.html [R=301,L,NC]
+RewriteRule ^gizlilik-sozlesmesi/?$ gizlilik-sozlesmesi.html [R=301,L,NC]
+RewriteRule ^teslimat-ve-iade/?$ teslimat-ve-iade.html [R=301,L,NC]
+RewriteRule ^mesafeli-satis-sozlesmesi/?$ mesafeli-satis-sozlesmesi.html [R=301,L,NC]
+RewriteRule ^fiyatlandirma/?$ fiyatlandirma.html [R=301,L,NC]
+RewriteRule ^indir/?$ indir.html [R=301,L,NC]

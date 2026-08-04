@@ -1,0 +1,16 @@
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# 1. Https zorunluluğu (cPanel için önerilir)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 2. Redirect /file.html to /file (Uzantılı link girilirse temiz URL'e yönlendir)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /([^\ ]+)\.html\ HTTP/ [NC]
+RewriteRule ^([^.]+)\.html$ /$1 [R=301,L]
+
+# 3. Forward /file to /file.html (Temiz URL girilirse arka planda .html dosyasını yükle)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [L]

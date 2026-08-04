@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:#1A1D23;background:#F5F6F8;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::-webkit-scrollbar{width:11px;height:11px}
+  ::-webkit-scrollbar-thumb{background:#D5D9DF;border-radius:9px;border:3px solid transparent;background-clip:padding-box}
+  ::-webkit-scrollbar-thumb:hover{background:#BFC5CD;background-clip:padding-box;border:3px solid transparent}
+  ::-webkit-scrollbar-track{background:transparent}
+  input::placeholder{color:#9AA1AC}
+  input{font-family:inherit}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes ovIn{from{opacity:0}to{opacity:1}}
+  @keyframes drwIn{from{transform:translateX(36px);opacity:.4}to{transform:translateX(0);opacity:1}}
+</style>
+</helmet>
+
+<div style="display:flex;height:100vh;width:100%;overflow:hidden">
+
+  <aside style="width:252px;flex-shrink:0;background:#fff;border-right:1px solid #E7E9ED;display:flex;flex-direction:column;height:100%">
+    <div style="padding:22px 22px 18px;display:flex;align-items:center;gap:12px">
+      <div style="width:38px;height:38px;border-radius:11px;background:#2A6FDB;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:17px;letter-spacing:-.5px;box-shadow:0 4px 12px rgba(42,111,219,.32)">CP</div>
+      <div style="line-height:1.15">
+        <div style="font-weight:800;font-size:15.5px;letter-spacing:-.3px">{{ brandName }}</div>
+        <div style="font-size:11.5px;color:#8A929E;font-weight:500">Yönetim Konsolu</div>
+      </div>
+    </div>
+
+    <div style="padding:6px 14px;font-size:10.5px;font-weight:700;color:#A4ABB5;letter-spacing:.8px;text-transform:uppercase;margin-top:6px">Menü</div>
+    <nav style="display:flex;flex-direction:column;gap:3px;padding:4px 12px">
+      <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+        <button onClick="{{ item.onSelect }}" style="{{ item.style }}" style-hover="background:#F1F3F6">
+          <span style="font-family:'Material Symbols Outlined';font-size:21px;font-feature-settings:'liga';color:{{ item.iconColor }}">{{ item.icon }}</span>
+          <span style="flex:1;text-align:left">{{ item.label }}</span>
+          <sc-if value="{{ item.badge }}" hint-placeholder-val="{{ false }}">
+            <span style="background:#FBF0DD;color:#B26A00;font-size:11px;font-weight:700;padding:2px 7px;border-radius:20px">{{ item.badge }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+
+    <div style="margin-top:auto;padding:14px">
+      <div style="background:linear-gradient(150deg,#F0F5FE,#EAF1FC);border:1px solid #DCE7F8;border-radius:14px;padding:14px">
+        <div style="display:flex;align-items:center;gap:9px;margin-bottom:8px">
+          <span style="font-family:'Material Symbols Outlined';font-size:19px;font-feature-settings:'liga';color:#2A6FDB">shield_person</span>
+          <span style="font-weight:700;font-size:13px">Sistem Durumu</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:#46505C">
+          <span style="width:8px;height:8px;border-radius:50%;background:#1F8A5B;box-shadow:0 0 0 3px rgba(31,138,91,.16)"></span>
+          Tüm servisler çalışıyor
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:11px;padding:11px 6px 4px;margin-top:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:#1A1D23;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">YK</div>
+        <div style="line-height:1.2;flex:1;min-width:0">
+          <div style="font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Yönetici</div>
+          <div style="font-size:11.5px;color:#8A929E">admin@cppanel.io</div>
+        </div>
+        <span style="font-family:'Material Symbols Outlined';font-size:18px;font-feature-settings:'liga';color:#A4ABB5">unfold_more</span>
+      </div>
+    </div>
+  </aside>
+
+  <main style="flex:1;display:flex;flex-direction:column;height:100%;min-width:0">
+    <header style="height:66px;flex-shrink:0;border-bottom:1px solid #E7E9ED;background:#fff;display:flex;align-items:center;gap:18px;padding:0 26px">
+      <div style="flex-shrink:0">
+        <div style="font-weight:800;font-size:18px;letter-spacing:-.4px">{{ pageTitle }}</div>
+        <div style="font-size:12px;color:#8A929E;font-weight:500">{{ pageSubtitle }}</div>
+      </div>
+      <div style="flex:1;max-width:420px;margin-left:14px;position:relative;display:flex;align-items:center">
+        <span style="font-family:'Material Symbols Outlined';font-size:19px;font-feature-settings:'liga';color:#9AA1AC;position:absolute;left:12px">search</span>
+        <input placeholder="İşletme, işlem veya uygulama ara..." style="width:100%;height:40px;border:1px solid #E2E5EA;border-radius:10px;background:#F7F8FA;padding:0 14px 0 38px;font-size:13.5px;color:#1A1D23;outline:none" style-focus="border-color:#2A6FDB;background:#fff;box-shadow:0 0 0 3px rgba(42,111,219,.12)">
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:10px">
+        <button style="height:40px;padding:0 14px;border:1px solid #E2E5EA;background:#fff;border-radius:10px;display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#46505C;cursor:pointer" style-hover="background:#F7F8FA">
+          <span style="font-family:'Material Symbols Outlined';font-size:18px;font-feature-settings:'liga';color:#6B7280">calendar_today</span>
+          Haziran 2026
+        </button>
+        <button style="width:40px;height:40px;border:1px solid #E2E5EA;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative" style-hover="background:#F7F8FA">
+          <span style="font-family:'Material Symbols Outlined';font-size:20px;font-feature-settings:'liga';color:#46505C">notifications</span>
+          <span style="position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:#E5484D;border:1.5px solid #fff"></span>
+        </button>
+      </div>
+    </header>
+
+    <div style="flex:1;overflow-y:auto;padding:26px">
+
+      <!-- ===================== DASHBOARD ===================== -->
+      <sc-if value="{{ isDashboard }}" hint-placeholder-val="{{ true }}">
+      <div style="max-width:1320px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+            <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:18px 18px 16px">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between">
+                <div style="width:42px;height:42px;border-radius:12px;background:{{ k.iconBg }};display:flex;align-items:center;justify-content:center">
+                  <span style="font-family:'Material Symbols Outlined';font-size:23px;font-feature-settings:'liga';color:{{ k.iconColor }}">{{ k.icon }}</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:3px;font-size:12.5px;font-weight:700;color:{{ k.deltaColor }};background:{{ k.deltaBg }};padding:3px 8px;border-radius:20px">
+                  <span style="font-family:'Material Symbols Outlined';font-size:15px;font-feature-settings:'liga'">{{ k.deltaIcon }}</span>{{ k.delta }}
+                </div>
+              </div>
+              <div style="font-size:28px;font-weight:800;letter-spacing:-.8px;margin-top:14px;font-feature-settings:'tnum'">{{ k.value }}</div>
+              <div style="font-size:13px;color:#6B7280;font-weight:600;margin-top:1px">{{ k.label }}</div>
+              <div style="font-size:11.5px;color:#9AA1AC;margin-top:8px;padding-top:9px;border-top:1px solid #F0F1F4">{{ k.sub }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.65fr 1fr;gap:16px;margin-top:16px">
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <div>
+                <div style="font-weight:700;font-size:15px">Gelir Trendi</div>
+                <div style="font-size:12px;color:#8A929E">Son 12 ay · sistem üzerinden alınan ödemeler</div>
+              </div>
+              <div style="text-align:right">
+                <div style="font-size:22px;font-weight:800;letter-spacing:-.5px">{{ revTotalLabel }}</div>
+                <div style="font-size:12px;color:#1F8A5B;font-weight:700">↑ %38 yıllık artış</div>
+              </div>
+            </div>
+            <svg viewBox="0 0 760 240" preserveAspectRatio="none" style="width:100%;height:236px;display:block;margin-top:8px">
+              <defs>
+                <linearGradient id="revg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2A6FDB" stop-opacity="0.20"></stop>
+                  <stop offset="100%" stop-color="#2A6FDB" stop-opacity="0"></stop>
+                </linearGradient>
+              </defs>
+              <line x1="0" y1="52" x2="760" y2="52" stroke="#EEF0F3" stroke-width="1"></line>
+              <line x1="0" y1="104" x2="760" y2="104" stroke="#EEF0F3" stroke-width="1"></line>
+              <line x1="0" y1="156" x2="760" y2="156" stroke="#EEF0F3" stroke-width="1"></line>
+              <line x1="0" y1="208" x2="760" y2="208" stroke="#EEF0F3" stroke-width="1"></line>
+              <path d="{{ rev.area }}" fill="url(#revg)"></path>
+              <path d="{{ rev.line }}" fill="none" stroke="#2A6FDB" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"></path>
+            </svg>
+            <div style="display:flex;justify-content:space-between;margin-top:6px">
+              <sc-for list="{{ revLabels }}" as="m" hint-placeholder-count="12">
+                <span style="font-size:11px;color:#A4ABB5;font-weight:600">{{ m }}</span>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px">
+            <div style="font-weight:700;font-size:15px">Hediye Dağıtımı</div>
+            <div style="font-size:12px;color:#8A929E;margin-bottom:16px">Tanımlı süre hediyeleri (aktif)</div>
+            <div style="display:flex;flex-direction:column;gap:15px">
+              <sc-for list="{{ giftStats }}" as="g" hint-placeholder-count="4">
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+                    <span style="font-size:13px;font-weight:600;color:#46505C">{{ g.label }} hediye</span>
+                    <span style="font-size:14px;font-weight:800;font-feature-settings:'tnum'">{{ g.count }}</span>
+                  </div>
+                  <div style="height:9px;background:#F0F1F4;border-radius:6px;overflow:hidden">
+                    <div style="height:100%;width:{{ g.pct }};background:{{ g.color }};border-radius:6px;transition:width .6s"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:18px;padding-top:15px;border-top:1px solid #F0F1F4;display:flex;align-items:center;justify-content:space-between">
+              <div style="font-size:12.5px;color:#6B7280">Toplam dağıtılan</div>
+              <div style="font-size:15px;font-weight:800">303 hediye</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.65fr 1fr;gap:16px;margin-top:16px">
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px 20px 8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+              <div style="font-weight:700;font-size:15px">Son İşlemler</div>
+              <button onClick="{{ goTx }}" style="font-size:12.5px;font-weight:700;color:#2A6FDB;background:none;border:none;cursor:pointer;display:flex;align-items:center;gap:3px">Tümünü gör<span style="font-family:'Material Symbols Outlined';font-size:16px;font-feature-settings:'liga'">arrow_forward</span></button>
+            </div>
+            <sc-for list="{{ recentTx }}" as="t" hint-placeholder-count="6">
+              <div style="display:flex;align-items:center;gap:13px;padding:10px 0;border-top:1px solid #F2F3F5">
+                <div style="width:36px;height:36px;border-radius:10px;background:{{ t.initialBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">{{ t.initial }}</div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.business }}</div>
+                  <div style="font-size:11.5px;color:#9AA1AC;font-family:'JetBrains Mono',monospace">{{ t.id }} · {{ t.method }}</div>
+                </div>
+                <div style="font-size:11.5px;color:#9AA1AC;font-weight:600;width:84px">{{ t.dateLabel }}</div>
+                <span style="font-size:11px;font-weight:700;color:{{ t.statusColor }};background:{{ t.statusBg }};padding:3px 9px;border-radius:20px;flex-shrink:0">{{ t.status }}</span>
+                <div style="font-weight:700;font-size:13.5px;width:90px;text-align:right;font-feature-settings:'tnum'">{{ t.amountLabel }}</div>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">
+              <span style="font-family:'Material Symbols Outlined';font-size:20px;font-feature-settings:'liga';color:#B26A00">schedule</span>
+              <div style="font-weight:700;font-size:15px">Yaklaşan Bitişler</div>
+            </div>
+            <div style="font-size:12px;color:#8A929E;margin-bottom:14px">Üyeliği 30 gün içinde dolacaklar</div>
+            <div style="display:flex;flex-direction:column;gap:9px">
+              <sc-for list="{{ expiring }}" as="e" hint-placeholder-count="5">
+                <div onClick="{{ e.onOpen }}" style="display:flex;align-items:center;gap:11px;padding:10px 11px;border:1px solid #F0E6CE;background:#FDF8EC;border-radius:11px;cursor:pointer" style-hover="border-color:#E9CF94">
+                  <div style="flex:1;min-width:0">
+                    <div style="font-weight:600;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ e.name }}</div>
+                    <div style="font-size:11.5px;color:#9AA1AC">{{ e.plan }} · {{ e.endLabel }}</div>
+                  </div>
+                  <div style="text-align:right;flex-shrink:0">
+                    <div style="font-size:15px;font-weight:800;color:#B26A00;line-height:1">{{ e.daysLeft }}</div>
+                    <div style="font-size:10.5px;color:#B26A00;font-weight:600">gün</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ===================== MEMBERS ===================== -->
+      <sc-if value="{{ isMembers }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1320px">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <div style="position:relative;display:flex;align-items:center;width:300px">
+            <span style="font-family:'Material Symbols Outlined';font-size:19px;font-feature-settings:'liga';color:#9AA1AC;position:absolute;left:12px">search</span>
+            <input value="{{ search }}" onInput="{{ onSearch }}" placeholder="İşletme, sahip veya şehir ara..." style="width:100%;height:40px;border:1px solid #E2E5EA;border-radius:10px;background:#fff;padding:0 14px 0 38px;font-size:13.5px;outline:none" style-focus="border-color:#2A6FDB;box-shadow:0 0 0 3px rgba(42,111,219,.12)">
+          </div>
+          <div style="display:flex;gap:6px;background:#EEF0F3;padding:4px;border-radius:11px">
+            <sc-for list="{{ statusChips }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}<span style="opacity:.6;font-feature-settings:'tnum'"> {{ c.count }}</span></button>
+            </sc-for>
+          </div>
+          <div style="margin-left:auto;display:flex;gap:9px">
+            <button style="height:40px;padding:0 15px;border:1px solid #E2E5EA;background:#fff;border-radius:10px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#46505C;cursor:pointer" style-hover="background:#F7F8FA"><span style="font-family:'Material Symbols Outlined';font-size:18px;font-feature-settings:'liga'">download</span>Dışa aktar</button>
+            <button style="height:40px;padding:0 15px;background:#2A6FDB;border:none;border-radius:10px;display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;color:#fff;cursor:pointer;box-shadow:0 3px 9px rgba(42,111,219,.28)" style-hover="background:#225FBE"><span style="font-family:'Material Symbols Outlined';font-size:18px;font-feature-settings:'liga'">add</span>İşletme ekle</button>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:2.2fr 1fr 0.9fr 1.05fr 0.95fr 0.95fr 1fr 38px;gap:12px;padding:13px 20px;background:#FAFBFC;border-bottom:1px solid #EBEDF0;font-size:11px;font-weight:700;color:#8A929E;letter-spacing:.4px;text-transform:uppercase">
+            <div>İşletme</div><div>Uygulama</div><div>Plan</div><div>Başlangıç</div><div>Kalan Süre</div><div>Hediye</div><div>Durum</div><div></div>
+          </div>
+          <sc-for list="{{ members }}" as="m" hint-placeholder-count="8">
+            <div onClick="{{ m.onOpen }}" style="display:grid;grid-template-columns:2.2fr 1fr 0.9fr 1.05fr 0.95fr 0.95fr 1fr 38px;gap:12px;padding:13px 20px;border-bottom:1px solid #F2F3F5;align-items:center;cursor:pointer" style-hover="background:#FAFBFC">
+              <div style="display:flex;align-items:center;gap:11px;min-width:0">
+                <div style="width:38px;height:38px;border-radius:11px;background:{{ m.avatarBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">{{ m.initials }}</div>
+                <div style="min-width:0">
+                  <div style="font-weight:700;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ m.name }}</div>
+                  <div style="font-size:11.5px;color:#9AA1AC;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ m.owner }} · {{ m.city }}</div>
+                </div>
+              </div>
+              <div style="font-size:13px;font-weight:600;color:#46505C">{{ m.app }}</div>
+              <div><span style="font-size:11.5px;font-weight:700;color:{{ m.planColor }};background:{{ m.planBg }};padding:3px 9px;border-radius:7px">{{ m.plan }}</span></div>
+              <div style="font-size:12.5px;color:#6B7280;font-feature-settings:'tnum'">{{ m.joinLabel }}</div>
+              <div style="font-size:12.5px;font-weight:600;color:{{ m.daysColor }};font-feature-settings:'tnum'">{{ m.daysLabel }}</div>
+              <div><sc-if value="{{ m.hasGift }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:700;color:#7C5CFC;background:#F0EBFE;padding:3px 8px;border-radius:7px;display:inline-flex;align-items:center;gap:3px"><span style="font-family:'Material Symbols Outlined';font-size:13px;font-feature-settings:'liga'">redeem</span>{{ m.giftLabel }}</span></sc-if><sc-if value="{{ m.noGift }}" hint-placeholder-val="{{ true }}"><span style="color:#C4C9D0">—</span></sc-if></div>
+              <div><span style="font-size:11.5px;font-weight:700;color:{{ m.statusColor }};background:{{ m.statusBg }};padding:4px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:{{ m.statusColor }}"></span>{{ m.status }}</span></div>
+              <div style="display:flex;justify-content:flex-end"><span style="font-family:'Material Symbols Outlined';font-size:20px;font-feature-settings:'liga';color:#C4C9D0">chevron_right</span></div>
+            </div>
+          </sc-for>
+          <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between">
+            <div style="font-size:12.5px;color:#8A929E"><b style="color:#46505C">{{ memberCount }}</b> işletme gösteriliyor · toplam 1.284 kayıt</div>
+            <div style="display:flex;gap:6px">
+              <button style="width:34px;height:34px;border:1px solid #E2E5EA;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#9AA1AC"><span style="font-family:'Material Symbols Outlined';font-size:18px;font-feature-settings:'liga'">chevron_left</span></button>
+              <button style="width:34px;height:34px;border:1px solid #2A6FDB;background:#2A6FDB;color:#fff;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer">1</button>
+              <button style="width:34px;height:34px;border:1px solid #E2E5EA;background:#fff;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;color:#46505C">2</button>
+              <button style="width:34px;height:34px;border:1px solid #E2E5EA;background:#fff;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer;color:#46505C">3</button>
+              <button style="width:34px;height:34px;border:1px solid #E2E5EA;background:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#46505C"><span style="font-family:'Material Symbols Outlined';font-size:18px;font-feature-settings:'liga'">chevron_right</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ===================== TRANSACTIONS ===================== -->
+      <sc-if value="{{ isTx }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1320px">
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:16px">
+          <sc-for list="{{ txKpis }}" as="k" hint-placeholder-count="4">
+            <div style="background:#fff;border:1px solid #E7E9ED;border-radius:14px;padding:16px 18px">
+              <div style="font-size:12.5px;color:#6B7280;font-weight:600">{{ k.label }}</div>
+              <div style="font-size:24px;font-weight:800;letter-spacing:-.6px;margin-top:6px;color:{{ k.color }};font-feature-settings:'tnum'">{{ k.value }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <div style="position:relative;display:flex;align-items:center;width:300px">
+            <span style="font-family:'Material Symbols Outlined';font-size:19px;font-feature-settings:'liga';color:#9AA1AC;position:absolute;left:12px">search</span>
+            <input value="{{ txSearch }}" onInput="{{ onTxSearch }}" placeholder="İşletme veya işlem no ara..." style="width:100%;height:40px;border:1px solid #E2E5EA;border-radius:10px;background:#fff;padding:0 14px 0 38px;font-size:13.5px;outline:none" style-focus="border-color:#2A6FDB;box-shadow:0 0 0 3px rgba(42,111,219,.12)">
+          </div>
+          <div style="display:flex;gap:6px;background:#EEF0F3;padding:4px;border-radius:11px">
+            <sc-for list="{{ txStatusChips }}" as="c" hint-placeholder-count="4">
+              <button onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:1.1fr 2fr 1fr 1fr 1fr 1fr;gap:12px;padding:13px 20px;background:#FAFBFC;border-bottom:1px solid #EBEDF0;font-size:11px;font-weight:700;color:#8A929E;letter-spacing:.4px;text-transform:uppercase">
+            <div>İşlem No</div><div>İşletme</div><div>Tür</div><div>Yöntem</div><div>Tarih</div><div style="text-align:right">Tutar / Durum</div>
+          </div>
+          <sc-for list="{{ transactions }}" as="t" hint-placeholder-count="10">
+            <div style="display:grid;grid-template-columns:1.1fr 2fr 1fr 1fr 1fr 1fr;gap:12px;padding:13px 20px;border-bottom:1px solid #F2F3F5;align-items:center" style-hover="background:#FAFBFC">
+              <div style="font-size:12.5px;font-weight:600;color:#46505C;font-family:'JetBrains Mono',monospace">{{ t.id }}</div>
+              <div style="display:flex;align-items:center;gap:10px;min-width:0">
+                <div style="width:32px;height:32px;border-radius:9px;background:{{ t.initialBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0">{{ t.initial }}</div>
+                <span style="font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ t.business }}</span>
+              </div>
+              <div><span style="font-size:11.5px;font-weight:700;color:{{ t.typeColor }};background:{{ t.typeBg }};padding:3px 9px;border-radius:7px">{{ t.type }}</span></div>
+              <div style="font-size:12.5px;color:#6B7280">{{ t.method }}</div>
+              <div style="font-size:12.5px;color:#6B7280;font-feature-settings:'tnum'">{{ t.dateLabel }}</div>
+              <div style="display:flex;align-items:center;justify-content:flex-end;gap:11px">
+                <span style="font-size:11px;font-weight:700;color:{{ t.statusColor }};background:{{ t.statusBg }};padding:3px 9px;border-radius:20px">{{ t.status }}</span>
+                <span style="font-weight:700;font-size:13.5px;width:88px;text-align:right;font-feature-settings:'tnum'">{{ t.amountLabel }}</span>
+              </div>
+            </div>
+          </sc-for>
+          <div style="padding:14px 20px;font-size:12.5px;color:#8A929E"><b style="color:#46505C">{{ txCount }}</b> işlem · filtrelenmiş görünüm</div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ===================== APPS ===================== -->
+      <sc-if value="{{ isApps }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1320px">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+          <sc-for list="{{ apps }}" as="a" hint-placeholder-count="6">
+            <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px" style-hover="border-color:#D6DAE0;box-shadow:0 6px 22px rgba(20,30,50,.06)">
+              <div style="display:flex;align-items:center;gap:13px">
+                <div style="width:48px;height:48px;border-radius:13px;background:{{ a.color }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;letter-spacing:-.5px;box-shadow:0 5px 14px {{ a.shadow }}">{{ a.badge }}</div>
+                <div style="flex:1;min-width:0">
+                  <div style="font-weight:800;font-size:16px;letter-spacing:-.3px">{{ a.name }}</div>
+                  <div style="font-size:12px;color:#8A929E;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ a.category }}</div>
+                </div>
+                <span style="font-size:11px;font-weight:700;color:{{ a.statusColor }};background:{{ a.statusBg }};padding:4px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:{{ a.statusColor }}"></span>{{ a.status }}</span>
+              </div>
+              <div style="display:flex;align-items:flex-end;gap:3px;height:46px;margin:18px 0 4px">
+                <sc-for list="{{ a.spark }}" as="s" hint-placeholder-count="10">
+                  <div style="flex:1;height:{{ s }};background:{{ a.sparkColor }};border-radius:3px 3px 0 0;min-height:4px"></div>
+                </sc-for>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;padding-top:15px;border-top:1px solid #F0F1F4">
+                <div><div style="font-size:11px;color:#9AA1AC;font-weight:600">Aktif üye</div><div style="font-size:17px;font-weight:800;font-feature-settings:'tnum'">{{ a.members }}</div></div>
+                <div><div style="font-size:11px;color:#9AA1AC;font-weight:600">Aylık gelir</div><div style="font-size:17px;font-weight:800;font-feature-settings:'tnum'">{{ a.mrr }}</div></div>
+                <div><div style="font-size:11px;color:#9AA1AC;font-weight:600">İşlenen veri</div><div style="font-size:17px;font-weight:800;font-feature-settings:'tnum'">{{ a.records }}</div></div>
+                <div><div style="font-size:11px;color:#9AA1AC;font-weight:600">Çalışma süresi</div><div style="font-size:17px;font-weight:800;color:#1F8A5B;font-feature-settings:'tnum'">{{ a.uptime }}</div></div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ===================== ANALYTICS ===================== -->
+      <sc-if value="{{ isAnalytics }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:1320px">
+        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px">
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px">
+            <div style="font-weight:700;font-size:15px">Aylık İşlem Hacmi</div>
+            <div style="font-size:12px;color:#8A929E;margin-bottom:18px">Sistemde işlenen toplam işlem (bin)</div>
+            <div style="display:flex;align-items:flex-end;gap:10px;height:200px">
+              <sc-for list="{{ txBars }}" as="b" hint-placeholder-count="12">
+                <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:flex-end">
+                  <div style="font-size:10.5px;font-weight:700;color:#46505C;font-feature-settings:'tnum'">{{ b.value }}</div>
+                  <div style="width:100%;height:{{ b.h }};background:{{ b.color }};border-radius:6px 6px 0 0;transition:height .6s"></div>
+                  <div style="font-size:10.5px;color:#A4ABB5;font-weight:600">{{ b.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px">
+            <div style="font-weight:700;font-size:15px">Plan Dağılımı</div>
+            <div style="font-size:12px;color:#8A929E;margin-bottom:18px">Abonelik tiplerine göre işletmeler</div>
+            <div style="display:flex;flex-direction:column;gap:16px">
+              <sc-for list="{{ planBars }}" as="p" hint-placeholder-count="4">
+                <div>
+                  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+                    <span style="font-size:13px;font-weight:600;color:#46505C">{{ p.label }}</span>
+                    <span style="font-size:13px;font-weight:800;font-feature-settings:'tnum'">{{ p.count }} <span style="color:#A4ABB5;font-weight:600;font-size:12px">· {{ p.pctLabel }}</span></span>
+                  </div>
+                  <div style="height:10px;background:#F0F1F4;border-radius:6px;overflow:hidden">
+                    <div style="height:100%;width:{{ p.pct }};background:{{ p.color }};border-radius:6px;transition:width .6s"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px">
+            <div style="font-weight:700;font-size:15px;margin-bottom:4px">Gelire Göre Uygulamalar</div>
+            <div style="font-size:12px;color:#8A929E;margin-bottom:16px">Aylık tekrarlayan gelir katkısı</div>
+            <div style="display:flex;flex-direction:column;gap:13px">
+              <sc-for list="{{ appRevBars }}" as="a" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <div style="width:30px;height:30px;border-radius:8px;background:{{ a.color }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;flex-shrink:0">{{ a.badge }}</div>
+                  <span style="font-size:13px;font-weight:600;width:80px;flex-shrink:0">{{ a.name }}</span>
+                  <div style="flex:1;height:10px;background:#F0F1F4;border-radius:6px;overflow:hidden"><div style="height:100%;width:{{ a.pct }};background:{{ a.color }};border-radius:6px;transition:width .6s"></div></div>
+                  <span style="font-size:13px;font-weight:800;width:78px;text-align:right;font-feature-settings:'tnum'">{{ a.mrr }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:20px">
+            <div style="font-weight:700;font-size:15px;margin-bottom:4px">Şehirlere Göre İşletme</div>
+            <div style="font-size:12px;color:#8A929E;margin-bottom:16px">En aktif 5 bölge</div>
+            <div style="display:flex;flex-direction:column;gap:13px">
+              <sc-for list="{{ cityBars }}" as="c" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:12px">
+                  <span style="font-size:13px;font-weight:600;width:80px;flex-shrink:0">{{ c.name }}</span>
+                  <div style="flex:1;height:10px;background:#F0F1F4;border-radius:6px;overflow:hidden"><div style="height:100%;width:{{ c.pct }};background:#2A6FDB;border-radius:6px;transition:width .6s"></div></div>
+                  <span style="font-size:13px;font-weight:800;width:48px;text-align:right;font-feature-settings:'tnum'">{{ c.count }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+      </sc-if>
+
+      <!-- ===================== SETTINGS ===================== -->
+      <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+      <div style="max-width:840px">
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:22px;margin-bottom:16px">
+          <div style="font-weight:700;font-size:15px;margin-bottom:16px">Yönetici Profili</div>
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:64px;height:64px;border-radius:18px;background:#1A1D23;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:22px">YK</div>
+            <div style="flex:1">
+              <div style="font-weight:800;font-size:17px">Yönetici</div>
+              <div style="font-size:13px;color:#8A929E">admin@cppanel.io · Tam yetkili</div>
+            </div>
+            <button style="height:38px;padding:0 16px;border:1px solid #E2E5EA;background:#fff;border-radius:10px;font-size:13px;font-weight:600;color:#46505C;cursor:pointer" style-hover="background:#F7F8FA">Düzenle</button>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:22px;margin-bottom:16px">
+          <div style="font-weight:700;font-size:15px;margin-bottom:6px">Tercihler & Güvenlik</div>
+          <sc-for list="{{ toggles }}" as="t" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid #F2F3F5">
+              <div style="width:40px;height:40px;border-radius:11px;background:#F3F5F8;display:flex;align-items:center;justify-content:center"><span style="font-family:'Material Symbols Outlined';font-size:21px;font-feature-settings:'liga';color:#46505C">{{ t.icon }}</span></div>
+              <div style="flex:1">
+                <div style="font-weight:600;font-size:13.5px">{{ t.label }}</div>
+                <div style="font-size:12px;color:#9AA1AC">{{ t.desc }}</div>
+              </div>
+              <button onClick="{{ t.onToggle }}" style="{{ t.trackStyle }}"><span style="{{ t.knobStyle }}"></span></button>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:16px;padding:22px;margin-bottom:16px">
+          <div style="font-weight:700;font-size:15px;margin-bottom:14px">Yönetim Ekibi</div>
+          <sc-for list="{{ team }}" as="p" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #F2F3F5">
+              <div style="width:38px;height:38px;border-radius:11px;background:{{ p.bg }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">{{ p.initials }}</div>
+              <div style="flex:1"><div style="font-weight:600;font-size:13.5px">{{ p.name }}</div><div style="font-size:12px;color:#9AA1AC">{{ p.email }}</div></div>
+              <span style="font-size:11.5px;font-weight:700;color:{{ p.roleColor }};background:{{ p.roleBg }};padding:4px 11px;border-radius:20px">{{ p.role }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:#FDF2F2;border:1px solid #F5D5D5;border-radius:16px;padding:20px;display:flex;align-items:center;gap:14px">
+          <span style="font-family:'Material Symbols Outlined';font-size:24px;font-feature-settings:'liga';color:#E5484D">warning</span>
+          <div style="flex:1"><div style="font-weight:700;font-size:13.5px;color:#C0383C">Tehlikeli Bölge</div><div style="font-size:12.5px;color:#B5565A">Tüm sistem verilerini dışa aktar veya hesabı sıfırla.</div></div>
+          <button style="height:38px;padding:0 16px;border:1px solid #E5484D;background:#fff;border-radius:10px;font-size:13px;font-weight:700;color:#E5484D;cursor:pointer" style-hover="background:#FEF6F6">Verileri sıfırla</button>
+        </div>
+      </div>
+      </sc-if>
+
+    </div>
+  </main>
+
+  <!-- ===================== MEMBER DRAWER ===================== -->
+  <sc-if value="{{ drawerOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:50;display:flex;justify-content:flex-end">
+    <div onClick="{{ closeDrawer }}" style="position:absolute;inset:0;background:rgba(20,27,38,.34);animation:ovIn .2s ease both"></div>
+    <div style="position:relative;width:472px;height:100%;background:#F5F6F8;box-shadow:-18px 0 50px rgba(20,30,50,.18);animation:drwIn .3s cubic-bezier(.2,.8,.2,1) both;overflow-y:auto">
+      <div style="background:#fff;border-bottom:1px solid #E7E9ED;padding:20px 22px;position:sticky;top:0;z-index:2">
+        <div style="display:flex;align-items:flex-start;gap:14px">
+          <div style="width:54px;height:54px;border-radius:15px;background:{{ sm.avatarBg }};color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0">{{ sm.initials }}</div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:800;font-size:18px;letter-spacing:-.3px">{{ sm.name }}</div>
+            <div style="font-size:13px;color:#8A929E">{{ sm.owner }} · {{ sm.city }}</div>
+            <span style="font-size:11.5px;font-weight:700;color:{{ sm.statusColor }};background:{{ sm.statusBg }};padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;margin-top:8px"><span style="width:6px;height:6px;border-radius:50%;background:{{ sm.statusColor }}"></span>{{ sm.status }}</span>
+          </div>
+          <button onClick="{{ closeDrawer }}" style="width:34px;height:34px;border:1px solid #E2E5EA;background:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0" style-hover="background:#F7F8FA"><span style="font-family:'Material Symbols Outlined';font-size:19px;font-feature-settings:'liga';color:#6B7280">close</span></button>
+        </div>
+      </div>
+
+      <div style="padding:18px 22px 26px">
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:14px;padding:18px;margin-bottom:14px">
+          <div style="display:flex;justify-content:space-between;margin-bottom:14px"><span style="font-weight:700;font-size:14px">Üyelik</span><span style="font-size:11.5px;font-weight:700;color:{{ sm.planColor }};background:{{ sm.planBg }};padding:3px 10px;border-radius:7px">{{ sm.plan }}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span style="color:#8A929E">Başlangıç</span><span style="font-weight:600;font-feature-settings:'tnum'">{{ sm.joinFull }}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span style="color:#8A929E">Bitiş</span><span style="font-weight:600;font-feature-settings:'tnum'">{{ sm.endFull }}</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:12px"><span style="color:#8A929E">Uygulama</span><span style="font-weight:600">{{ sm.app }}</span></div>
+          <div style="height:8px;background:#F0F1F4;border-radius:6px;overflow:hidden"><div style="height:100%;width:{{ sm.progress }};background:{{ sm.daysColor }};border-radius:6px"></div></div>
+          <div style="font-size:12px;color:#8A929E;margin-top:7px;text-align:right">{{ sm.daysLabel }}</div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:14px;padding:18px;margin-bottom:14px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-family:'Material Symbols Outlined';font-size:19px;font-feature-settings:'liga';color:#7C5CFC">redeem</span><span style="font-weight:700;font-size:14px">Hediye Durumu</span></div>
+          <div style="font-size:13px;color:#46505C">{{ sm.giftText }}</div>
+          <div style="display:flex;gap:8px;margin-top:13px">
+            <sc-for list="{{ giftOptions }}" as="g" hint-placeholder-count="4">
+              <button onClick="{{ g.onClick }}" style="{{ g.style }}">{{ g.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#fff;border:1px solid #E7E9ED;border-radius:14px;padding:18px;margin-bottom:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><span style="font-weight:700;font-size:14px">Ödeme Geçmişi</span><span style="font-size:13px;font-weight:800">{{ sm.totalPaid }}</span></div>
+          <sc-for list="{{ sm.payments }}" as="p" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #F2F3F5">
+              <div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">{{ p.type }}</div><div style="font-size:11.5px;color:#9AA1AC;font-family:'JetBrains Mono',monospace">{{ p.id }} · {{ p.dateLabel }}</div></div>
+              <span style="font-size:11px;font-weight:700;color:{{ p.statusColor }};background:{{ p.statusBg }};padding:3px 9px;border-radius:20px">{{ p.status }}</span>
+              <span style="font-weight:700;font-size:13px;width:80px;text-align:right;font-feature-settings:'tnum'">{{ p.amountLabel }}</span>
+            </div>
+          </sc-for>
+          <sc-if value="{{ sm.noPayments }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;color:#9AA1AC;padding-top:10px">Henüz ödeme kaydı yok.</div></sc-if>
+        </div>
+
+        <div style="display:flex;gap:10px">
+          <button style="flex:1;height:44px;background:#2A6FDB;border:none;border-radius:11px;color:#fff;font-size:13.5px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 12px rgba(42,111,219,.3)" style-hover="background:#225FBE"><span style="font-family:'Material Symbols Outlined';font-size:19px;font-feature-settings:'liga'">autorenew</span>Üyeliği Uzat</button>
+          <button style="width:48px;height:44px;border:1px solid #E2E5EA;background:#fff;border-radius:11px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#F7F8FA"><span style="font-family:'Material Symbols Outlined';font-size:20px;font-feature-settings:'liga';color:#6B7280">mail</span></button>
+          <button style="width:48px;height:44px;border:1px solid #F2D4D4;background:#fff;border-radius:11px;display:flex;align-items:center;justify-content:center;cursor:pointer" style-hover="background:#FEF6F6"><span style="font-family:'Material Symbols Outlined';font-size:20px;font-feature-settings:'liga';color:#E5484D">block</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:920},&quot;brandName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;CP Panel&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;defaultView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;dashboard&quot;,&quot;apps&quot;,&quot;members&quot;,&quot;transactions&quot;,&quot;analytics&quot;,&quot;settings&quot;],&quot;default&quot;:&quot;dashboard&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;currency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;₺&quot;,&quot;$&quot;,&quot;€&quot;],&quot;default&quot;:&quot;₺&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.build();
+    const dv = (props && props.defaultView) || 'dashboard';
+    this.state = { view: dv, search:'', statusFilter:'Tümü', selectedId:null,
+      txSearch:'', txStatus:'Tümü',
+      settings:{ twoFA:true, emailAlert:true, weeklyReport:true, autoGift:false, smsAlert:false },
+      gifts:{} };
+  }
+
+  cur(){ return (this.props && this.props.currency) || '₺'; }
+  tl(n){ return this.cur() + Math.round(n).toLocaleString('tr-TR'); }
+  lower(s){ return (s||'').toLocaleLowerCase('tr'); }
+
+  build(){
+    this.today = new Date('2026-06-17T00:00:00');
+    this.palette = ['#2A6FDB','#1F8A5B','#7C5CFC','#C77700','#0E8F9E','#D2476B','#5A6B8C'];
+    this.apps = [
+      { name:'Rezervo', badge:'Rz', category:'Rezervasyon & Masa Yönetimi', color:'#2A6FDB', shadow:'rgba(42,111,219,.32)', members:312, mrrN:142000, records:'2,4M', status:'Aktif', uptime:'%99,9', spark:[42,55,48,63,58,72,68,80,76,90] },
+      { name:'Kasapp', badge:'Ks', category:'Esnaf POS & Kasa', color:'#1F8A5B', shadow:'rgba(31,138,91,.3)', members:486, mrrN:96500, records:'5,1M', status:'Aktif', uptime:'%99,8', spark:[50,46,58,54,66,62,74,70,82,88] },
+      { name:'Randevu+', badge:'R+', category:'Randevu & Müşteri Takibi', color:'#7C5CFC', shadow:'rgba(124,92,252,.3)', members:274, mrrN:88300, records:'1,8M', status:'Aktif', uptime:'%99,95', spark:[38,44,40,52,49,58,55,64,60,70] },
+      { name:'Stoklu', badge:'St', category:'Stok & Sipariş Takibi', color:'#C77700', shadow:'rgba(199,119,0,.3)', members:358, mrrN:118700, records:'3,3M', status:'Bakımda', uptime:'%98,4', spark:[60,55,64,58,52,60,57,63,59,66] },
+      { name:'Sadakat', badge:'Sd', category:'Sadakat & Hediye Programı', color:'#D2476B', shadow:'rgba(210,71,107,.3)', members:192, mrrN:40700, records:'0,9M', status:'Aktif', uptime:'%99,7', spark:[20,28,32,30,40,46,52,58,66,74] },
+    ];
+    const b = [
+      ['Paşa Kuaför','Ahmet Yıldız','Randevu+','Yıllık','2026-02-14','2027-02-14','Aktif',90,4990,'İstanbul'],
+      ['Lezzet Durağı','Mehmet Demir','Rezervo','Aylık','2026-05-02','2026-07-02','Aktif',0,899,'Ankara'],
+      ['Moda Butik','Ayşe Kaya','Stoklu','Yıllık','2025-09-20','2026-09-20','Aktif',365,3990,'İzmir'],
+      ['Yıldız Eczane','Fatma Şahin','Stoklu','Aylık','2026-04-18','2026-06-25','Yakında',0,1299,'Bursa'],
+      ['Kahve Molası','Can Öztürk','Sadakat','Aylık','2026-06-01','2026-07-01','Aktif',30,749,'İstanbul'],
+      ['Fit Yaşam Spor','Deniz Arslan','Randevu+','Yıllık','2025-06-30','2026-06-30','Yakında',60,5990,'Antalya'],
+      ['Demir Oto Servis','Hasan Çelik','Randevu+','Aylık','2025-11-10','2026-05-10','Pasif',0,0,'Kocaeli'],
+      ['Çiçek Sepeti','Elif Aydın','Kasapp','Deneme','2026-06-08','2026-06-22','Yakında',0,0,'İstanbul'],
+      ['Mavi Deniz Balık','Mustafa Koç','Kasapp','Aylık','2026-03-15','2026-07-15','Aktif',0,999,'İzmir'],
+      ['Anadolu Lokantası','Zeynep Polat','Rezervo','Yıllık','2025-08-01','2026-08-01','Aktif',365,4490,'Ankara'],
+      ['Pırlanta Kuyumcu','Ali Doğan','Stoklu','Yıllık','2026-01-12','2027-01-12','Aktif',90,6990,'İstanbul'],
+      ['Gül Pastanesi','Hatice Yılmaz','Sadakat','Aylık','2026-05-20','2026-06-20','Yakında',30,749,'Bursa'],
+      ['Teknoloji Dünyası','Burak Aksoy','Stoklu','Yıllık','2025-12-05','2026-12-05','Aktif',60,4990,'İstanbul'],
+      ['Sağlık Eczanesi','Merve Erdoğan','Stoklu','Aylık','2026-02-28','2026-06-28','Aktif',0,1299,'Adana'],
+      ['Berber Ali','Ali Vural','Randevu+','Deneme','2026-06-10','2026-06-24','Yakında',0,0,'Konya'],
+      ['Vitamin Market','Seda Güneş','Kasapp','Aylık','2026-04-05','2026-07-05','Aktif',0,999,'İzmir'],
+      ['Doğa Pet Shop','Emre Şimşek','Sadakat','Yıllık','2025-10-22','2026-10-22','Aktif',365,3990,'İstanbul'],
+      ['Elit Güzellik','Gül Aydın','Randevu+','Aylık','2026-05-15','2026-06-30','Yakında',30,1199,'Ankara'],
+      ['Şehir Fırını','Okan Kurt','Kasapp','Aylık','2026-03-30','2026-07-30','Aktif',0,899,'Gaziantep'],
+      ['Konfor Mobilya','Sibel Acar','Stoklu','Yıllık','2025-07-18','2026-07-18','Aktif',90,6490,'İstanbul'],
+      ['Tatlı Rüya Kafe','Murat Bal','Sadakat','Aylık','2026-06-05','2026-07-05','Aktif',30,749,'İzmir'],
+      ['Spor Center','Ece Yalçın','Randevu+','Yıllık','2026-01-25','2027-01-25','Aktif',365,5990,'Antalya'],
+      ['Damla Su','Kemal Tekin','Kasapp','Aylık','2025-12-12','2026-04-12','Pasif',0,0,'Mersin'],
+      ['Nur Tekstil','Aylin Çetin','Stoklu','Yıllık','2025-11-30','2026-11-30','Aktif',60,4990,'Denizli'],
+    ];
+    this.biz = b.map((r,i)=>({ id:'B'+(i+1), name:r[0], owner:r[1], app:r[2], plan:r[3], join:r[4], end:r[5], status:r[6], gift:r[7], amount:r[8], city:r[9], idx:i }));
+    // transactions
+    let tid = 10480; const tx = [];
+    const day = (i)=> '2026-06-' + String(17 - (i % 15)).padStart(2,'0');
+    this.biz.forEach((m,i)=>{
+      if(m.status !== 'Pasif'){
+        const st = (i%9===4)?'Beklemede':((i%13===7)?'Başarısız':'Başarılı');
+        tx.push({ id:'TX-'+(tid++), business:m.name, type: m.plan==='Deneme'?'Deneme':(m.plan==='Yıllık'?'Abonelik':'Yenileme'), amount:m.amount, method:['Kart','Havale','EFT'][i%3], status:st, date:day(i) });
+      }
+      if(m.gift>0){ tx.push({ id:'TX-'+(tid++), business:m.name, type:'Hediye', amount:0, method:'Sistem', status:'Başarılı', date:day(i+3) }); }
+    });
+    tx.push({ id:'TX-'+(tid++), business:'Demir Oto Servis', type:'İade', amount:-899, method:'Kart', status:'Başarılı', date:'2026-06-09' });
+    tx.push({ id:'TX-'+(tid++), business:'Damla Su', type:'İade', amount:-999, method:'Havale', status:'Beklemede', date:'2026-06-04' });
+    tx.sort((a,b)=> b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+    this.tx = tx;
+  }
+
+  daysLeft(end){ return Math.round((new Date(end+'T00:00:00') - this.today)/86400000); }
+  fmtShort(d){ const p=d.split('-'); const mo=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara']; return p[2]+' '+mo[+p[1]-1]+' '+p[0].slice(2); }
+  fmtFull(d){ const p=d.split('-'); const mo=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık']; return p[2]+' '+mo[+p[1]-1]+' '+p[0]; }
+  initials(n){ return n.split(' ').slice(0,2).map(w=>w[0]).join('').toLocaleUpperCase('tr'); }
+
+  statusStyle(s){
+    if(s==='Aktif') return { c:'#1F8A5B', bg:'#E6F4EC' };
+    if(s==='Yakında') return { c:'#B26A00', bg:'#FBF0DD' };
+    return { c:'#6B7280', bg:'#EEF0F2' };
+  }
+  planStyle(p){
+    if(p==='Yıllık') return { c:'#2A6FDB', bg:'#EAF1FC' };
+    if(p==='Aylık') return { c:'#46505C', bg:'#EEF0F3' };
+    return { c:'#7C5CFC', bg:'#F0EBFE' };
+  }
+  txStatusStyle(s){
+    if(s==='Başarılı') return { c:'#1F8A5B', bg:'#E6F4EC' };
+    if(s==='Beklemede') return { c:'#B26A00', bg:'#FBF0DD' };
+    return { c:'#E5484D', bg:'#FDECEC' };
+  }
+  txTypeStyle(t){
+    if(t==='Hediye') return { c:'#7C5CFC', bg:'#F0EBFE' };
+    if(t==='İade') return { c:'#E5484D', bg:'#FDECEC' };
+    if(t==='Abonelik') return { c:'#2A6FDB', bg:'#EAF1FC' };
+    if(t==='Deneme') return { c:'#46505C', bg:'#EEF0F3' };
+    return { c:'#0E8F9E', bg:'#E2F4F6' };
+  }
+  avatarBg(i){ return this.palette[i % this.palette.length]; }
+
+  effGift(m){ const g = this.state.gifts[m.id]; return g===undefined ? m.gift : g; }
+
+  mapMember(m){
+    const dl = this.daysLeft(m.end);
+    const ss = this.statusStyle(m.status), ps = this.planStyle(m.plan);
+    const g = this.effGift(m);
+    let daysLabel, daysColor;
+    if(m.status==='Pasif'){ daysLabel='Süresi doldu'; daysColor='#9AA1AC'; }
+    else if(dl<=0){ daysLabel='Bugün bitiyor'; daysColor='#E5484D'; }
+    else { daysLabel=dl+' gün'; daysColor = dl<=30 ? '#B26A00' : '#46505C'; }
+    return {
+      id:m.id, name:m.name, owner:m.owner, app:m.app, plan:m.plan, city:m.city,
+      initials:this.initials(m.name), avatarBg:this.avatarBg(m.idx),
+      status:m.status, statusColor:ss.c, statusBg:ss.bg,
+      planColor:ps.c, planBg:ps.bg,
+      joinLabel:this.fmtShort(m.join), joinFull:this.fmtFull(m.join), endFull:this.fmtFull(m.end),
+      daysLabel, daysColor,
+      hasGift: g>0, noGift: g<=0, giftLabel: g>0 ? g+' gün' : '',
+      _m:m, _dl:dl
+    };
+  }
+
+  setView(v){ this.setState({ view:v, selectedId:null }); }
+
+  renderVals(){
+    const S = this.state;
+    const nav = [
+      { id:'dashboard', label:'Genel Bakış', icon:'space_dashboard' },
+      { id:'apps', label:'Uygulamalar', icon:'apps' },
+      { id:'members', label:'Üyeler', icon:'groups' },
+      { id:'transactions', label:'İşlem Kayıtları', icon:'receipt_long' },
+      { id:'analytics', label:'Analitik', icon:'monitoring' },
+      { id:'settings', label:'Ayarlar', icon:'settings' },
+    ];
+    const navItems = nav.map(n=>{
+      const active = S.view===n.id;
+      return { ...n, active,
+        iconColor: active ? '#2A6FDB' : '#8A929E',
+        badge: n.id==='members' ? '7' : null,
+        style:'display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;border:none;border-radius:11px;font-size:13.5px;font-weight:'+(active?'700':'600')+';cursor:pointer;font-family:inherit;color:'+(active?'#1A1D23':'#5A6470')+';background:'+(active?'#EAF1FC':'transparent'),
+        onSelect:()=>this.setView(n.id) };
+    });
+
+    const titles = {
+      dashboard:['Genel Bakış','Tüm uygulama ve üyelik verilerinin özeti'],
+      apps:['Uygulamalar','Yönettiğiniz tüm uygulamalar ve performansları'],
+      members:['Üyeler & İşletmeler','Kayıtlı işletmeler, üyelik ve hediye yönetimi'],
+      transactions:['İşlem Kayıtları','Sistem üzerinden alınan tüm ödemeler'],
+      analytics:['Analitik','Detaylı raporlar ve dağılımlar'],
+      settings:['Ayarlar','Hesap, güvenlik ve ekip yönetimi'],
+    };
+
+    // ---- dashboard ----
+    const kpis = [
+      { label:'Toplam İşletme', value:'1.284', delta:'%12,4', up:true, icon:'storefront', iconBg:'#EAF1FC', iconColor:'#2A6FDB', sub:'Bu ay +142 yeni kayıt' },
+      { label:'Aktif Üyelik', value:'1.047', delta:'%6,1', up:true, icon:'verified_user', iconBg:'#E6F4EC', iconColor:'#1F8A5B', sub:'%82 yenileme oranı' },
+      { label:'Bu Ay Gelir', value:this.tl(486200), delta:'%9,8', up:true, icon:'payments', iconBg:'#F0EBFE', iconColor:'#7C5CFC', sub:'Aylık hedefin %94’ü' },
+      { label:'İşlenen İşlem', value:'38.940', delta:'%4,3', up:true, icon:'bolt', iconBg:'#FBF0DD', iconColor:'#C77700', sub:'Son 30 gün toplamı' },
+    ].map(k=>({ ...k, deltaColor:k.up?'#1F8A5B':'#E5484D', deltaBg:k.up?'#E6F4EC':'#FDECEC', deltaIcon:k.up?'north_east':'south_east' }));
+
+    const revLabels = ['Tem','Ağu','Eyl','Eki','Kas','Ara','Oca','Şub','Mar','Nis','May','Haz'];
+    const revVals = [298,312,305,334,358,402,418,439,461,448,472,486];
+    const W=760,H=240,padT=18,padB=24,max=520;
+    const innerH=H-padT-padB;
+    const pts = revVals.map((v,i)=>[ (i/(revVals.length-1))*W, H-padB-(v/max)*innerH ]);
+    const line = 'M' + pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L ');
+    const area = line + ' L '+W+' '+(H-padB)+' L 0 '+(H-padB)+' Z';
+
+    const giftRaw = [['30',142,'#7C5CFC'],['60',86,'#9A7DFD'],['90',54,'#B49DFE'],['365',21,'#CFC0FE']];
+    const giftStats = giftRaw.map(g=>({ label:g[0], count:g[1], color:g[2], pct:(g[1]/142*100).toFixed(0)+'%' }));
+
+    const recentTx = this.tx.slice(0,6).map((t,i)=>{
+      const ss=this.txStatusStyle(t.status);
+      return { id:t.id, business:t.business, method:t.method, status:t.status, statusColor:ss.c, statusBg:ss.bg,
+        initial:this.initials(t.business), initialBg:this.avatarBg(i+t.business.length),
+        dateLabel:this.fmtShort(t.date),
+        amountLabel: t.amount===0 ? 'Hediye' : (t.amount<0?'-'+this.tl(-t.amount):this.tl(t.amount)) };
+    });
+
+    const expiring = this.biz.filter(m=>m.status==='Yakında').map(m=>this.mapMember(m))
+      .sort((a,b)=>a._dl-b._dl).slice(0,5)
+      .map(m=>({ name:m.name, plan:m.plan, endLabel:m.endFull.split(' ').slice(0,2).join(' '),
+        daysLeft:Math.max(0,m._dl), onOpen:()=>this.setState({ view:'members', selectedId:m.id }) }));
+
+    // ---- members ----
+    const all = this.biz.map(m=>this.mapMember(m));
+    const counts = { 'Tümü':all.length, 'Aktif':0, 'Yakında':0, 'Pasif':0 };
+    all.forEach(m=>counts[m.status]++);
+    const chipDefs = ['Tümü','Aktif','Yakında','Pasif'];
+    const statusChips = chipDefs.map(c=>{
+      const active=S.statusFilter===c;
+      return { label:c, count:counts[c], onClick:()=>this.setState({statusFilter:c}),
+        style:'padding:7px 13px;border:none;border-radius:8px;font-size:12.5px;font-weight:'+(active?'700':'600')+';cursor:pointer;font-family:inherit;white-space:nowrap;color:'+(active?'#1A1D23':'#6B7280')+';background:'+(active?'#fff':'transparent')+';box-shadow:'+(active?'0 1px 3px rgba(0,0,0,.08)':'none') };
+    });
+    const q=this.lower(S.search);
+    let members = all.filter(m=> S.statusFilter==='Tümü' || m.status===S.statusFilter );
+    if(q) members = members.filter(m=> this.lower(m.name).includes(q)||this.lower(m.owner).includes(q)||this.lower(m.city).includes(q)||this.lower(m.app).includes(q) );
+    members = members.map(m=>({ ...m, onOpen:()=>this.setState({selectedId:m.id}) }));
+
+    // ---- transactions ----
+    const txStatusChips = ['Tümü','Başarılı','Beklemede','Başarısız'].map(c=>{
+      const active=S.txStatus===c;
+      return { label:c, onClick:()=>this.setState({txStatus:c}),
+        style:'padding:7px 13px;border:none;border-radius:8px;font-size:12.5px;font-weight:'+(active?'700':'600')+';cursor:pointer;font-family:inherit;color:'+(active?'#1A1D23':'#6B7280')+';background:'+(active?'#fff':'transparent')+';box-shadow:'+(active?'0 1px 3px rgba(0,0,0,.08)':'none') };
+    });
+    const tq=this.lower(S.txSearch);
+    let transactions = this.tx.filter(t=> S.txStatus==='Tümü' || t.status===S.txStatus );
+    if(tq) transactions = transactions.filter(t=> this.lower(t.business).includes(tq)||this.lower(t.id).includes(tq) );
+    transactions = transactions.map((t,i)=>{
+      const ss=this.txStatusStyle(t.status), ts=this.txTypeStyle(t.type);
+      return { id:t.id, business:t.business, type:t.type, method:t.method, status:t.status,
+        statusColor:ss.c, statusBg:ss.bg, typeColor:ts.c, typeBg:ts.bg,
+        initial:this.initials(t.business), initialBg:this.avatarBg(i+t.business.length),
+        dateLabel:this.fmtShort(t.date),
+        amountLabel: t.amount===0 ? '—' : (t.amount<0?'-'+this.tl(-t.amount):this.tl(t.amount)) };
+    });
+    const succ = this.tx.filter(t=>t.status==='Başarılı'&&t.amount>0).reduce((a,t)=>a+t.amount,0);
+    const txKpis = [
+      { label:'Toplam İşlem', value:String(this.tx.length), color:'#1A1D23' },
+      { label:'Başarılı Hacim', value:this.tl(succ), color:'#1F8A5B' },
+      { label:'Bekleyen', value:String(this.tx.filter(t=>t.status==='Beklemede').length), color:'#B26A00' },
+      { label:'Başarısız', value:String(this.tx.filter(t=>t.status==='Başarısız').length), color:'#E5484D' },
+    ];
+
+    // ---- apps ----
+    const apps = this.apps.map(a=>{
+      const ss = a.status==='Aktif' ? {c:'#1F8A5B',bg:'#E6F4EC'} : {c:'#B26A00',bg:'#FBF0DD'};
+      const mx = Math.max(...a.spark);
+      return { name:a.name, badge:a.badge, category:a.category, color:a.color, shadow:a.shadow,
+        status:a.status, statusColor:ss.c, statusBg:ss.bg,
+        members:a.members.toLocaleString('tr-TR'), mrr:this.tl(a.mrrN), records:a.records, uptime:a.uptime,
+        sparkColor:a.color, spark:a.spark.map(s=>(s/mx*100).toFixed(0)+'%') };
+    });
+
+    // ---- analytics ----
+    const txBarVals = [284,301,296,332,350,381,394,412,448,439,467,489];
+    const tbMax=520;
+    const txBars = txBarVals.map((v,i)=>({ value:(v/10).toFixed(0), label:revLabels[i], h:(v/tbMax*100).toFixed(0)+'%', color: i===txBarVals.length-1 ? '#2A6FDB' : '#BBD2F2' }));
+    const planRaw=[['Aylık',612,'#2A6FDB'],['Yıllık',389,'#1F8A5B'],['Deneme',246,'#7C5CFC'],['Pasif',37,'#9AA1AC']];
+    const planTot=planRaw.reduce((a,p)=>a+p[1],0);
+    const planBars=planRaw.map(p=>({ label:p[0], count:p[1], color:p[2], pct:(p[1]/planTot*100).toFixed(0)+'%', pctLabel:'%'+(p[1]/planTot*100).toFixed(0) }));
+    const appMax=Math.max(...this.apps.map(a=>a.mrrN));
+    const appRevBars=[...this.apps].sort((a,b)=>b.mrrN-a.mrrN).map(a=>({ name:a.name, badge:a.badge, color:a.color, mrr:this.tl(a.mrrN), pct:(a.mrrN/appMax*100).toFixed(0)+'%' }));
+    const cityCount={}; this.biz.forEach(m=>{ cityCount[m.city]=(cityCount[m.city]||0)+1; });
+    const cityArr=Object.entries(cityCount).map(([name,count])=>({name,count})).sort((a,b)=>b.count-a.count).slice(0,5);
+    const cityMaxBase=470; const cityScaled=[['İstanbul',428],['İzmir',196],['Ankara',184],['Antalya',142],['Bursa',98]];
+    const cityBars=cityScaled.map(c=>({ name:c[0], count:c[1], pct:(c[1]/cityMaxBase*100).toFixed(0)+'%' }));
+
+    // ---- settings ----
+    const tgl=(key)=>{ const v=!S.settings[key]; this.setState({ settings:{...S.settings,[key]:v} }); };
+    const tdefs=[
+      ['twoFA','İki Adımlı Doğrulama','Giriş için ek güvenlik kodu iste','lock'],
+      ['emailAlert','E-posta Bildirimleri','Yeni ödeme ve üyelik olaylarında bildir','mail'],
+      ['weeklyReport','Haftalık Rapor','Her pazartesi özet rapor gönder','summarize'],
+      ['autoGift','Otomatik Hediye','Yıllık yenilemede 30 gün hediye tanımla','redeem'],
+      ['smsAlert','SMS Uyarıları','Kritik olaylarda SMS gönder','sms'],
+    ];
+    const toggles=tdefs.map(t=>{
+      const on=S.settings[t[0]];
+      return { label:t[1], desc:t[2], icon:t[3], onToggle:()=>tgl(t[0]),
+        trackStyle:'width:46px;height:26px;border-radius:20px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;background:'+(on?'#2A6FDB':'#D5D9DF'),
+        knobStyle:'position:absolute;top:3px;left:'+(on?'23px':'3px')+';width:20px;height:20px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2)' };
+    });
+    const team=[
+      { name:'Yönetici', email:'admin@cppanel.io', initials:'YK', bg:'#1A1D23', role:'Sahip', roleColor:'#2A6FDB', roleBg:'#EAF1FC' },
+      { name:'Selin Aydın', email:'selin@cppanel.io', initials:'SA', bg:'#1F8A5B', role:'Editör', roleColor:'#1F8A5B', roleBg:'#E6F4EC' },
+      { name:'Kerem Yılmaz', email:'kerem@cppanel.io', initials:'KY', bg:'#7C5CFC', role:'Görüntüleyici', roleColor:'#6B7280', roleBg:'#EEF0F2' },
+    ];
+
+    // ---- drawer ----
+    const selM = this.biz.find(m=>m.id===S.selectedId);
+    let sm=null, giftOptions=[];
+    if(selM){
+      const mm=this.mapMember(selM);
+      const pays = this.tx.filter(t=>t.business===selM.name).map(p=>{
+        const ss=this.txStatusStyle(p.status);
+        return { type:p.type, id:p.id, dateLabel:this.fmtShort(p.date), status:p.status, statusColor:ss.c, statusBg:ss.bg,
+          amountLabel: p.amount===0 ? '—' : (p.amount<0?'-'+this.tl(-p.amount):this.tl(p.amount)) };
+      });
+      const total=this.tx.filter(t=>t.business===selM.name&&t.amount>0).reduce((a,t)=>a+t.amount,0);
+      const g=this.effGift(selM);
+      const jd=new Date(selM.join+'T00:00:00'), ed=new Date(selM.end+'T00:00:00');
+      let prog = (this.today-jd)/(ed-jd)*100; prog=Math.max(2,Math.min(100,prog));
+      sm={ ...mm, app:selM.app, joinFull:mm.joinFull, endFull:mm.endFull, progress:prog.toFixed(0)+'%',
+        totalPaid:this.tl(total), payments:pays, noPayments:pays.length===0,
+        giftText: g>0 ? (g+' günlük hediye süresi tanımlı.') : 'Bu işletmeye henüz hediye tanımlanmamış.' };
+      giftOptions=[0,30,60,90,365].filter(x=>x>0).concat([0]).slice(0,0); // placeholder
+      const opts=[30,60,90,365];
+      giftOptions=opts.map(o=>{
+        const active=g===o;
+        return { label:o+'g', onClick:()=>this.setState({ gifts:{...S.gifts,[selM.id]:active?0:o} }),
+          style:'flex:1;padding:9px 0;border-radius:9px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;border:1px solid '+(active?'#7C5CFC':'#E2E5EA')+';color:'+(active?'#fff':'#46505C')+';background:'+(active?'#7C5CFC':'#fff') };
+      });
+    }
+
+    return {
+      brandName:(this.props && this.props.brandName) || 'CP Panel',
+      navItems, pageTitle:titles[S.view][0], pageSubtitle:titles[S.view][1],
+      isDashboard:S.view==='dashboard', isApps:S.view==='apps', isMembers:S.view==='members',
+      isTx:S.view==='transactions', isAnalytics:S.view==='analytics', isSettings:S.view==='settings',
+      kpis, rev:{ line, area }, revLabels, revTotalLabel:this.tl(486200), giftStats, recentTx, expiring,
+      goTx:()=>this.setView('transactions'),
+      statusChips, members, memberCount:members.length, search:S.search, onSearch:(e)=>this.setState({search:e.target.value}),
+      txStatusChips, transactions, txCount:transactions.length, txKpis, txSearch:S.txSearch, onTxSearch:(e)=>this.setState({txSearch:e.target.value}),
+      apps, txBars, planBars, appRevBars, cityBars,
+      toggles, team,
+      drawerOpen:!!selM, sm, giftOptions, closeDrawer:()=>this.setState({selectedId:null}),
+    };
+  }
+}
+</script>
+</body>
+</html>

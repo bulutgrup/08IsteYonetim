@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "İşteYönetim",
+    "slug": "isteyonetim",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "isteyonetim",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.bulutgrup.isteyonetim"
+    },
+    "android": {
+      "package": "com.bulutgrup.isteyonetim",
+      "adaptiveIcon": {
+        "backgroundColor": "#FBF8F0",
+        "foregroundImage": "./assets/icon.png"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#FBF8F0"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

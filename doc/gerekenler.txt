@@ -1,0 +1,135 @@
+
+# Hakkımızda 
+
+Bulut Grup Yazılım olarak temelleri 1999 yılına dayanan bir yazılım geliştirme serüvenine sahibiz. Özellikle web tasarım ve web yazılım konusunda kendisini geliştiren ekibimiz ile çok özel projeler üzerinden çalıştık yıllarca.
+
+Gelişen teknolojiler ile artık mobil tarafa geçiş yapan yazılım ekibimiz başta kendi projelerimizin mobilize edilmesi, farklı sektör ve müşterilerimizin özel isteklerini yerine getirmekle meşgulüz.
+
+Şirket içi işleyişi kontrol altına almak için uygulamamız devreye girmiştir.
+
+
+Yıllara Yayılan Tecrübe
+
+1999
+Web Tasarım Başlangıç
+F2Ajans olarak başladığımız hizmet hayatımız Web Tasarım hizmetleri ile müşterilerimizi erkenden dijital dünyaya adım attırdık.
+
+2007
+E-Ticaret
+Artık vazgeçilmezimiz olacak e-ticaret yazılımları ile devam...
+
+2015
+Mobil Destekli Yazılımlar
+Mobil dünyanın kendini göstermesi üzerine mobil destekli yazılımlar ile devam...
+
+2024
+Mobil Uygulama
+Tamamen yazılımlarımız mobil uygulama olarak hizmet vermeye başladı...
+
+
+
+----------------------------
+# Teslimat ve İade Şartları
+
+1. TESLİMAT ŞARTLARI
+
+kursasistani.com, bulut tabanlı bir kurs yönetim yazılımıdır (SaaS). Bu nedenle fiziki bir kargo teslimatı söz konusu değildir.
+
+Satın alma veya abonelik yenileme işlemi iyzico güvenli ödeme altyapısı üzerinden başarıyla tamamlandıktan sonra, kullanıcının sisteme kayıtlı e-posta adresine giriş ve aktivasyon bilgileri anında otomatik olarak gönderilir ve sisteme erişim yetkisi tanımlanır.
+
+ALICI, aktivasyon işlemlerinin tamamlanmasıyla birlikte kursasistani.com paneline giriş yaparak yazılımı anında kullanmaya başlayabilir.
+
+Dijital teslimata ilişkin teknik bir aksaklık yaşanması veya erişim bilgilerinin ulaşmaması durumunda ALICI, admin@kursasistani.com üzerinden SATICI ile iletişime geçebilir.
+
+2. İADE VE CAYMA HAKKI ŞARTLARI
+
+Dijital Ürün İstisnası: 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği’nin 15. maddesinin (ğ) bendi uyarınca; "Elektronik ortamda anında ifa edilen hizmetler veya tüketiciye anında teslim edilen gayrimaddi mallara ilişkin sözleşmeler" cayma hakkının istisnası kapsamındadır.
+
+kursasistani.com üzerinden sunulan yazılım hizmeti, dijital olarak anında ifa edilen ve lisanslanan bir hizmet olduğundan, satın alma/abonelik işlemi gerçekleştikten ve yazılım erişime açıldıktan sonra cayma hakkı ve ücret iadesi kural olarak geçerli değildir.
+
+Teknik Kusur ve Mücbir Sebepler: Yazılımdan kaynaklanan, platformun temel işlevlerini yerine getirmesini engelleyen ve teknik ekibimiz tarafından makul sürede giderilemeyen süreklilik arz eden kusurların varlığı halinde, ALICI’nın talebi değerlendirilir. Haklı bulunan iade taleplerinde, onay tarihinden itibaren ücret, iyzico aracılığıyla ALICI’nın banka/kredi kartına 7-14 iş günü içinde iade edilir.
+
+
+
+
+
+----------------------------
+# Gizlilik Sözleşmesi
+
+GİZLİLİK VE VERİ GÜVENLİĞİ SÖZLEŞMESİ
+1. TARAFLAR VE AMAÇ
+İşbu sözleşme, kursasistani.com web sitesini işleten Bulut Grup Bilişim Elektrik ve Elektronik ve Yazılım Hizmetleri Ltd. Şti. (Sözleşmede "ŞİRKET" olarak anılacaktır) ile platforma üye olan kullanıcı (Sözleşmede "KULLANICI" olarak anılacaktır) arasında, KULLANICI'ya ait verilerin gizliliği ve güvenliğine ilişkin sınırları belirlemek amacıyla akdedilmiştir.
+
+2. TOPLANAN VERİLER VE İŞLEME AMACI
+
+2.1. Kullanıcı Verileri: ŞİRKET; KULLANICI’nın platforma kayıt olurken ve ödeme yaparken paylaştığı ad, soyad, e-posta, telefon ve fatura bilgilerini, hizmetin kesintisiz sunulması, faturalandırma süreçlerinin yürütülmesi ve müşteri desteği sağlanması amacıyla işler.
+
+2.2. Kurs ve Öğrenci Verileri: kursasistani.com, kurs yönetim süreçlerinin (öğrenci takibi, gelir-gider, devam zorunluluğu vb.) yürütülmesi için KULLANICI tarafından sisteme girilen verileri saklar. Bu veriler tamamen KULLANICI'nın mülkiyetindedir ve ŞİRKET tarafından üçüncü taraflarla kesinlikle paylaşılmaz.
+
+3. KREDİ KARTI VE ÖDEME GÜVENLİĞİ
+
+KULLANICI’nın ödeme yaparken kullandığı kredi/banka kartı bilgileri kesinlikle ŞİRKET sunucularında tutulmaz veya saklanmaz.
+
+Tüm ödeme işlemleri ve veri akışları, iyzico ödeme altyapısı aracılığıyla 256-bit SSL güvenlik sertifikası üzerinden şifrelenerek doğrudan ilgili bankaya iletilir.
+
+4. VERİ GÜVENLİĞİ VE SAKLAMA SÜRESİ
+ŞİRKET, sisteme girilen tüm verilerin güvenliğini sağlamak amacıyla gerekli siber güvenlik önlemlerini (şifreleme, sunucu güvenliği, yedekleme) almayı taahhüt eder. KULLANICI üyeliğini iptal etmediği sürece veriler yasal mevzuat sınırları dahilinde güvenle saklanır.
+
+5. KULLANICI HAKLARI (KVKK)
+KULLANICI, 6698 sayılı Kişisel Verilerin Korunması Kanunu uyarınca, admin@kursasistani.com adresine başvurarak kendisiyle ilgili kişisel verilerin işlenip işlenmediğini öğrenme, düzeltilmesini veya silinmesini talep etme hakkına sahiptir.
+
+
+
+
+----------------------------
+# Mesafeli Satış Sözleşmesi
+
+1. TARAFLAR
+
+SATICI:
+
+Unvan: Bulut Grup Bilişim Elektrik ve Elektronik ve Yazılım Hizmetleri Ltd. Şti.
+
+Adres: Mustafa Kemal Mh. Maidan İş Merkezi 4C Blok No:140 Çankaya / ANKARA
+
+Vergi Dairesi / No: Maltepe V.D. / 1901323607
+
+E-posta: admin@kursasistani.com
+
+Web Adresi: kursasistani.com
+
+ALICI:
+
+kursasistani.com web sitesine üye olan ve yazılım/abonelik lisansı satın alan kullanıcıdır. (Sözleşmede "ALICI" olarak anılacaktır). ALICI'nın üye olurken beyan ettiği bilgiler esas alınır.
+
+2. SÖZLEŞMENİN KONUSU
+İşbu sözleşmenin konusu, ALICI’nın SATICI’ya ait kursasistani.com web sitesi üzerinden elektronik ortamda satın aldığı kurs yönetim yazılımı hizmeti/lisansı ile ilgili olarak 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği hükümleri uyarınca tarafların hak ve yükümlülüklerinin saptanmasıdır.
+
+3. SÖZLEŞME KONUSU ÜRÜN, BEDEL AND ÖDEME
+
+Ürün/Hizmet Adı: KursAsistanı Yazılım Lisans Aboneliği
+
+Türü: Dijital Hizmet / SaaS (Yazılım)
+
+Satış Bedeli: ALICI tarafından seçilen paket tutarı (KDV Dahil)
+
+Ödeme Yöntemi: iyzico Güvenli Ödeme Sistemi (Kredi Kartı / Banka Kartı)
+
+4. GENEL HÜKÜMLER
+
+4.1. ALICI, kursasistani.com sitesinde yer alan yazılımın temel nitelikleri, satış fiyatı, ödeme şekli ve teslimata ilişkin ön bilgileri okuyup bilgi sahibi olduğunu ve elektronik ortamda gerekli teyidi verdiğini beyan eder.
+
+4.2. Sözleşme konusu hizmet, elektronik ortamda anında ifa edilen bir yazılım hizmeti olduğundan, ödemenin iyzico üzerinden başarıyla tamamlanmasını müteakip ALICI'nın sisteme erişimi derhal aktif hale getirilir.
+
+4.3. SATICI, mücbir sebepler veya altyapı sağlayıcılarından kaynaklanan küresel kesintiler dışında, yazılımı sözleşme ve seçilen paket süresi boyunca kesintisiz olarak ALICI'nın kullanımına sunmakla yükümlüdür.
+
+5. CAYMA HAKKI VE İSTİSNALARI
+
+Mesafeli Sözleşmeler Yönetmeliği’nin 15/1-ğ maddesi uyarınca, elektronik ortamda anında ifa edilen hizmetler ve tüketiciye anında teslim edilen gayrimaddi mallara ilişkin sözleşmelerde cayma hakkı kullanılamaz.
+
+ALICI, bu sözleşmeyi onaylayarak ve kursasistani.com hizmetini başlatarak, dijital ürün niteliğindeki bu yazılım için cayma hakkından feragat ettiğini peşinen kabul, beyan ve taahhüt eder.
+
+6. YETKİLİ MAHKEME
+İşbu sözleşmenin uygulanmasında, Ticaret Bakanlığınca ilan edilen değere kadar Tüketici Hakem Heyetleri ile SATICI'nın yerleşim yerindeki Tüketici Mahkemeleri yetkilidir.
+
+Yürürlük: ALICI, web sitesi üzerinden ödeme ve üyelik işlemini gerçekleştirdiğinde işbu sözleşmenin tüm şartlarını kabul etmiş sayılır.

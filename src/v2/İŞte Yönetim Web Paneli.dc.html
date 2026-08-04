@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#DDE3EC; font-family:'Manrope',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#EE6C5A; text-decoration:none; }
+  a:hover { color:#D8503D; }
+  input, textarea, button { font-family:inherit; }
+  input:focus, textarea:focus { outline:2px solid #F0876A; }
+  .sc::-webkit-scrollbar { width:8px; height:8px; }
+  .sc::-webkit-scrollbar-thumb { background:#CBD4E1; border-radius:8px; }
+  .sc::-webkit-scrollbar-track { background:transparent; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(10px) } to { opacity:1; transform:none } }
+</style>
+</helmet>
+
+<div style="min-height:100vh; display:block; overflow-x:auto; padding:28px; box-sizing:border-box; background:radial-gradient(1400px 700px at 50% 0%, #EEF2F7, #DDE3EC 70%)">
+  <div style="width:1440px; margin:0 auto; height:940px; background:#F4F6FA; border-radius:20px; overflow:hidden; box-shadow:0 40px 90px -30px rgba(16,30,51,.45); display:flex; border:1px solid #D3DAE6">
+
+    <div style="width:264px; flex:none; background:#101E33; display:flex; flex-direction:column">
+      <div style="padding:22px 20px 18px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,.08)">
+        <div style="width:42px; height:42px; border-radius:13px; background:#fff; overflow:hidden; position:relative; flex:none">
+          <img src="uploads/isteyonetim_logo.png" alt="İŞte Yönetim" style="position:absolute; width:114px; max-width:none; left:-35px; top:-4px"/>
+        </div>
+        <div>
+          <div style="font-size:15.5px; font-weight:800; color:#fff; letter-spacing:-.2px">İŞte Yönetim</div>
+          <div style="font-size:11px; color:#8497B5; font-weight:600; margin-top:2px">Yönetim Paneli v2.4</div>
+        </div>
+      </div>
+
+      <div class="sc" style="flex:1; overflow-y:auto; padding:14px 12px 18px">
+        <sc-for list="{{ menu }}" as="m" hint-placeholder-count="9">
+          <div style="margin-bottom:3px">
+            <div onClick="{{ m.go }}" style="display:flex; align-items:center; gap:11px; padding:10px 11px; border-radius:11px; cursor:pointer; background: {{ m.bg }}">
+              <div style="width:28px; height:28px; flex:none; border-radius:9px; display:flex; align-items:center; justify-content:center; font-size:11.5px; font-weight:800; background: {{ m.iconBg }}; color: {{ m.iconFg }}">{{ m.mark }}</div>
+              <div style="flex:1; font-size:13.5px; font-weight:700; color: {{ m.fg }}">{{ m.label }}</div>
+              <sc-if value="{{ m.hasChildren }}" hint-placeholder-val="{{ true }}">
+                <svg width="11" height="11" viewBox="0 0 12 12" fill="none"><path d="m3 4.5 3 3 3-3" stroke="#5F7092" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </sc-if>
+            </div>
+            <sc-if value="{{ m.hasChildren }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; flex-direction:column; gap:1px; padding:2px 0 5px 50px">
+                <sc-for list="{{ m.children }}" as="ch" hint-placeholder-count="2">
+                  <div onClick="{{ ch.go }}" style="font-size:12.5px; font-weight:600; color: {{ ch.fg }}; padding:7px 10px; border-radius:8px; cursor:pointer; background: {{ ch.bg }}">{{ ch.label }}</div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="padding:14px; border-top:1px solid rgba(255,255,255,.08)">
+        <div style="background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.09); border-radius:14px; padding:13px">
+          <div style="font-size:12.5px; font-weight:800; color:#fff">Profesyonel Plan</div>
+          <div style="font-size:11px; color:#8497B5; font-weight:600; margin-top:3px">12 kullanıcıdan 9'u aktif</div>
+          <div style="height:6px; border-radius:4px; background:rgba(255,255,255,.12); margin-top:9px; overflow:hidden">
+            <div style="width:75%; height:100%; background:linear-gradient(90deg,#EE6C5A,#F5A05A)"></div>
+          </div>
+        </div>
+        <div onClick="{{ logout }}" style="display:flex; align-items:center; gap:10px; padding:11px; margin-top:8px; border-radius:11px; cursor:pointer; color:#F58C78; font-size:13.5px; font-weight:700">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 2H3.5A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14H6M10 11l3-3-3-3M13 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Çıkış
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1; min-width:0; display:flex; flex-direction:column">
+      <div style="flex:none; height:72px; background:#fff; border-bottom:1px solid #E7EBF2; display:flex; align-items:center; gap:16px; padding:0 26px">
+        <div style="flex:none; min-width:210px">
+          <div style="font-size:11px; font-weight:800; color:#94A0B4; letter-spacing:.7px; text-transform:uppercase">{{ eyebrow }}</div>
+          <div style="font-size:19px; font-weight:800; color:#101E33; letter-spacing:-.4px">{{ title }}</div>
+        </div>
+        <div style="flex:1; display:flex; justify-content:center">
+          <div style="width:380px; max-width:100%; flex-shrink:1; min-width:0; height:42px; display:flex; align-items:center; gap:10px; background:#F4F6FA; border:1px solid #E7EBF2; border-radius:12px; padding:0 14px">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.2" stroke="#94A0B4" stroke-width="1.8"/><path d="m11 11 3.2 3.2" stroke="#94A0B4" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <input placeholder="Müşteri, teklif veya görev ara..." style="flex:1; border:none; background:transparent; font-size:13.5px; color:#101E33"/>
+            <span style="font-size:11px; font-weight:700; color:#94A0B4; border:1px solid #E0E6EF; border-radius:6px; padding:2px 6px">⌘K</span>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px">
+          <div style="width:40px; height:40px; border-radius:12px; border:1px solid #E7EBF2; display:flex; align-items:center; justify-content:center; position:relative; cursor:pointer">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="none"><path d="M9 2a5 5 0 0 0-5 5v3l-1.4 2.2A.5.5 0 0 0 3 13h12a.5.5 0 0 0 .4-.8L14 10V7a5 5 0 0 0-5-5Z" stroke="#54617A" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 15a2 2 0 0 0 4 0" stroke="#54617A" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <div style="position:absolute; top:8px; right:9px; width:8px; height:8px; border-radius:50%; background:#EE6C5A; border:2px solid #fff"></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px; padding-left:12px; border-left:1px solid #E7EBF2">
+            <div style="width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#EE6C5A,#F5A05A); color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800">KA</div>
+            <div>
+              <div style="font-size:13.5px; font-weight:800; color:#101E33">Kemal Aydın</div>
+              <div style="font-size:11px; color:#94A0B4; font-weight:600">Yönetici</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc" style="flex:1; overflow-y:auto; padding:22px 26px 30px">
+
+        <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+          <div style="animation:fadeUp .3s ease">
+            <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px">
+              <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+                <div onClick="{{ s.go }}" style="background:#fff; border:1px solid #E7EBF2; border-radius:18px; padding:18px; cursor:pointer">
+                  <div style="display:flex; align-items:center; justify-content:space-between">
+                    <div style="width:38px; height:38px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:13.5px; font-weight:800; background: {{ s.bg }}; color: {{ s.fg }}">{{ s.mark }}</div>
+                    <div style="font-size:11.5px; font-weight:800; color:#1F8A5F; background:#E7F6EF; padding:4px 8px; border-radius:8px">{{ s.delta }}</div>
+                  </div>
+                  <div style="font-size:30px; font-weight:800; color:#101E33; margin-top:14px; letter-spacing:-1px">{{ s.value }}</div>
+                  <div style="font-size:12.5px; color:#7A8699; font-weight:600; margin-top:2px">{{ s.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 400px; gap:16px; margin-top:16px">
+              <div style="background:#fff; border:1px solid #E7EBF2; border-radius:20px; padding:20px">
+                <div style="display:flex; align-items:flex-start; justify-content:space-between">
+                  <div>
+                    <div style="font-size:15px; font-weight:800; color:#101E33">Nakit Akışı</div>
+                    <div style="font-size:12px; color:#94A0B4; font-weight:600; margin-top:3px">Son 8 ay · gelir / gider</div>
+                  </div>
+                  <div style="display:flex; gap:14px; font-size:11.5px; font-weight:700; color:#54617A">
+                    <div style="display:flex; align-items:center; gap:6px"><span style="width:9px; height:9px; border-radius:3px; background:#101E33; display:inline-block"></span>Gelir</div>
+                    <div style="display:flex; align-items:center; gap:6px"><span style="width:9px; height:9px; border-radius:3px; background:#F5A05A; display:inline-block"></span>Gider</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:flex-end; gap:18px; height:210px; margin-top:22px; padding:0 4px">
+                  <sc-for list="{{ chart }}" as="b" hint-placeholder-count="8">
+                    <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:9px">
+                      <div style="width:100%; display:flex; align-items:flex-end; justify-content:center; gap:5px; height:180px">
+                        <div style="width:14px; border-radius:5px 5px 0 0; background:#101E33; height: {{ b.inH }}"></div>
+                        <div style="width:14px; border-radius:5px 5px 0 0; background:linear-gradient(180deg,#F5A05A,#EE6C5A); height: {{ b.outH }}"></div>
+                      </div>
+                      <div style="font-size:11px; font-weight:700; color:#94A0B4">{{ b.label }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+
+              <div style="background:#fff; border:1px solid #E7EBF2; border-radius:20px; padding:20px; display:flex; flex-direction:column">
+                <div style="font-size:15px; font-weight:800; color:#101E33">Son Mesajlar</div>
+                <div style="display:flex; flex-direction:column; gap:4px; margin-top:12px">
+                  <sc-for list="{{ recentMsgs }}" as="m" hint-placeholder-count="4">
+                    <div onClick="{{ goMsgs }}" style="display:flex; gap:11px; padding:11px; border-radius:13px; cursor:pointer">
+                      <div style="width:36px; height:36px; flex:none; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; background: {{ m.avBg }}; color: {{ m.avFg }}">{{ m.initials }}</div>
+                      <div style="flex:1; min-width:0">
+                        <div style="display:flex; justify-content:space-between; gap:8px">
+                          <div style="font-size:13px; font-weight:800; color:#101E33">{{ m.title }}</div>
+                          <div style="font-size:11px; font-weight:700; color:#94A0B4">{{ m.time }}</div>
+                        </div>
+                        <div style="font-size:12px; color:#7A8699; font-weight:600; margin-top:3px; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden">{{ m.subtitle }}</div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div onClick="{{ goMsgs }}" style="margin-top:auto; text-align:center; font-size:12.5px; font-weight:800; color:#EE6C5A; cursor:pointer; padding-top:12px">Tüm mesajlar</div>
+              </div>
+            </div>
+
+            <div style="background:#fff; border:1px solid #E7EBF2; border-radius:20px; padding:20px; margin-top:16px">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px">
+                <div style="font-size:15px; font-weight:800; color:#101E33">Bugünün Görevleri</div>
+                <div onClick="{{ goTasks }}" style="font-size:12.5px; font-weight:800; color:#EE6C5A; cursor:pointer">Görev listesi</div>
+              </div>
+              <sc-for list="{{ todayTasks }}" as="t" hint-placeholder-count="3">
+                <div style="display:flex; align-items:center; gap:14px; padding:13px 4px; border-bottom:1px solid #F1F4F9">
+                  <div style="width:8px; height:34px; border-radius:5px; flex:none; background: {{ t.accent }}"></div>
+                  <div style="flex:1">
+                    <div style="font-size:13.5px; font-weight:800; color:#101E33">{{ t.title }}</div>
+                    <div style="font-size:12px; color:#7A8699; font-weight:600; margin-top:2px">{{ t.subtitle }}</div>
+                  </div>
+                  <div style="font-size:11.5px; font-weight:800; padding:5px 10px; border-radius:9px; background: {{ t.badgeBg }}; color: {{ t.badgeFg }}">{{ t.badge }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:fadeUp .25s ease; background:#fff; border:1px solid #E7EBF2; border-radius:20px; overflow:hidden">
+            <div style="display:flex; align-items:center; gap:12px; padding:18px 20px; border-bottom:1px solid #EEF1F6">
+              <div style="display:flex; gap:8px; flex:1">
+                <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
+                  <div style="padding:8px 14px; border-radius:11px; font-size:12.5px; font-weight:700; border:1px solid {{ c.border }}; background: {{ c.bg }}; color: {{ c.fg }}; cursor:pointer">{{ c.label }}</div>
+                </sc-for>
+              </div>
+              <div style="display:flex; align-items:center; gap:9px; background:#F4F6FA; border:1px solid #E7EBF2; border-radius:11px; padding:0 12px; height:38px; width:230px">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.2" stroke="#94A0B4" stroke-width="1.8"/><path d="m11 11 3.2 3.2" stroke="#94A0B4" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <input placeholder="Filtrele" style="flex:1; border:none; background:transparent; font-size:13px; color:#101E33; min-width:0"/>
+              </div>
+              <sc-if value="{{ hasCreate }}" hint-placeholder-val="{{ true }}">
+                <button onClick="{{ createGo }}" style="height:38px; padding:0 16px; border:none; border-radius:11px; background:linear-gradient(100deg,#EE6C5A,#F5A05A); color:#fff; font-size:13px; font-weight:800; cursor:pointer; box-shadow:0 8px 16px -8px rgba(238,108,90,.8)">{{ createLabel }}</button>
+              </sc-if>
+            </div>
+
+            <div style="display:grid; grid-template-columns:2.4fr 1fr 1fr 1fr 44px; gap:16px; padding:12px 20px; background:#FAFBFD; border-bottom:1px solid #EEF1F6">
+              <sc-for list="{{ columns }}" as="col" hint-placeholder-count="4">
+                <div style="font-size:11px; font-weight:800; color:#94A0B4; letter-spacing:.6px; text-transform:uppercase">{{ col }}</div>
+              </sc-for>
+              <div></div>
+            </div>
+
+            <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+              <div style="display:grid; grid-template-columns:2.4fr 1fr 1fr 1fr 44px; gap:16px; align-items:center; padding:14px 20px; border-bottom:1px solid #F3F5F9">
+                <div style="display:flex; align-items:center; gap:12px; min-width:0">
+                  <div style="width:38px; height:38px; flex:none; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; background: {{ it.avBg }}; color: {{ it.avFg }}">{{ it.initials }}</div>
+                  <div style="min-width:0">
+                    <div style="font-size:13.5px; font-weight:800; color:#101E33; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ it.title }}</div>
+                    <div style="font-size:12px; color:#7A8699; font-weight:600; margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ it.subtitle }}</div>
+                  </div>
+                </div>
+                <div style="font-size:12.5px; font-weight:700; color:#54617A">{{ it.time }}</div>
+                <div><span style="font-size:11.5px; font-weight:800; padding:5px 10px; border-radius:9px; background: {{ it.badgeBg }}; color: {{ it.badgeFg }}">{{ it.badge }}</span></div>
+                <div style="font-size:13.5px; font-weight:800; color: {{ it.metaColor }}">{{ it.meta }}</div>
+                <div style="display:flex; justify-content:flex-end">
+                  <div style="width:30px; height:30px; border-radius:9px; border:1px solid #E7EBF2; display:flex; align-items:center; justify-content:center; cursor:pointer; color:#94A0B4; font-weight:800; font-size:14px">⋯</div>
+                </div>
+              </div>
+            </sc-for>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 20px">
+              <div style="font-size:12.5px; color:#94A0B4; font-weight:600">{{ countLabel }}</div>
+              <div style="display:flex; gap:6px">
+                <div style="width:32px; height:32px; border-radius:9px; border:1px solid #E7EBF2; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; color:#fff; background:#101E33">1</div>
+                <div style="width:32px; height:32px; border-radius:9px; border:1px solid #E7EBF2; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; color:#54617A">2</div>
+                <div style="width:32px; height:32px; border-radius:9px; border:1px solid #E7EBF2; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; color:#54617A">3</div>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isForm }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:fadeUp .25s ease; display:grid; grid-template-columns:1fr 330px; gap:16px; align-items:start">
+            <div style="background:#fff; border:1px solid #E7EBF2; border-radius:20px; padding:24px">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px">
+                <sc-for list="{{ fields }}" as="f" hint-placeholder-count="6">
+                  <div style="display:flex; flex-direction:column; gap:7px; grid-column: {{ f.span }}">
+                    <label style="font-size:12px; font-weight:800; color:#54617A">{{ f.label }}</label>
+                    <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}">
+                      <input placeholder="{{ f.ph }}" style="height:46px; border:1.5px solid #E4E9F1; background:#FBFCFE; border-radius:12px; padding:0 14px; font-size:13.5px; color:#101E33; box-sizing:border-box; width:100%"/>
+                    </sc-if>
+                    <sc-if value="{{ f.isArea }}" hint-placeholder-val="{{ false }}">
+                      <textarea placeholder="{{ f.ph }}" rows="5" style="border:1.5px solid #E4E9F1; background:#FBFCFE; border-radius:12px; padding:12px 14px; font-size:13.5px; color:#101E33; box-sizing:border-box; width:100%; resize:none; line-height:1.55"></textarea>
+                    </sc-if>
+                    <sc-if value="{{ f.isPick }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex; gap:8px; flex-wrap:wrap">
+                        <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="3">
+                          <div style="padding:9px 15px; border-radius:11px; font-size:12.5px; font-weight:700; border:1.5px solid {{ o.border }}; background: {{ o.bg }}; color: {{ o.fg }}; cursor:pointer">{{ o.label }}</div>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:24px; padding-top:20px; border-top:1px solid #EEF1F6">
+                <button onClick="{{ back }}" style="height:44px; padding:0 20px; border:1.5px solid #E4E9F1; border-radius:12px; background:#fff; color:#54617A; font-size:13.5px; font-weight:700; cursor:pointer">Vazgeç</button>
+                <button style="height:44px; padding:0 24px; border:none; border-radius:12px; background:linear-gradient(100deg,#EE6C5A,#F5A05A); color:#fff; font-size:13.5px; font-weight:800; cursor:pointer; box-shadow:0 10px 20px -9px rgba(238,108,90,.75)">{{ submitLabel }}</button>
+              </div>
+            </div>
+            <div style="background:linear-gradient(150deg,#FEF1ED,#FDF5EA); border:1px solid #FAE0D6; border-radius:20px; padding:20px">
+              <div style="font-size:13.5px; font-weight:800; color:#101E33">Bilgi</div>
+              <div style="font-size:12.5px; color:#8A5C4C; font-weight:600; line-height:1.6; margin-top:8px">{{ formHint }}</div>
+              <div style="height:1px; background:#F4D9CE; margin:16px 0"></div>
+              <div style="display:flex; flex-direction:column; gap:10px">
+                <sc-for list="{{ formTips }}" as="tip" hint-placeholder-count="3">
+                  <div style="display:flex; gap:9px; align-items:flex-start">
+                    <div style="width:16px; height:16px; flex:none; border-radius:5px; background:#EE6C5A; display:flex; align-items:center; justify-content:center; margin-top:1px">
+                      <svg width="10" height="8" viewBox="0 0 11 9" fill="none"><path d="M1 4.6 4 7.5 10 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                    <div style="font-size:12px; color:#54617A; font-weight:600; line-height:1.5">{{ tip }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isRows }}" hint-placeholder-val="{{ false }}">
+          <div style="animation:fadeUp .25s ease; display:grid; grid-template-columns:1fr 1fr; gap:16px; align-items:start">
+            <sc-if value="{{ showProfile }}" hint-placeholder-val="{{ false }}">
+              <div style="grid-column:1/-1; background:#fff; border:1px solid #E7EBF2; border-radius:20px; padding:22px; display:flex; align-items:center; gap:18px">
+                <div style="width:64px; height:64px; border-radius:20px; background:linear-gradient(135deg,#EE6C5A,#F5A05A); color:#fff; display:flex; align-items:center; justify-content:center; font-size:21px; font-weight:800">KA</div>
+                <div style="flex:1">
+                  <div style="font-size:18px; font-weight:800; color:#101E33">Kemal Aydın</div>
+                  <div style="font-size:13px; color:#7A8699; font-weight:600; margin-top:3px">Yönetici · kemal@isteyonetim.com · Aydın Teknoloji A.Ş.</div>
+                </div>
+                <button style="height:42px; padding:0 18px; border:1.5px solid #E4E9F1; border-radius:12px; background:#fff; color:#101E33; font-size:13px; font-weight:800; cursor:pointer">Profili Düzenle</button>
+              </div>
+            </sc-if>
+            <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+              <div style="background:#fff; border:1px solid #E7EBF2; border-radius:20px; overflow:hidden">
+                <div style="font-size:11px; font-weight:800; color:#94A0B4; letter-spacing:.7px; text-transform:uppercase; padding:16px 20px 12px">{{ g.title }}</div>
+                <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+                  <div style="display:flex; align-items:center; gap:13px; padding:14px 20px; border-top:1px solid #F3F5F9; cursor:pointer">
+                    <div style="width:36px; height:36px; flex:none; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800; background: {{ r.bg }}; color: {{ r.fg }}">{{ r.mark }}</div>
+                    <div style="flex:1; min-width:0">
+                      <div style="font-size:13.5px; font-weight:800; color:#101E33">{{ r.label }}</div>
+                      <div style="font-size:12px; color:#94A0B4; font-weight:600; margin-top:2px">{{ r.hint }}</div>
+                    </div>
+                    <sc-if value="{{ r.isToggle }}" hint-placeholder-val="{{ false }}">
+                      <div style="width:44px; height:26px; border-radius:14px; padding:3px; box-sizing:border-box; background: {{ r.tBg }}; display:flex; justify-content: {{ r.tAlign }}">
+                        <div style="width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(16,30,51,.3)"></div>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ r.isLink }}" hint-placeholder-val="{{ true }}">
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="m6 3 5 5-5 5" stroke="#C3CBD9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const soft = (bg, fg) => ({ bg, fg });
+const badge = (label, tone) => {
+  const t = { ok:['#E7F6EF','#1F8A5F'], warn:['#FEF3E2','#B87514'], hot:['#FDECEA','#C7422F'],
+    info:['#E9F0FD','#2C5AA8'], mute:['#EFF2F7','#6B778C'], brand:['#FEF0EC','#D8503D'] }[tone] || ['#EFF2F7','#6B778C'];
+  return { badge: label, badgeBg: t[0], badgeFg: t[1] };
+};
+const av = (initials, tone) => {
+  const t = { a:['#FEF0EC','#D8503D'], b:['#E9F0FD','#2C5AA8'], c:['#E7F6EF','#1F8A5F'], d:['#F3EEFB','#6941A8'], e:['#FEF3E2','#B87514'] }[tone];
+  return { initials, avBg: t[0], avFg: t[1] };
+};
+
+const SCREENS = {
+  home:      { kind:'home', title:'Giriş Paneli', eyebrow:'Genel bakış' },
+  msgInbox:  { kind:'list', title:'Gelen Mesajlar', eyebrow:'Mesajlar', create:['msgNew','Mesaj Yaz'] },
+  msgNew:    { kind:'form', title:'Mesaj Yaz', eyebrow:'Mesajlar' },
+  taskNew:   { kind:'form', title:'Görev Oluştur', eyebrow:'Görev Paneli' },
+  taskList:  { kind:'list', title:'Görev Listesi', eyebrow:'Görev Paneli', create:['taskNew','Görev Oluştur'] },
+  projNew:   { kind:'form', title:'Proje Oluştur', eyebrow:'Proje Paneli' },
+  projList:  { kind:'list', title:'Proje Listesi', eyebrow:'Proje Paneli', create:['projNew','Proje Oluştur'] },
+  offerNew:  { kind:'form', title:'Teklif Oluştur', eyebrow:'Teklif Paneli' },
+  offerList: { kind:'list', title:'Verilen Teklifler', eyebrow:'Teklif Paneli', create:['offerNew','Teklif Oluştur'] },
+  custNew:   { kind:'form', title:'Müşteri Oluştur', eyebrow:'Müşteri Paneli' },
+  custList:  { kind:'list', title:'Müşteri Listesi', eyebrow:'Müşteri Paneli', create:['custNew','Müşteri Ekle'] },
+  finNew:    { kind:'form', title:'Hareket Ekle', eyebrow:'Finans Paneli' },
+  finList:   { kind:'list', title:'Gider Listesi', eyebrow:'Finans Paneli', create:['finNew','Hareket Ekle'] },
+  servNew:   { kind:'form', title:'Servis Ekle', eyebrow:'Teknik Servis' },
+  servList:  { kind:'list', title:'Servis Listesi', eyebrow:'Teknik Servis', create:['servNew','Servis Ekle'] },
+  staff:     { kind:'list', title:'Personel Yönetimi', eyebrow:'Sistem Ayarları', create:['staff','Personel Ekle'] },
+  account:   { kind:'rows', title:'Hesap Ayarları', eyebrow:'Sistem Ayarları' },
+  settings:  { kind:'rows', title:'Ayarlar', eyebrow:'Sistem Ayarları' }
+};
+
+const DATA = {
+  msgInbox: { chips:['Tümü','Okunmamış','Müşteri','Ekip'], columns:['Gönderen / Mesaj','Tarih','Durum','Kaynak'], count:'Toplam 28 mesaj',
+    items:[
+      { ...av('AY','a'), title:'Ayşe Yıldırım', time:'09:24', subtitle:'Tekliflerinizde revizyon yapmamız gerekiyor, uygun olduğunuzda arayabilir miyim?', ...badge('Okunmadı','brand'), meta:'Müşteri', metaColor:'#54617A' },
+      { ...av('MT','b'), title:'Mert Tunç', time:'Dün', subtitle:'Beykoz şantiyesi montaj fotoğraflarını sisteme yükledim.', ...badge('Ekip','info'), meta:'Saha', metaColor:'#54617A' },
+      { ...av('DK','c'), title:'Deniz Koç', time:'Dün', subtitle:'Servis formu #4471 müşteri tarafından imzalandı, faturaya geçebiliriz.', ...badge('Yanıtlandı','ok'), meta:'Teknik', metaColor:'#54617A' },
+      { ...av('SB','d'), title:'Selin Barış', time:'23 Tem', subtitle:'Ağustos personel izin planını onayınıza gönderdim.', ...badge('Okundu','mute'), meta:'İK', metaColor:'#54617A' },
+      { ...av('HK','e'), title:'Hakan Kaya', time:'22 Tem', subtitle:'Yeni depo yazılımı için demo talebimiz var.', ...badge('Okunmadı','brand'), meta:'Müşteri', metaColor:'#54617A' }
+    ] },
+  taskList: { chips:['Tümü','Bugün','Devam eden','Tamamlanan'], columns:['Görev','Termin','Durum','İlerleme'], count:'14 açık görev',
+    items:[
+      { ...av('01','a'), title:'Kule Plaza klima bakımı', time:'Bugün', subtitle:'Kule Plaza A.Ş. · Mert Tunç', ...badge('Acil','hot'), meta:'%40', metaColor:'#EE6C5A' },
+      { ...av('02','b'), title:'Teklif revizyonu — TKF-2026-118', time:'Bugün', subtitle:'Ayşe Yıldırım · Satış', ...badge('Devam ediyor','info'), meta:'%75', metaColor:'#2C5AA8' },
+      { ...av('03','c'), title:'Aylık gider mutabakatı', time:'Yarın', subtitle:'Finans · Selin Barış', ...badge('Planlandı','mute'), meta:'%0', metaColor:'#94A0B4' },
+      { ...av('04','d'), title:'Depo sayımı raporu', time:'27 Tem', subtitle:'Operasyon · Deniz Koç', ...badge('Tamamlandı','ok'), meta:'%100', metaColor:'#1F8A5F' },
+      { ...av('05','e'), title:'Yeni personel oryantasyonu', time:'29 Tem', subtitle:'İK · Selin Barış', ...badge('Planlandı','mute'), meta:'%10', metaColor:'#94A0B4' }
+    ] },
+  projList: { chips:['Tümü','Aktif','Beklemede','Biten'], columns:['Proje','Süre','Durum','Bütçe'], count:'6 aktif proje',
+    items:[
+      { ...av('KP','a'), title:'Kule Plaza HVAC Yenileme', time:'12 hafta', subtitle:'Kule Plaza A.Ş. · 4 kişilik ekip', ...badge('Aktif','ok'), meta:'₺1.24M', metaColor:'#101E33' },
+      { ...av('BD','b'), title:'Beykoz Depo Otomasyonu', time:'8 hafta', subtitle:'Beykoz Lojistik · 3 kişilik ekip', ...badge('Aktif','ok'), meta:'₺860K', metaColor:'#101E33' },
+      { ...av('AV','d'), title:'Ataşehir Villa Elektrik', time:'5 hafta', subtitle:'Özel müşteri · 2 kişilik ekip', ...badge('Beklemede','warn'), meta:'₺410K', metaColor:'#101E33' },
+      { ...av('İM','c'), title:'İzmir Mağaza Kurulumu', time:'—', subtitle:'Vega Perakende · tamamlandı', ...badge('Tamamlandı','mute'), meta:'₺295K', metaColor:'#101E33' }
+    ] },
+  offerList: { chips:['Tümü','Bekleyen','Onaylanan','Reddedilen'], columns:['Teklif','Tarih','Durum','Tutar'], count:'Toplam 42 teklif',
+    items:[
+      { ...av('118','a'), title:'TKF-2026-118', time:'24 Tem', subtitle:'Kule Plaza A.Ş. · HVAC bakım sözleşmesi', ...badge('Bekliyor','warn'), meta:'₺185.000', metaColor:'#101E33' },
+      { ...av('117','c'), title:'TKF-2026-117', time:'21 Tem', subtitle:'Beykoz Lojistik · Depo raf sistemi', ...badge('Onaylandı','ok'), meta:'₺742.500', metaColor:'#101E33' },
+      { ...av('116','b'), title:'TKF-2026-116', time:'18 Tem', subtitle:'Vega Perakende · Mağaza aydınlatma', ...badge('Onaylandı','ok'), meta:'₺96.400', metaColor:'#101E33' },
+      { ...av('115','e'), title:'TKF-2026-115', time:'11 Tem', subtitle:'Anadolu İnşaat · Jeneratör tedariği', ...badge('Reddedildi','hot'), meta:'₺1.180.000', metaColor:'#101E33' }
+    ] },
+  custList: { chips:['Tümü','Kurumsal','Bireysel','Pasif'], columns:['Müşteri','Şehir','Tip','Proje'], count:'86 kayıtlı müşteri',
+    items:[
+      { ...av('KP','a'), title:'Kule Plaza A.Ş.', time:'İstanbul', subtitle:'Ayşe Yıldırım · 0532 000 00 00', ...badge('Kurumsal','info'), meta:'6 proje', metaColor:'#54617A' },
+      { ...av('BL','b'), title:'Beykoz Lojistik', time:'İstanbul', subtitle:'Hakan Kaya · 0533 000 00 00', ...badge('Kurumsal','info'), meta:'3 proje', metaColor:'#54617A' },
+      { ...av('VP','c'), title:'Vega Perakende', time:'İzmir', subtitle:'Ceren Ak · 0555 000 00 00', ...badge('Kurumsal','info'), meta:'2 proje', metaColor:'#54617A' },
+      { ...av('EÖ','d'), title:'Emre Özkan', time:'Ankara', subtitle:'Bireysel müşteri · 0542 000 00 00', ...badge('Bireysel','mute'), meta:'1 proje', metaColor:'#54617A' }
+    ] },
+  finList: { chips:['Tümü','Gider','Gelir','Bu ay'], columns:['Hareket','Tarih','Tip','Tutar'], count:'Temmuz 2026 · 34 hareket',
+    items:[
+      { ...av('₺','a'), title:'Malzeme alımı — bakır boru', time:'24 Tem', subtitle:'Kule Plaza projesi · Nakit', ...badge('Gider','hot'), meta:'-₺48.600', metaColor:'#C7422F' },
+      { ...av('₺','c'), title:'Hakediş tahsilatı', time:'23 Tem', subtitle:'Beykoz Lojistik · Havale', ...badge('Gelir','ok'), meta:'+₺260.000', metaColor:'#1F8A5F' },
+      { ...av('₺','a'), title:'Araç yakıt gideri', time:'22 Tem', subtitle:'Saha ekibi · Kredi kartı', ...badge('Gider','hot'), meta:'-₺12.350', metaColor:'#C7422F' },
+      { ...av('₺','a'), title:'Ofis kirası', time:'20 Tem', subtitle:'Genel gider · Otomatik ödeme', ...badge('Gider','hot'), meta:'-₺85.000', metaColor:'#C7422F' },
+      { ...av('₺','c'), title:'Servis bedeli', time:'19 Tem', subtitle:'Vega Perakende · Havale', ...badge('Gelir','ok'), meta:'+₺34.800', metaColor:'#1F8A5F' }
+    ] },
+  servList: { chips:['Tümü','Açık','Serviste','Teslim'], columns:['Servis kaydı','Tarih','Durum','Kapsam'], count:'4 açık servis kaydı',
+    items:[
+      { ...av('SR','a'), title:'#4483 · Chiller ünitesi', time:'Bugün', subtitle:'Kule Plaza A.Ş. · Mert Tunç', ...badge('Açık','hot'), meta:'Garanti', metaColor:'#54617A' },
+      { ...av('SR','e'), title:'#4482 · Forklift akü', time:'Dün', subtitle:'Beykoz Lojistik · Deniz Koç', ...badge('Serviste','warn'), meta:'Ücretli', metaColor:'#54617A' },
+      { ...av('SR','c'), title:'#4471 · Klima montajı', time:'21 Tem', subtitle:'Vega Perakende · Deniz Koç', ...badge('Teslim edildi','ok'), meta:'Ücretli', metaColor:'#54617A' },
+      { ...av('SR','b'), title:'#4468 · Jeneratör bakımı', time:'16 Tem', subtitle:'Anadolu İnşaat · Mert Tunç', ...badge('Teslim edildi','ok'), meta:'Sözleşme', metaColor:'#54617A' }
+    ] },
+  staff: { chips:['Tümü','Saha','Ofis','Pasif'], columns:['Personel','Birim','Durum','Yetki'], count:'12 kullanıcıdan 9\'u aktif',
+    items:[
+      { ...av('MT','b'), title:'Mert Tunç', time:'Saha', subtitle:'Teknik servis uzmanı · 12 açık görev', ...badge('Aktif','ok'), meta:'Tam yetki', metaColor:'#54617A' },
+      { ...av('DK','c'), title:'Deniz Koç', time:'Saha', subtitle:'Servis teknisyeni · 7 açık görev', ...badge('Aktif','ok'), meta:'Sınırlı', metaColor:'#54617A' },
+      { ...av('SB','d'), title:'Selin Barış', time:'Ofis', subtitle:'İK & Finans · 3 açık görev', ...badge('Aktif','ok'), meta:'Tam yetki', metaColor:'#54617A' },
+      { ...av('OG','e'), title:'Onur Güneş', time:'Ofis', subtitle:'Satış temsilcisi · izinde', ...badge('Pasif','mute'), meta:'Sınırlı', metaColor:'#54617A' }
+    ] }
+};
+
+const pick = (label, opts, activeIdx, span) => ({ label, kind:'pick', span,
+  options: opts.map((o, i) => i === activeIdx
+    ? { label:o, bg:'#FEF0EC', fg:'#D8503D', border:'#F4C0B4' }
+    : { label:o, bg:'#fff', fg:'#54617A', border:'#E4E9F1' }) });
+const txt = (label, ph, span) => ({ label, ph, kind:'text', span });
+const area = (label, ph) => ({ label, ph, kind:'area', span:'1 / -1' });
+
+const FORMS = {
+  msgNew: { hint:'Mesajınız seçtiğiniz alıcıya anlık bildirim ve e-posta olarak iletilir.', submit:'Mesajı Gönder',
+    tips:['Ekip mesajları tüm birim üyelerine gider','Dosya eki 25 MB\'a kadar desteklenir','Yanıtlar bu ekranda takip edilir'],
+    fields:[ txt('Alıcı','Kişi veya ekip seçin'), pick('Tür',['Müşteri','Ekip','Duyuru'],0), txt('Konu','Örn. Teklif revizyonu','1 / -1'), area('Mesaj','Mesajınızı yazın...') ] },
+  taskNew: { hint:'Görev atadığınız personelin mobil uygulamasına anında düşer.', submit:'Görevi Oluştur',
+    tips:['Acil görevler push bildirim gönderir','Projeye bağlı görevler ilerlemeye işlenir','Termin geçince otomatik hatırlatma yapılır'],
+    fields:[ txt('Görev başlığı','Örn. Kule Plaza klima bakımı','1 / -1'), txt('İlgili proje','Proje seçin'), txt('Atanan personel','Personel seçin'), pick('Öncelik',['Düşük','Normal','Acil'],1), txt('Bitiş tarihi','25.07.2026'), area('Açıklama','Görev detayları...') ] },
+  projNew: { hint:'Proje oluşturduğunuzda ilgili teklif, görev ve giderler otomatik bağlanır.', submit:'Projeyi Oluştur',
+    tips:['Onaylı tekliften proje türetebilirsiniz','Bütçe aşımında uyarı alırsınız','Ekip ataması sonradan değiştirilebilir'],
+    fields:[ txt('Proje adı','Örn. Kule Plaza HVAC Yenileme','1 / -1'), txt('Müşteri','Müşteri seçin'), pick('Durum',['Aktif','Beklemede','Taslak'],0), txt('Bütçe','₺0,00'), txt('Başlangıç / bitiş','01.08.2026 — 30.10.2026'), area('Kapsam','Proje kapsamı...') ] },
+  offerNew: { hint:'Teklif PDF olarak müşteriye e-posta ile gönderilebilir.', submit:'Teklifi Kaydet',
+    tips:['Teklif numarası otomatik üretilir','Onaylanan teklif projeye dönüştürülebilir','KDV oranı ayarlardan yönetilir'],
+    fields:[ txt('Müşteri','Müşteri seçin'), txt('Teklif başlığı','Örn. HVAC bakım sözleşmesi'), txt('Tutar (KDV hariç)','₺0,00'), pick('Geçerlilik',['15 gün','30 gün','60 gün'],1), area('Kalemler','1 adet chiller bakımı — ₺...') ] },
+  custNew: { hint:'Müşteri kaydı teklif, proje ve servis modülleriyle ilişkilendirilir.', submit:'Müşteriyi Kaydet',
+    tips:['Vergi no ile e-fatura entegrasyonu çalışır','Yetkili kişiye otomatik bilgilendirme gider','Pasif müşteriler listede gizlenebilir'],
+    fields:[ pick('Müşteri tipi',['Kurumsal','Bireysel'],0), txt('Ünvan / Ad Soyad','Örn. Kule Plaza A.Ş.'), txt('Yetkili kişi','Örn. Ayşe Yıldırım'), txt('Telefon','0(5__) ___ __ __'), txt('E-posta','ornek@firma.com'), area('Adres','Fatura adresi...') ] },
+  finNew: { hint:'Gelir ve giderler aylık nakit akışı raporuna anında işlenir.', submit:'Hareketi Kaydet',
+    tips:['Projeye bağlı giderler kârlılığa yansır','Fiş/fatura görseli ekleyebilirsiniz','Tekrarlayan giderleri otomatikleştirin'],
+    fields:[ pick('Hareket tipi',['Gider','Gelir'],0), txt('Açıklama','Örn. Malzeme alımı'), txt('Tutar','₺0,00'), pick('Ödeme',['Nakit','Havale','Kredi kartı'],1), txt('Kategori / proje','Kule Plaza projesi'), txt('Tarih','25.07.2026') ] },
+  servNew: { hint:'Servis kaydı açıldığında müşteriye takip numarası SMS ile gönderilir.', submit:'Servis Kaydı Aç',
+    tips:['Garanti kapsamı seri no ile kontrol edilir','Teknisyen sahada form imzalatabilir','Tamamlanan servis faturaya dönüşür'],
+    fields:[ txt('Müşteri','Müşteri seçin'), txt('Cihaz / ekipman','Örn. Chiller ünitesi'), txt('Seri no','SN-000000'), pick('Servis tipi',['Garanti','Ücretli','Sözleşme'],0), txt('Atanan teknisyen','Teknisyen seçin'), area('Arıza tanımı','Müşteri beyanı...') ] }
+};
+
+const ROWS = {
+  account: { profile:true, groups:[
+    { title:'Profil', rows:[
+      { mark:'AD', label:'Kişisel bilgiler', hint:'Ad, ünvan, telefon', ...soft('#FEF0EC','#D8503D'), link:true },
+      { mark:'FR', label:'Firma bilgileri', hint:'Aydın Teknoloji A.Ş. · vergi no', ...soft('#E9F0FD','#2C5AA8'), link:true },
+      { mark:'PW', label:'Şifre değiştir', hint:'Son değişiklik 3 ay önce', ...soft('#F3EEFB','#6941A8'), link:true },
+      { mark:'2F', label:'İki adımlı doğrulama', hint:'SMS ile doğrulama açık', ...soft('#E7F6EF','#1F8A5F'), toggle:true } ] },
+    { title:'Abonelik', rows:[
+      { mark:'PR', label:'Plan ve faturalama', hint:'Profesyonel · 12 kullanıcı', ...soft('#E7F6EF','#1F8A5F'), link:true },
+      { mark:'FT', label:'Fatura geçmişi', hint:'Son fatura 01.07.2026', ...soft('#FEF3E2','#B87514'), link:true },
+      { mark:'KL', label:'Kullanıcı ekle', hint:'3 boş lisans', ...soft('#E9F0FD','#2C5AA8'), link:true } ] } ] },
+  settings: { profile:false, groups:[
+    { title:'Bildirimler', rows:[
+      { mark:'BL', label:'Anlık bildirimler', hint:'Görev ve mesaj bildirimleri', ...soft('#FEF0EC','#D8503D'), toggle:true },
+      { mark:'EP', label:'E-posta özeti', hint:'Her sabah 08:00', ...soft('#E9F0FD','#2C5AA8'), toggle:true },
+      { mark:'SM', label:'SMS uyarıları', hint:'Sadece acil servis kayıtları', ...soft('#FEF3E2','#B87514'), toggle:false } ] },
+    { title:'Uygulama', rows:[
+      { mark:'DL', label:'Koyu tema', hint:'Sistem ayarını takip et', ...soft('#EFF2F7','#54617A'), toggle:false },
+      { mark:'TR', label:'Dil ve bölge', hint:'Türkçe · ₺ TRY', ...soft('#E7F6EF','#1F8A5F'), link:true },
+      { mark:'YD', label:'Yedekleme', hint:'Günlük · son 03:00', ...soft('#F3EEFB','#6941A8'), link:true },
+      { mark:'DS', label:'Destek ve yardım', hint:'Canlı destek, kılavuz', ...soft('#E9F0FD','#2C5AA8'), link:true } ] } ] }
+};
+
+const MENU = [
+  { mark:'GP', label:'Giriş Paneli', screen:'home' },
+  { mark:'MS', label:'Mesajlar', children:[['Gelen Mesajlar','msgInbox'],['Mesaj Yaz','msgNew']] },
+  { mark:'GÖ', label:'Görev Paneli', children:[['Görev Oluştur','taskNew'],['Görev Listesi','taskList']] },
+  { mark:'PR', label:'Proje Paneli', children:[['Proje Oluştur','projNew'],['Proje Listesi','projList']] },
+  { mark:'TK', label:'Teklif Paneli', children:[['Teklif Oluştur','offerNew'],['Verilen Teklifler','offerList']] },
+  { mark:'MŞ', label:'Müşteri Paneli', children:[['Müşteri Oluştur','custNew'],['Müşteri Listesi','custList']] },
+  { mark:'FN', label:'Finans Paneli', children:[['Hareket Ekle','finNew'],['Gider Listesi','finList']] },
+  { mark:'TS', label:'Teknik Servis', children:[['Servis Ekle','servNew'],['Servis Listesi','servList']] },
+  { mark:'SA', label:'Sistem Ayarları', children:[['Personel Yönetimi','staff'],['Hesap Ayarları','account'],['Ayarlar','settings']] }
+];
+
+const CHART = [['Ara',62,44],['Oca',70,48],['Şub',55,50],['Mar',84,58],['Nis',76,52],['May',92,61],['Haz',88,57],['Tem',100,66]];
+
+class Component extends DCLogic {
+  state = { screen: 'home', prev: 'home' };
+  go = (screen) => this.setState(s => ({ screen, prev: s.screen }));
+
+  renderVals() {
+    const { screen } = this.state;
+    const cur = SCREENS[screen] || SCREENS.home;
+    const data = DATA[screen] || {};
+    const form = FORMS[screen];
+    const rows = ROWS[screen];
+
+    return {
+      title: cur.title, eyebrow: cur.eyebrow,
+      isHome: cur.kind === 'home', isList: cur.kind === 'list',
+      isForm: cur.kind === 'form', isRows: cur.kind === 'rows',
+      back: () => this.setState(s => ({ screen: s.prev === s.screen ? 'home' : s.prev })),
+      logout: () => this.go('home'),
+      goTasks: () => this.go('taskList'), goMsgs: () => this.go('msgInbox'),
+
+      stats: [
+        { mark:'GÖ', value:'14', label:'Açık görev', delta:'+3 bu hafta', bg:'#FEF0EC', fg:'#D8503D', go:()=>this.go('taskList') },
+        { mark:'PR', value:'6', label:'Aktif proje', delta:'+1 bu ay', bg:'#E9F0FD', fg:'#2C5AA8', go:()=>this.go('projList') },
+        { mark:'TK', value:'₺2.2M', label:'Bekleyen teklif', delta:'%68 dönüşüm', bg:'#FEF3E2', fg:'#B87514', go:()=>this.go('offerList') },
+        { mark:'TS', value:'4', label:'Açık servis', delta:'+1 bugün', bg:'#E7F6EF', fg:'#1F8A5F', go:()=>this.go('servList') }
+      ],
+      chart: CHART.map(([label, i, o]) => ({ label, inH: i + '%', outH: o + '%' })),
+      recentMsgs: DATA.msgInbox.items.slice(0, 4),
+      todayTasks: [
+        { title:'Kule Plaza klima bakımı', subtitle:'09:30 · Mert Tunç · Kule Plaza A.Ş.', accent:'#EE6C5A', ...badge('Acil','hot') },
+        { title:'Teklif revizyonu TKF-2026-118', subtitle:'13:00 · Satış ekibi', accent:'#2C5AA8', ...badge('Devam ediyor','info') },
+        { title:'Aylık gider mutabakatı', subtitle:'16:00 · Selin Barış · Finans', accent:'#F5A05A', ...badge('Planlandı','mute') }
+      ],
+
+      chips: (data.chips || []).map((label, i) => i === 0
+        ? { label, bg:'#101E33', fg:'#fff', border:'#101E33' }
+        : { label, bg:'#fff', fg:'#54617A', border:'#E4E9F1' }),
+      columns: data.columns || [], items: data.items || [], countLabel: data.count || '',
+      hasCreate: !!cur.create, createLabel: cur.create ? '+ ' + cur.create[1] : '',
+      createGo: () => cur.create && this.go(cur.create[0]),
+
+      formHint: form ? form.hint : '', submitLabel: form ? form.submit : 'Kaydet',
+      formTips: form ? form.tips : [],
+      fields: form ? form.fields.map(f => ({
+        label:f.label, ph:f.ph, options:f.options, span: f.span || 'auto',
+        isText: f.kind === 'text', isArea: f.kind === 'area', isPick: f.kind === 'pick'
+      })) : [],
+
+      showProfile: !!(rows && rows.profile),
+      groups: rows ? rows.groups.map(g => ({
+        title: g.title,
+        rows: g.rows.map(r => ({
+          mark:r.mark, label:r.label, hint:r.hint, bg:r.bg, fg:r.fg,
+          isToggle: r.toggle !== undefined, isLink: !!r.link,
+          tBg: r.toggle ? '#EE6C5A' : '#DDE3EC', tAlign: r.toggle ? 'flex-end' : 'flex-start'
+        }))
+      })) : [],
+
+      menu: MENU.map(m => {
+        const active = m.screen === screen || (m.children || []).some(c => c[1] === screen);
+        return {
+          mark:m.mark, label:m.label,
+          bg: active && m.screen ? 'rgba(255,255,255,.09)' : 'transparent',
+          fg: active ? '#fff' : '#C6D1E2',
+          iconBg: active ? 'linear-gradient(135deg,#EE6C5A,#F5A05A)' : 'rgba(255,255,255,.07)',
+          iconFg: active ? '#fff' : '#8497B5',
+          go: () => this.go(m.screen || m.children[0][1]),
+          hasChildren: !!m.children,
+          children: (m.children || []).map(([label, key]) => ({
+            label, go: () => this.go(key),
+            fg: key === screen ? '#fff' : '#8497B5',
+            bg: key === screen ? 'rgba(238,108,90,.22)' : 'transparent'
+          }))
+        };
+      })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

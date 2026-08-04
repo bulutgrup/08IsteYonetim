@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin:0; background:#DDE3EC; font-family:'Manrope',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#EE6C5A; text-decoration:none; }
+  a:hover { color:#D8503D; }
+  input, textarea, select, button { font-family:inherit; }
+  input:focus, textarea:focus { outline:2px solid #F0876A; outline-offset:0; }
+  .sc::-webkit-scrollbar { width:0; height:0; }
+  @keyframes slideUp { from { transform:translateY(14px); opacity:0 } to { transform:translateY(0); opacity:1 } }
+  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+  @keyframes drawerIn { from { transform:translateX(-100%) } to { transform:translateX(0) } }
+</style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px; box-sizing:border-box; background:radial-gradient(1200px 600px at 50% 0%, #EEF2F7 0%, #DDE3EC 60%)">
+  <div style="width:390px; height:844px; background:#F4F6FA; border:11px solid #101E33; border-radius:46px; box-shadow:0 40px 80px -20px rgba(16,30,51,.45); overflow:hidden; position:relative; display:flex; flex-direction:column">
+
+    <div style="height:44px; flex:none; display:flex; align-items:center; justify-content:space-between; padding:0 26px; font-size:13px; font-weight:700; color:#101E33; background:transparent; position:relative; z-index:5">
+      <span>9:41</span>
+      <div style="display:flex; gap:5px; align-items:center">
+        <svg width="17" height="11" viewBox="0 0 17 11" fill="none"><rect x="0" y="7" width="3" height="4" rx="1" fill="#101E33"/><rect x="4.5" y="5" width="3" height="6" rx="1" fill="#101E33"/><rect x="9" y="2.5" width="3" height="8.5" rx="1" fill="#101E33"/><rect x="13.5" y="0" width="3" height="11" rx="1" fill="#101E33"/></svg>
+        <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="3" stroke="#101E33" opacity=".5"/><rect x="2" y="2" width="15" height="7" rx="1.6" fill="#101E33"/><path d="M22 4v3a2 2 0 0 0 0-3z" fill="#101E33" opacity=".5"/></svg>
+      </div>
+    </div>
+
+    <sc-if value="{{ loggedOut }}" hint-placeholder-val="{{ false }}">
+      <div style="flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 30px 40px; background:#FFFFFF; animation:fadeIn .3s ease">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:26px; margin-bottom:38px">
+          <img src="uploads/isteyonetim_logo.png" alt="İŞte Yönetim" style="width:168px; height:auto; display:block"/>
+          <div style="text-align:center">
+            <div style="font-size:20px; font-weight:800; color:#101E33; letter-spacing:-.3px">Tekrar hoş geldiniz</div>
+            <div style="font-size:14px; color:#7A8699; margin-top:6px; line-height:1.5">İşletmenizi tek panelden yönetin</div>
+          </div>
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:14px">
+          <div style="display:flex; flex-direction:column; gap:7px">
+            <label style="font-size:12px; font-weight:700; color:#54617A; letter-spacing:.2px">E-posta</label>
+            <input type="email" value="demo@isteyonetim.com" style="height:50px; border:1.5px solid #E2E7EF; background:#FBFCFE; border-radius:14px; padding:0 15px; font-size:14.5px; color:#101E33; box-sizing:border-box"/>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:7px">
+            <label style="font-size:12px; font-weight:700; color:#54617A; letter-spacing:.2px">Şifre</label>
+            <input type="password" value="123456" style="height:50px; border:1.5px solid #E2E7EF; background:#FBFCFE; border-radius:14px; padding:0 15px; font-size:14.5px; color:#101E33; box-sizing:border-box"/>
+          </div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:2px 2px 6px">
+            <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#54617A; font-weight:600">
+              <div style="width:18px; height:18px; border-radius:6px; background:#EE6C5A; display:flex; align-items:center; justify-content:center">
+                <svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.6 4 7.5 10 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              Beni hatırla
+            </div>
+            <span style="font-size:13px; font-weight:700; color:#EE6C5A">Şifremi unuttum</span>
+          </div>
+          <button onClick="{{ login }}" style="height:54px; border:none; border-radius:16px; background:linear-gradient(100deg,#EE6C5A 0%,#F5A05A 100%); color:#fff; font-size:15.5px; font-weight:800; letter-spacing:.2px; cursor:pointer; box-shadow:0 10px 22px -8px rgba(238,108,90,.7)">Giriş Yap</button>
+          <div style="text-align:center; font-size:13px; color:#7A8699; margin-top:8px">Hesabınız yok mu? <span style="color:#101E33; font-weight:800">Kayıt olun</span></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ true }}">
+      <div style="flex:1; display:flex; flex-direction:column; min-height:0; position:relative">
+
+        <div style="flex:none; display:flex; align-items:center; gap:12px; padding:6px 18px 14px; background:#F4F6FA">
+          <sc-if value="{{ showBack }}" hint-placeholder-val="{{ false }}">
+            <button onClick="{{ back }}" style="width:38px; height:38px; flex:none; border:1px solid #E4E9F1; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 3 5 8l5 5" stroke="#101E33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </sc-if>
+          <sc-if value="{{ showLogo }}" hint-placeholder-val="{{ true }}">
+            <div style="width:34px; height:34px; flex:none; border-radius:10px; overflow:hidden; position:relative; background:#fff">
+              <img src="uploads/isteyonetim_logo.png" alt="İŞte Yönetim" style="position:absolute; width:93px; max-width:none; left:-29px; top:-3px"/>
+            </div>
+          </sc-if>
+          <div style="flex:1; min-width:0">
+            <div style="font-size:11px; font-weight:700; color:#94A0B4; letter-spacing:.6px; text-transform:uppercase">{{ eyebrow }}</div>
+            <div style="font-size:19px; font-weight:800; color:#101E33; letter-spacing:-.4px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ title }}</div>
+          </div>
+          <button onClick="{{ openMenu }}" style="width:38px; height:38px; flex:none; border:1px solid #E4E9F1; background:#fff; border-radius:12px; display:flex; align-items:center; justify-content:center; cursor:pointer; padding:0; position:relative">
+            <svg width="17" height="17" viewBox="0 0 18 18" fill="none"><path d="M2 4.5h14M2 9h14M2 13.5h9" stroke="#101E33" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+
+        <div class="sc" style="flex:1; overflow-y:auto; padding:0 18px 96px; scrollbar-width:none">
+
+          <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+            <div style="animation:slideUp .3s ease">
+              <div style="border-radius:22px; padding:18px; background:linear-gradient(115deg,#101E33 0%,#1D3355 55%,#2A4472 100%); position:relative; overflow:hidden">
+                <div style="position:absolute; right:-40px; top:-40px; width:150px; height:150px; border-radius:50%; background:linear-gradient(140deg,rgba(238,108,90,.55),rgba(245,160,90,.15))"></div>
+                <div style="position:relative">
+                  <div style="font-size:13px; color:#A9B8D0; font-weight:600">Merhaba, Kemal Bey 👋</div>
+                  <div style="font-size:15px; color:#fff; font-weight:700; margin-top:3px">Bugün 6 açık işiniz var</div>
+                  <div style="display:flex; gap:10px; margin-top:16px">
+                    <div style="flex:1; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.13); border-radius:14px; padding:10px 12px">
+                      <div style="font-size:19px; font-weight:800; color:#fff">₺482K</div>
+                      <div style="font-size:11px; color:#A9B8D0; font-weight:600; margin-top:2px">Aylık ciro</div>
+                    </div>
+                    <div style="flex:1; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.13); border-radius:14px; padding:10px 12px">
+                      <div style="font-size:19px; font-weight:800; color:#F5A05A">%68</div>
+                      <div style="font-size:11px; color:#A9B8D0; font-weight:600; margin-top:2px">Teklif dönüşümü</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:11px; margin-top:14px">
+                <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+                  <div onClick="{{ s.go }}" style="background:#fff; border-radius:18px; padding:14px; border:1px solid #EAEEF5; cursor:pointer">
+                    <div style="display:flex; align-items:center; justify-content:space-between">
+                      <div style="width:32px; height:32px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; background: {{ s.bg }}; color: {{ s.fg }}">{{ s.mark }}</div>
+                      <div style="font-size:11px; font-weight:700; color:#3FAE7F">{{ s.delta }}</div>
+                    </div>
+                    <div style="font-size:23px; font-weight:800; color:#101E33; margin-top:10px; letter-spacing:-.5px">{{ s.value }}</div>
+                    <div style="font-size:12px; color:#7A8699; font-weight:600; margin-top:1px">{{ s.label }}</div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="display:flex; align-items:center; justify-content:space-between; margin:20px 2px 10px">
+                <div style="font-size:15px; font-weight:800; color:#101E33">Hızlı İşlem</div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:9px">
+                <sc-for list="{{ quick }}" as="q" hint-placeholder-count="4">
+                  <div onClick="{{ q.go }}" style="background:#fff; border:1px solid #EAEEF5; border-radius:16px; padding:11px 6px; display:flex; flex-direction:column; align-items:center; gap:7px; cursor:pointer">
+                    <div style="width:34px; height:34px; border-radius:11px; background:linear-gradient(135deg,#FEF0EC,#FDF3E8); display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800; color:#EE6C5A">{{ q.mark }}</div>
+                    <div style="font-size:10.5px; font-weight:700; color:#54617A; text-align:center; line-height:1.2">{{ q.label }}</div>
+                  </div>
+                </sc-for>
+              </div>
+
+              <div style="display:flex; align-items:center; justify-content:space-between; margin:20px 2px 10px">
+                <div style="font-size:15px; font-weight:800; color:#101E33">Bugünün Görevleri</div>
+                <span onClick="{{ goTasks }}" style="font-size:12.5px; font-weight:700; color:#EE6C5A; cursor:pointer">Tümü</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:9px">
+                <sc-for list="{{ todayTasks }}" as="t" hint-placeholder-count="3">
+                  <div style="background:#fff; border:1px solid #EAEEF5; border-radius:16px; padding:13px 14px; display:flex; gap:12px; align-items:center">
+                    <div style="width:8px; height:38px; border-radius:6px; flex:none; background: {{ t.accent }}"></div>
+                    <div style="flex:1; min-width:0">
+                      <div style="font-size:13.5px; font-weight:700; color:#101E33; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ t.title }}</div>
+                      <div style="font-size:11.5px; color:#7A8699; font-weight:600; margin-top:3px">{{ t.subtitle }}</div>
+                    </div>
+                    <div style="font-size:11px; font-weight:800; padding:5px 9px; border-radius:8px; background: {{ t.badgeBg }}; color: {{ t.badgeFg }}">{{ t.badge }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isList }}" hint-placeholder-val="{{ false }}">
+            <div style="animation:slideUp .25s ease">
+              <div style="display:flex; align-items:center; gap:9px; background:#fff; border:1px solid #EAEEF5; border-radius:14px; padding:0 13px; height:44px; margin-bottom:12px">
+                <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5.2" stroke="#94A0B4" stroke-width="1.8"/><path d="m11 11 3.2 3.2" stroke="#94A0B4" stroke-width="1.8" stroke-linecap="round"/></svg>
+                <input placeholder="Ara..." style="flex:1; border:none; background:transparent; font-size:13.5px; color:#101E33; padding:0"/>
+              </div>
+              <div style="display:flex; gap:7px; overflow-x:auto; padding-bottom:12px; scrollbar-width:none" class="sc">
+                <sc-for list="{{ chips }}" as="c" hint-placeholder-count="4">
+                  <div style="flex:none; padding:7px 13px; border-radius:11px; font-size:12px; font-weight:700; border:1px solid {{ c.border }}; background: {{ c.bg }}; color: {{ c.fg }}">{{ c.label }}</div>
+                </sc-for>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px">
+                <sc-for list="{{ items }}" as="it" hint-placeholder-count="6">
+                  <div style="background:#fff; border:1px solid #EAEEF5; border-radius:18px; padding:14px; display:flex; gap:12px">
+                    <div style="width:42px; height:42px; flex:none; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:13.5px; font-weight:800; background: {{ it.avBg }}; color: {{ it.avFg }}">{{ it.initials }}</div>
+                    <div style="flex:1; min-width:0">
+                      <div style="display:flex; align-items:baseline; gap:8px">
+                        <div style="flex:1; min-width:0; font-size:14px; font-weight:800; color:#101E33; white-space:nowrap; overflow:hidden; text-overflow:ellipsis">{{ it.title }}</div>
+                        <div style="font-size:11px; font-weight:700; color:#94A0B4; flex:none">{{ it.time }}</div>
+                      </div>
+                      <div style="font-size:12.5px; color:#54617A; font-weight:600; margin-top:3px; line-height:1.45; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden">{{ it.subtitle }}</div>
+                      <div style="display:flex; align-items:center; justify-content:space-between; margin-top:9px; gap:8px">
+                        <div style="font-size:11px; font-weight:800; padding:5px 9px; border-radius:8px; background: {{ it.badgeBg }}; color: {{ it.badgeFg }}">{{ it.badge }}</div>
+                        <div style="font-size:13px; font-weight:800; color: {{ it.metaColor }}">{{ it.meta }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isForm }}" hint-placeholder-val="{{ false }}">
+            <div style="animation:slideUp .25s ease; display:flex; flex-direction:column; gap:13px">
+              <div style="background:linear-gradient(110deg,#FEF1ED,#FDF5EA); border:1px solid #FAE0D6; border-radius:16px; padding:13px 15px; font-size:12.5px; color:#8A5C4C; font-weight:600; line-height:1.5">{{ formHint }}</div>
+              <sc-for list="{{ fields }}" as="f" hint-placeholder-count="5">
+                <div style="display:flex; flex-direction:column; gap:7px">
+                  <label style="font-size:12px; font-weight:700; color:#54617A">{{ f.label }}</label>
+                  <sc-if value="{{ f.isText }}" hint-placeholder-val="{{ true }}">
+                    <input placeholder="{{ f.ph }}" style="height:48px; border:1.5px solid #E4E9F1; background:#fff; border-radius:14px; padding:0 14px; font-size:14px; color:#101E33; box-sizing:border-box; width:100%"/>
+                  </sc-if>
+                  <sc-if value="{{ f.isArea }}" hint-placeholder-val="{{ false }}">
+                    <textarea placeholder="{{ f.ph }}" rows="4" style="border:1.5px solid #E4E9F1; background:#fff; border-radius:14px; padding:12px 14px; font-size:14px; color:#101E33; box-sizing:border-box; width:100%; resize:none; line-height:1.5"></textarea>
+                  </sc-if>
+                  <sc-if value="{{ f.isPick }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex; gap:8px; flex-wrap:wrap">
+                      <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="3">
+                        <div style="padding:9px 14px; border-radius:12px; font-size:12.5px; font-weight:700; border:1.5px solid {{ o.border }}; background: {{ o.bg }}; color: {{ o.fg }}; cursor:pointer">{{ o.label }}</div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-for>
+              <button style="height:52px; margin-top:6px; border:none; border-radius:16px; background:linear-gradient(100deg,#EE6C5A,#F5A05A); color:#fff; font-size:15px; font-weight:800; cursor:pointer; box-shadow:0 10px 20px -9px rgba(238,108,90,.75)">{{ submitLabel }}</button>
+              <button onClick="{{ back }}" style="height:48px; border:1.5px solid #E4E9F1; border-radius:16px; background:#fff; color:#54617A; font-size:14px; font-weight:700; cursor:pointer">Vazgeç</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ isRows }}" hint-placeholder-val="{{ false }}">
+            <div style="animation:slideUp .25s ease">
+              <sc-if value="{{ showProfile }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#fff; border:1px solid #EAEEF5; border-radius:20px; padding:18px; display:flex; align-items:center; gap:14px; margin-bottom:14px">
+                  <div style="width:56px; height:56px; border-radius:18px; background:linear-gradient(135deg,#EE6C5A,#F5A05A); color:#fff; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800">KA</div>
+                  <div style="flex:1; min-width:0">
+                    <div style="font-size:16px; font-weight:800; color:#101E33">Kemal Aydın</div>
+                    <div style="font-size:12.5px; color:#7A8699; font-weight:600; margin-top:2px">Yönetici · kemal@isteyonetim.com</div>
+                  </div>
+                </div>
+              </sc-if>
+              <div style="display:flex; flex-direction:column; gap:14px">
+                <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+                  <div>
+                    <div style="font-size:11px; font-weight:800; color:#94A0B4; letter-spacing:.7px; text-transform:uppercase; margin:0 4px 8px">{{ g.title }}</div>
+                    <div style="background:#fff; border:1px solid #EAEEF5; border-radius:18px; overflow:hidden">
+                      <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="3">
+                        <div onClick="{{ r.go }}" style="display:flex; align-items:center; gap:12px; padding:14px; border-bottom:1px solid #F1F4F9; cursor:pointer">
+                          <div style="width:34px; height:34px; flex:none; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; background: {{ r.bg }}; color: {{ r.fg }}">{{ r.mark }}</div>
+                          <div style="flex:1; min-width:0">
+                            <div style="font-size:14px; font-weight:700; color:#101E33">{{ r.label }}</div>
+                            <div style="font-size:11.5px; color:#94A0B4; font-weight:600; margin-top:2px">{{ r.hint }}</div>
+                          </div>
+                          <sc-if value="{{ r.isToggle }}" hint-placeholder-val="{{ false }}">
+                            <div style="width:44px; height:26px; border-radius:14px; padding:3px; box-sizing:border-box; background: {{ r.tBg }}; display:flex; justify-content: {{ r.tAlign }}">
+                              <div style="width:20px; height:20px; border-radius:50%; background:#fff; box-shadow:0 1px 3px rgba(16,30,51,.3)"></div>
+                            </div>
+                          </sc-if>
+                          <sc-if value="{{ r.isLink }}" hint-placeholder-val="{{ true }}">
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="m6 3 5 5-5 5" stroke="#C3CBD9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </sc-for>
+                <button onClick="{{ logout }}" style="height:50px; border:1.5px solid #F6D8D2; border-radius:16px; background:#FEF4F2; color:#D8503D; font-size:14.5px; font-weight:800; cursor:pointer; margin-top:2px">Çıkış Yap</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ showFab }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ fabGo }}" style="position:absolute; right:18px; bottom:92px; width:56px; height:56px; border:none; border-radius:20px; background:linear-gradient(135deg,#EE6C5A,#F5A05A); color:#fff; font-size:26px; font-weight:400; line-height:1; cursor:pointer; box-shadow:0 14px 26px -10px rgba(238,108,90,.85); z-index:6">+</button>
+        </sc-if>
+
+        <div style="position:absolute; left:0; right:0; bottom:0; height:78px; background:rgba(255,255,255,.94); backdrop-filter:blur(14px); border-top:1px solid #E7EBF2; display:flex; align-items:flex-start; padding:11px 8px 0; z-index:7">
+          <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="5">
+            <div onClick="{{ tb.go }}" style="flex:1; display:flex; flex-direction:column; align-items:center; gap:5px; cursor:pointer">
+              <div style="width:34px; height:30px; border-radius:11px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; background: {{ tb.bg }}; color: {{ tb.markFg }}">{{ tb.mark }}</div>
+              <div style="font-size:10.5px; font-weight:700; color: {{ tb.fg }}">{{ tb.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute; inset:0; z-index:20; display:flex">
+            <div style="width:306px; background:#101E33; height:100%; display:flex; flex-direction:column; animation:drawerIn .22s ease; box-shadow:24px 0 60px rgba(16,30,51,.4)">
+              <div style="padding:22px 20px 16px; display:flex; align-items:center; gap:12px; border-bottom:1px solid rgba(255,255,255,.08)">
+                <div style="width:44px; height:44px; border-radius:14px; background:#fff; overflow:hidden; flex:none; position:relative">
+                  <img src="uploads/isteyonetim_logo.png" alt="İŞte Yönetim" style="position:absolute; width:120px; max-width:none; left:-37px; top:-4px"/>
+                </div>
+                <div style="flex:1; min-width:0">
+                  <div style="font-size:15px; font-weight:800; color:#fff">Kemal Aydın</div>
+                  <div style="font-size:11.5px; color:#8497B5; font-weight:600; margin-top:2px">Aydın Teknoloji A.Ş.</div>
+                </div>
+              </div>
+              <div class="sc" style="flex:1; overflow-y:auto; padding:12px 12px 20px; scrollbar-width:none">
+                <sc-for list="{{ menu }}" as="m" hint-placeholder-count="8">
+                  <div style="margin-bottom:4px">
+                    <div onClick="{{ m.go }}" style="display:flex; align-items:center; gap:11px; padding:11px 12px; border-radius:13px; cursor:pointer; background: {{ m.bg }}">
+                      <div style="width:30px; height:30px; flex:none; border-radius:10px; background: {{ m.iconBg }}; color: {{ m.iconFg }}; display:flex; align-items:center; justify-content:center; font-size:12.5px; font-weight:800">{{ m.mark }}</div>
+                      <div style="flex:1; font-size:14px; font-weight:700; color: {{ m.fg }}">{{ m.label }}</div>
+                    </div>
+                    <sc-if value="{{ m.hasChildren }}" hint-placeholder-val="{{ true }}">
+                      <div style="display:flex; flex-direction:column; gap:2px; padding:2px 0 6px 53px">
+                        <sc-for list="{{ m.children }}" as="ch" hint-placeholder-count="2">
+                          <div onClick="{{ ch.go }}" style="font-size:12.5px; font-weight:600; color: {{ ch.fg }}; padding:7px 10px; border-radius:9px; cursor:pointer; background: {{ ch.bg }}">{{ ch.label }}</div>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+                <div onClick="{{ logout }}" style="display:flex; align-items:center; gap:11px; padding:11px 12px; border-radius:13px; cursor:pointer; margin-top:10px; border:1px solid rgba(238,108,90,.35)">
+                  <div style="width:30px; height:30px; flex:none; border-radius:10px; background:rgba(238,108,90,.16); color:#F58C78; display:flex; align-items:center; justify-content:center">
+                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 2H3.5A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14H6M10 11l3-3-3-3M13 8H6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </div>
+                  <div style="flex:1; font-size:14px; font-weight:700; color:#F58C78">Çıkış</div>
+                </div>
+              </div>
+            </div>
+            <div onClick="{{ closeMenu }}" style="flex:1; background:rgba(16,30,51,.5); animation:fadeIn .2s ease"></div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:920}}">
+const C = { coral:'#EE6C5A', orange:'#F5A05A', navy:'#101E33', ink:'#54617A' };
+const soft = (bg, fg) => ({ bg, fg });
+
+const SCREENS = {
+  home:      { kind:'home',  title:'Giriş Paneli', eyebrow:'Genel bakış' },
+  msgInbox:  { kind:'list',  title:'Gelen Mesajlar', eyebrow:'Mesajlar', fab:'msgNew' },
+  msgNew:    { kind:'form',  title:'Mesaj Yaz', eyebrow:'Mesajlar' },
+  taskNew:   { kind:'form',  title:'Görev Oluştur', eyebrow:'Görev Paneli' },
+  taskList:  { kind:'list',  title:'Görev Listesi', eyebrow:'Görev Paneli', fab:'taskNew' },
+  projNew:   { kind:'form',  title:'Proje Oluştur', eyebrow:'Proje Paneli' },
+  projList:  { kind:'list',  title:'Proje Listesi', eyebrow:'Proje Paneli', fab:'projNew' },
+  offerNew:  { kind:'form',  title:'Teklif Oluştur', eyebrow:'Teklif Paneli' },
+  offerList: { kind:'list',  title:'Verilen Teklifler', eyebrow:'Teklif Paneli', fab:'offerNew' },
+  custNew:   { kind:'form',  title:'Müşteri Oluştur', eyebrow:'Müşteri Paneli' },
+  custList:  { kind:'list',  title:'Müşteri Listesi', eyebrow:'Müşteri Paneli', fab:'custNew' },
+  finNew:    { kind:'form',  title:'Hareket Ekle', eyebrow:'Finans Paneli' },
+  finList:   { kind:'list',  title:'Gider Listesi', eyebrow:'Finans Paneli', fab:'finNew' },
+  servNew:   { kind:'form',  title:'Servis Ekle', eyebrow:'Teknik Servis' },
+  servList:  { kind:'list',  title:'Servis Listesi', eyebrow:'Teknik Servis', fab:'servNew' },
+  staff:     { kind:'list',  title:'Personel Yönetimi', eyebrow:'Sistem Ayarları' },
+  account:   { kind:'rows',  title:'Hesap Ayarları', eyebrow:'Sistem Ayarları' },
+  settings:  { kind:'rows',  title:'Ayarlar', eyebrow:'Sistem Ayarları' }
+};
+
+const badge = (label, tone) => {
+  const t = {
+    ok:      ['#E7F6EF','#1F8A5F'], warn: ['#FEF3E2','#B87514'], hot: ['#FDECEA','#C7422F'],
+    info:    ['#E9F0FD','#2C5AA8'], mute: ['#EFF2F7','#6B778C'], brand:['#FEF0EC','#D8503D']
+  }[tone] || ['#EFF2F7','#6B778C'];
+  return { badge: label, badgeBg: t[0], badgeFg: t[1] };
+};
+const av = (initials, tone) => {
+  const t = { a:['#FEF0EC','#D8503D'], b:['#E9F0FD','#2C5AA8'], c:['#E7F6EF','#1F8A5F'], d:['#F3EEFB','#6941A8'], e:['#FEF3E2','#B87514'] }[tone];
+  return { initials, avBg: t[0], avFg: t[1] };
+};
+
+const DATA = {
+  msgInbox: {
+    chips: ['Tümü','Okunmamış','Müşteri','Ekip'],
+    items: [
+      { ...av('AY','a'), title:'Ayşe Yıldırım', time:'09:24', subtitle:'Merhaba, tekliflerinizde revizyon yapmamız gerekiyor. Uygun olduğunuzda arayabilir miyim?', ...badge('Okunmadı','brand'), meta:'Müşteri', metaColor:'#94A0B4' },
+      { ...av('MT','b'), title:'Mert Tunç', time:'Dün', subtitle:'Beykoz şantiyesi montaj fotoğraflarını sisteme yükledim.', ...badge('Ekip','info'), meta:'Saha', metaColor:'#94A0B4' },
+      { ...av('DK','c'), title:'Deniz Koç', time:'Dün', subtitle:'Servis formu #4471 müşteri tarafından imzalandı, faturaya geçebiliriz.', ...badge('Yanıtlandı','ok'), meta:'Teknik', metaColor:'#94A0B4' },
+      { ...av('SB','d'), title:'Selin Barış', time:'23 Tem', subtitle:'Ağustos personel izin planını onayınıza gönderdim.', ...badge('Okundu','mute'), meta:'İK', metaColor:'#94A0B4' },
+      { ...av('HK','e'), title:'Hakan Kaya', time:'22 Tem', subtitle:'Yeni depo yazılımı için demo talebimiz var.', ...badge('Okunmadı','brand'), meta:'Müşteri', metaColor:'#94A0B4' }
+    ]
+  },
+  taskList: {
+    chips: ['Tümü','Bugün','Devam eden','Tamamlanan'],
+    items: [
+      { ...av('01','a'), title:'Kule Plaza klima bakımı', time:'Bugün', subtitle:'Kule Plaza A.Ş. · Mert Tunç', ...badge('Acil','hot'), meta:'%40', metaColor:'#EE6C5A' },
+      { ...av('02','b'), title:'Teklif revizyonu — TKF-2026-118', time:'Bugün', subtitle:'Ayşe Yıldırım · Satış', ...badge('Devam ediyor','info'), meta:'%75', metaColor:'#2C5AA8' },
+      { ...av('03','c'), title:'Aylık gider mutabakatı', time:'Yarın', subtitle:'Finans · Selin Barış', ...badge('Planlandı','mute'), meta:'%0', metaColor:'#94A0B4' },
+      { ...av('04','d'), title:'Depo sayımı raporu', time:'27 Tem', subtitle:'Operasyon · Deniz Koç', ...badge('Tamamlandı','ok'), meta:'%100', metaColor:'#1F8A5F' },
+      { ...av('05','e'), title:'Yeni personel oryantasyonu', time:'29 Tem', subtitle:'İK · Selin Barış', ...badge('Planlandı','mute'), meta:'%10', metaColor:'#94A0B4' }
+    ]
+  },
+  projList: {
+    chips: ['Tümü','Aktif','Beklemede','Biten'],
+    items: [
+      { ...av('KP','a'), title:'Kule Plaza HVAC Yenileme', time:'12 hf', subtitle:'Kule Plaza A.Ş. · 4 kişilik ekip', ...badge('Aktif','ok'), meta:'₺1.24M', metaColor:'#101E33' },
+      { ...av('BD','b'), title:'Beykoz Depo Otomasyonu', time:'8 hf', subtitle:'Beykoz Lojistik · 3 kişilik ekip', ...badge('Aktif','ok'), meta:'₺860K', metaColor:'#101E33' },
+      { ...av('AV','d'), title:'Ataşehir Villa Elektrik', time:'5 hf', subtitle:'Özel müşteri · 2 kişilik ekip', ...badge('Beklemede','warn'), meta:'₺410K', metaColor:'#101E33' },
+      { ...av('İM','c'), title:'İzmir Mağaza Kurulumu', time:'—', subtitle:'Vega Perakende · tamamlandı', ...badge('Tamamlandı','mute'), meta:'₺295K', metaColor:'#101E33' }
+    ]
+  },
+  offerList: {
+    chips: ['Tümü','Bekleyen','Onaylanan','Reddedilen'],
+    items: [
+      { ...av('118','a'), title:'TKF-2026-118', time:'24 Tem', subtitle:'Kule Plaza A.Ş. · HVAC bakım sözleşmesi', ...badge('Bekliyor','warn'), meta:'₺185.000', metaColor:'#101E33' },
+      { ...av('117','c'), title:'TKF-2026-117', time:'21 Tem', subtitle:'Beykoz Lojistik · Depo raf sistemi', ...badge('Onaylandı','ok'), meta:'₺742.500', metaColor:'#101E33' },
+      { ...av('116','b'), title:'TKF-2026-116', time:'18 Tem', subtitle:'Vega Perakende · Mağaza aydınlatma', ...badge('Onaylandı','ok'), meta:'₺96.400', metaColor:'#101E33' },
+      { ...av('115','e'), title:'TKF-2026-115', time:'11 Tem', subtitle:'Anadolu İnşaat · Jeneratör tedariği', ...badge('Reddedildi','hot'), meta:'₺1.180.000', metaColor:'#101E33' }
+    ]
+  },
+  custList: {
+    chips: ['Tümü','Kurumsal','Bireysel','Pasif'],
+    items: [
+      { ...av('KP','a'), title:'Kule Plaza A.Ş.', time:'İstanbul', subtitle:'Ayşe Yıldırım · 0532 000 00 00', ...badge('Kurumsal','info'), meta:'6 proje', metaColor:'#54617A' },
+      { ...av('BL','b'), title:'Beykoz Lojistik', time:'İstanbul', subtitle:'Hakan Kaya · 0533 000 00 00', ...badge('Kurumsal','info'), meta:'3 proje', metaColor:'#54617A' },
+      { ...av('VP','c'), title:'Vega Perakende', time:'İzmir', subtitle:'Ceren Ak · 0555 000 00 00', ...badge('Kurumsal','info'), meta:'2 proje', metaColor:'#54617A' },
+      { ...av('EÖ','d'), title:'Emre Özkan', time:'Ankara', subtitle:'Bireysel müşteri · 0542 000 00 00', ...badge('Bireysel','mute'), meta:'1 proje', metaColor:'#54617A' }
+    ]
+  },
+  finList: {
+    chips: ['Tümü','Gider','Gelir','Bu ay'],
+    items: [
+      { ...av('₺','a'), title:'Malzeme alımı — bakır boru', time:'24 Tem', subtitle:'Kule Plaza projesi · Nakit', ...badge('Gider','hot'), meta:'-₺48.600', metaColor:'#C7422F' },
+      { ...av('₺','c'), title:'Hakediş tahsilatı', time:'23 Tem', subtitle:'Beykoz Lojistik · Havale', ...badge('Gelir','ok'), meta:'+₺260.000', metaColor:'#1F8A5F' },
+      { ...av('₺','a'), title:'Araç yakıt gideri', time:'22 Tem', subtitle:'Saha ekibi · Kredi kartı', ...badge('Gider','hot'), meta:'-₺12.350', metaColor:'#C7422F' },
+      { ...av('₺','a'), title:'Ofis kirası', time:'20 Tem', subtitle:'Genel gider · Otomatik ödeme', ...badge('Gider','hot'), meta:'-₺85.000', metaColor:'#C7422F' },
+      { ...av('₺','c'), title:'Servis bedeli', time:'19 Tem', subtitle:'Vega Perakende · Havale', ...badge('Gelir','ok'), meta:'+₺34.800', metaColor:'#1F8A5F' }
+    ]
+  },
+  servList: {
+    chips: ['Tümü','Açık','Serviste','Teslim'],
+    items: [
+      { ...av('SR','a'), title:'#4483 · Chiller ünitesi', time:'Bugün', subtitle:'Kule Plaza A.Ş. · Mert Tunç', ...badge('Açık','hot'), meta:'Garanti', metaColor:'#54617A' },
+      { ...av('SR','e'), title:'#4482 · Forklift akü', time:'Dün', subtitle:'Beykoz Lojistik · Deniz Koç', ...badge('Serviste','warn'), meta:'Ücretli', metaColor:'#54617A' },
+      { ...av('SR','c'), title:'#4471 · Klima montajı', time:'21 Tem', subtitle:'Vega Perakende · Deniz Koç', ...badge('Teslim edildi','ok'), meta:'Ücretli', metaColor:'#54617A' },
+      { ...av('SR','b'), title:'#4468 · Jeneratör bakımı', time:'16 Tem', subtitle:'Anadolu İnşaat · Mert Tunç', ...badge('Teslim edildi','ok'), meta:'Sözleşme', metaColor:'#54617A' }
+    ]
+  },
+  staff: {
+    chips: ['Tümü','Saha','Ofis','Pasif'],
+    items: [
+      { ...av('MT','b'), title:'Mert Tunç', time:'Saha', subtitle:'Teknik servis uzmanı · 12 açık görev', ...badge('Aktif','ok'), meta:'Tam yetki', metaColor:'#54617A' },
+      { ...av('DK','c'), title:'Deniz Koç', time:'Saha', subtitle:'Servis teknisyeni · 7 açık görev', ...badge('Aktif','ok'), meta:'Sınırlı', metaColor:'#54617A' },
+      { ...av('SB','d'), title:'Selin Barış', time:'Ofis', subtitle:'İK & Finans · 3 açık görev', ...badge('Aktif','ok'), meta:'Tam yetki', metaColor:'#54617A' },
+      { ...av('OG','e'), title:'Onur Güneş', time:'Ofis', subtitle:'Satış temsilcisi · izinde', ...badge('Pasif','mute'), meta:'Sınırlı', metaColor:'#54617A' }
+    ]
+  }
+};
+
+const pick = (label, opts, activeIdx) => ({
+  label, kind:'pick',
+  options: opts.map((o, i) => i === activeIdx
+    ? { label:o, bg:'#FEF0EC', fg:'#D8503D', border:'#F4C0B4' }
+    : { label:o, bg:'#fff', fg:'#54617A', border:'#E4E9F1' })
+});
+const txt = (label, ph) => ({ label, ph, kind:'text' });
+const area = (label, ph) => ({ label, ph, kind:'area' });
+
+const FORMS = {
+  msgNew: { hint:'Mesajınız seçtiğiniz alıcıya anlık bildirim olarak iletilir.', submit:'Mesajı Gönder',
+    fields:[ txt('Alıcı','Kişi veya ekip seçin'), pick('Tür',['Müşteri','Ekip','Duyuru'],0), txt('Konu','Örn. Teklif revizyonu'), area('Mesaj','Mesajınızı yazın...') ] },
+  taskNew: { hint:'Görev atadığınız personelin mobil uygulamasına anında düşer.', submit:'Görevi Oluştur',
+    fields:[ txt('Görev başlığı','Örn. Kule Plaza klima bakımı'), txt('İlgili proje','Proje seçin'), txt('Atanan personel','Personel seçin'), pick('Öncelik',['Düşük','Normal','Acil'],1), txt('Bitiş tarihi','25.07.2026'), area('Açıklama','Görev detayları...') ] },
+  projNew: { hint:'Proje oluşturduğunuzda ilgili teklif ve görevler otomatik bağlanır.', submit:'Projeyi Oluştur',
+    fields:[ txt('Proje adı','Örn. Kule Plaza HVAC Yenileme'), txt('Müşteri','Müşteri seçin'), pick('Durum',['Aktif','Beklemede','Taslak'],0), txt('Bütçe','₺0,00'), txt('Başlangıç / bitiş','01.08.2026 — 30.10.2026'), area('Kapsam','Proje kapsamı...') ] },
+  offerNew: { hint:'Teklif PDF olarak müşteriye e-posta ile gönderilebilir.', submit:'Teklifi Kaydet',
+    fields:[ txt('Müşteri','Müşteri seçin'), txt('Teklif başlığı','Örn. HVAC bakım sözleşmesi'), txt('Tutar (KDV hariç)','₺0,00'), pick('Geçerlilik',['15 gün','30 gün','60 gün'],1), area('Kalemler','1 adet chiller bakımı — ₺...') ] },
+  custNew: { hint:'Müşteri kaydı teklif, proje ve servis modülleriyle ilişkilendirilir.', submit:'Müşteriyi Kaydet',
+    fields:[ pick('Müşteri tipi',['Kurumsal','Bireysel'],0), txt('Ünvan / Ad Soyad','Örn. Kule Plaza A.Ş.'), txt('Yetkili kişi','Örn. Ayşe Yıldırım'), txt('Telefon','0(5__) ___ __ __'), txt('E-posta','ornek@firma.com'), area('Adres','Fatura adresi...') ] },
+  finNew: { hint:'Gelir ve giderler aylık nakit akışı raporuna işlenir.', submit:'Hareketi Kaydet',
+    fields:[ pick('Hareket tipi',['Gider','Gelir'],0), txt('Açıklama','Örn. Malzeme alımı'), txt('Tutar','₺0,00'), pick('Ödeme',['Nakit','Havale','Kredi kartı'],1), txt('Kategori / proje','Kule Plaza projesi'), txt('Tarih','25.07.2026') ] },
+  servNew: { hint:'Servis kaydı açıldığında müşteriye takip numarası SMS ile gider.', submit:'Servis Kaydı Aç',
+    fields:[ txt('Müşteri','Müşteri seçin'), txt('Cihaz / ekipman','Örn. Chiller ünitesi'), txt('Seri no','SN-000000'), pick('Servis tipi',['Garanti','Ücretli','Sözleşme'],0), txt('Atanan teknisyen','Teknisyen seçin'), area('Arıza tanımı','Müşteri beyanı...') ] }
+};
+
+const ROWS = {
+  account: { profile:true, groups:[
+    { title:'Profil', rows:[
+      { mark:'AD', label:'Kişisel bilgiler', hint:'Ad, ünvan, telefon', ...soft('#FEF0EC','#D8503D'), link:true },
+      { mark:'FR', label:'Firma bilgileri', hint:'Aydın Teknoloji A.Ş. · vergi no', ...soft('#E9F0FD','#2C5AA8'), link:true },
+      { mark:'PW', label:'Şifre değiştir', hint:'Son değişiklik 3 ay önce', ...soft('#F3EEFB','#6941A8'), link:true } ] },
+    { title:'Abonelik', rows:[
+      { mark:'PR', label:'Plan ve faturalama', hint:'Profesyonel · 12 kullanıcı', ...soft('#E7F6EF','#1F8A5F'), link:true },
+      { mark:'FT', label:'Fatura geçmişi', hint:'Son fatura 01.07.2026', ...soft('#FEF3E2','#B87514'), link:true } ] } ] },
+  settings: { profile:false, groups:[
+    { title:'Bildirimler', rows:[
+      { mark:'BL', label:'Anlık bildirimler', hint:'Görev ve mesaj bildirimleri', ...soft('#FEF0EC','#D8503D'), toggle:true },
+      { mark:'EP', label:'E-posta özeti', hint:'Her sabah 08:00', ...soft('#E9F0FD','#2C5AA8'), toggle:true },
+      { mark:'SM', label:'SMS uyarıları', hint:'Sadece acil servis kayıtları', ...soft('#FEF3E2','#B87514'), toggle:false } ] },
+    { title:'Uygulama', rows:[
+      { mark:'DL', label:'Koyu tema', hint:'Sistem ayarını takip et', ...soft('#EFF2F7','#54617A'), toggle:false },
+      { mark:'TR', label:'Dil', hint:'Türkçe', ...soft('#E7F6EF','#1F8A5F'), link:true },
+      { mark:'YD', label:'Yedekleme', hint:'Günlük · son 03:00', ...soft('#F3EEFB','#6941A8'), link:true },
+      { mark:'DS', label:'Destek ve yardım', hint:'Canlı destek, kılavuz', ...soft('#E9F0FD','#2C5AA8'), link:true } ] } ] }
+};
+
+const MENU = [
+  { mark:'GP', label:'Giriş Paneli', screen:'home' },
+  { mark:'MS', label:'Mesajlar', children:[['Gelen Mesajlar','msgInbox'],['Mesaj Yaz','msgNew']] },
+  { mark:'GÖ', label:'Görev Paneli', children:[['Görev Oluştur','taskNew'],['Görev Listesi','taskList']] },
+  { mark:'PR', label:'Proje Paneli', children:[['Proje Oluştur','projNew'],['Proje Listesi','projList']] },
+  { mark:'TK', label:'Teklif Paneli', children:[['Teklif Oluştur','offerNew'],['Verilen Teklifler','offerList']] },
+  { mark:'MŞ', label:'Müşteri Paneli', children:[['Müşteri Oluştur','custNew'],['Müşteri Listesi','custList']] },
+  { mark:'FN', label:'Finans Paneli', children:[['Hareket Ekle','finNew'],['Gider Listesi','finList']] },
+  { mark:'TS', label:'Teknik Servis', children:[['Servis Ekle','servNew'],['Servis Listesi','servList']] },
+  { mark:'SA', label:'Sistem Ayarları', children:[['Personel Yönetimi','staff'],['Hesap Ayarları','account'],['Ayarlar','settings']] }
+];
+
+class Component extends DCLogic {
+  state = { auth: true, screen: 'home', menu: false, stack: [] };
+
+  go = (screen) => this.setState(s => ({
+    screen, menu: false,
+    stack: screen === 'home' ? [] : (s.screen === screen ? s.stack : [...s.stack, s.screen])
+  }));
+
+  renderVals() {
+    const { auth, screen, menu, stack } = this.state;
+    const cur = SCREENS[screen] || SCREENS.home;
+    const data = DATA[screen] || {};
+    const form = FORMS[screen];
+    const rows = ROWS[screen];
+
+    const tabs = [
+      ['GP','Panel','home'], ['GÖ','Görev','taskList'], ['PR','Proje','projList'],
+      ['MS','Mesaj','msgInbox'], ['MŞ','Müşteri','custList']
+    ].map(([mark, label, key]) => {
+      const on = screen === key;
+      return { mark, label, go: () => this.go(key),
+        bg: on ? 'linear-gradient(135deg,#EE6C5A,#F5A05A)' : 'transparent',
+        fg: on ? '#EE6C5A' : '#94A0B4' };
+    }).map(t => ({ ...t, fg: t.bg === 'transparent' ? '#94A0B4' : '#EE6C5A' }));
+    tabs.forEach(t => { if (t.bg !== 'transparent') t.mfg = '#fff'; });
+
+    return {
+      loggedIn: auth, loggedOut: !auth,
+      login: () => this.setState({ auth: true, screen: 'home', stack: [] }),
+      logout: () => this.setState({ auth: false, menu: false, screen: 'home', stack: [] }),
+      title: cur.title, eyebrow: cur.eyebrow,
+      showBack: stack.length > 0, showLogo: stack.length === 0,
+      back: () => this.setState(s => ({ screen: s.stack[s.stack.length - 1] || 'home', stack: s.stack.slice(0, -1) })),
+      openMenu: () => this.setState({ menu: true }),
+      closeMenu: () => this.setState({ menu: false }),
+      menuOpen: menu,
+
+      isHome: cur.kind === 'home', isList: cur.kind === 'list',
+      isForm: cur.kind === 'form', isRows: cur.kind === 'rows',
+      showFab: !!cur.fab, fabGo: () => this.go(cur.fab),
+      goTasks: () => this.go('taskList'),
+
+      stats: [
+        { mark:'GÖ', value:'14', label:'Açık görev', delta:'+3', bg:'#FEF0EC', fg:'#D8503D', go:()=>this.go('taskList') },
+        { mark:'PR', value:'6', label:'Aktif proje', delta:'+1', bg:'#E9F0FD', fg:'#2C5AA8', go:()=>this.go('projList') },
+        { mark:'TK', value:'9', label:'Bekleyen teklif', delta:'+2', bg:'#FEF3E2', fg:'#B87514', go:()=>this.go('offerList') },
+        { mark:'TS', value:'4', label:'Açık servis', delta:'+1', bg:'#E7F6EF', fg:'#1F8A5F', go:()=>this.go('servList') }
+      ],
+      quick: [
+        { mark:'+G', label:'Görev', go:()=>this.go('taskNew') },
+        { mark:'+T', label:'Teklif', go:()=>this.go('offerNew') },
+        { mark:'+M', label:'Müşteri', go:()=>this.go('custNew') },
+        { mark:'+S', label:'Servis', go:()=>this.go('servNew') }
+      ],
+      todayTasks: [
+        { title:'Kule Plaza klima bakımı', subtitle:'09:30 · Mert Tunç', accent:'#EE6C5A', ...badge('Acil','hot') },
+        { title:'Teklif revizyonu TKF-118', subtitle:'13:00 · Satış ekibi', accent:'#2C5AA8', ...badge('Devam','info') },
+        { title:'Gider mutabakatı', subtitle:'16:00 · Selin Barış', accent:'#F5A05A', ...badge('Planlı','mute') }
+      ],
+
+      chips: (data.chips || []).map((label, i) => i === 0
+        ? { label, bg:'#101E33', fg:'#fff', border:'#101E33' }
+        : { label, bg:'#fff', fg:'#54617A', border:'#E4E9F1' }),
+      items: data.items || [],
+
+      formHint: form ? form.hint : '', submitLabel: form ? form.submit : 'Kaydet',
+      fields: form ? form.fields.map(f => ({
+        ...f, isText: f.kind === 'text', isArea: f.kind === 'area', isPick: f.kind === 'pick'
+      })) : [],
+
+      showProfile: !!(rows && rows.profile),
+      groups: rows ? rows.groups.map(g => ({
+        title: g.title,
+        rows: g.rows.map(r => ({
+          mark:r.mark, label:r.label, hint:r.hint, bg:r.bg, fg:r.fg,
+          isToggle: r.toggle !== undefined, isLink: !!r.link,
+          tBg: r.toggle ? '#EE6C5A' : '#DDE3EC', tAlign: r.toggle ? 'flex-end' : 'flex-start',
+          go: () => {}
+        }))
+      })) : [],
+
+      tabs: tabs.map(t => {
+        const on = t.bg !== 'transparent';
+        return { mark:t.mark, label:t.label, go:t.go, bg:t.bg, markFg: on ? '#fff' : '#94A0B4', fg: on ? '#EE6C5A' : '#94A0B4' };
+      }),
+
+      menu: MENU.map(m => {
+        const active = m.screen === screen || (m.children || []).some(c => c[1] === screen);
+        return {
+          mark: m.mark, label: m.label,
+          bg: active && m.screen ? 'rgba(255,255,255,.09)' : 'transparent',
+          fg: active ? '#fff' : '#C6D1E2',
+          iconBg: active ? 'linear-gradient(135deg,#EE6C5A,#F5A05A)' : 'rgba(255,255,255,.07)',
+          iconFg: active ? '#fff' : '#8497B5',
+          go: () => m.screen ? this.go(m.screen) : this.go(m.children[0][1]),
+          hasChildren: !!m.children,
+          children: (m.children || []).map(([label, key]) => ({
+            label, go: () => this.go(key),
+            fg: key === screen ? '#fff' : '#8497B5',
+            bg: key === screen ? 'rgba(238,108,90,.22)' : 'transparent'
+          }))
+        };
+      })
+    };
+  }
+}
+
+</script>
+</body>
+</html>

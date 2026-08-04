@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">IsteYonetim</string>
+    <string name="title_activity_main">IsteYonetim</string>
+    <string name="package_name">com.bulutgrup.isteyonetim</string>
+    <string name="custom_url_scheme">com.bulutgrup.isteyonetim</string>
+</resources>
