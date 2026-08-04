@@ -129,6 +129,8 @@ export default function App() {
   // Reply message text
   const [replyText, setReplyText] = useState<string>('');
 
+  const [offerItems, setOfferItems] = useState<{ name: string; qty: number; price: number; kdv: number }[]>([{ name: '', qty: 1, price: 0, kdv: 20 }]);
+
   // Active filter tab
   const [activeChip, setActiveChip] = useState<string>('Tümü');
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -303,12 +305,18 @@ export default function App() {
         await supabase.from('messages').insert([payload]);
         Alert.alert('Başarılı', 'Mesajınız gönderildi.');
       } else if (screen === 'offerNew') {
+        const totalAmount = offerItems.reduce((acc, curr) => {
+          const itemTotal = curr.qty * curr.price;
+          const itemTax = itemTotal * (curr.kdv / 100);
+          return acc + itemTotal + itemTax;
+        }, 0);
         const payload = {
           title: formTitle || 'Yeni Teklif',
-          amount: parseFloat(formAmount) || 0,
+          amount: totalAmount,
           status: formStatus || 'sent',
           valid_until: formDate || null,
-          customer_name: formCustomerId || 'Genel Müşteri'
+          customer_name: formCustomerId || 'Genel Müşteri',
+          notes: JSON.stringify(offerItems)
         };
         await supabase.from('offers').insert([payload]);
         Alert.alert('Başarılı', 'Teklif oluşturuldu.');
@@ -350,6 +358,7 @@ export default function App() {
       setFormCustomerId('');
       setFormAssignedTo('');
       setFormCategory('');
+      setOfferItems([{ name: '', qty: 1, price: 0, kdv: 20 }]);
       fetchData();
       go(prevScreen);
     } catch (err: any) {
@@ -465,6 +474,15 @@ export default function App() {
     // Filter by Chip (Status)
     if (activeChip !== 'Tümü') {
       list = list.filter(item => {
+        if (screen === 'msgInbox') {
+          // Messages: read status
+          const isRead = item.read === true;
+          return activeChip === 'Aktif' ? !isRead : isRead;
+        }
+        if (screen === 'finList') {
+          // Finance: Income (Aktif) vs Expense (Tamamlanan)
+          return activeChip === 'Aktif' ? item.type === 'income' : item.type === 'expense';
+        }
         const status = (item.status || '').toLowerCase();
         if (activeChip === 'Aktif') return status === 'active' || status === 'todo' || status === 'unresolved' || status === 'in_progress' || status === 'sent';
         if (activeChip === 'Tamamlanan') return status === 'completed' || status === 'done' || status === 'resolved' || status === 'accepted';
@@ -889,7 +907,7 @@ export default function App() {
               />
             )}
 
-            {(screen === 'finNew' || screen === 'offerNew') && (
+            {screen === 'finNew' && (
               <TextInput 
                 placeholder="Tutar (₺)"
                 placeholderTextColor={theme.ink}
@@ -901,13 +919,104 @@ export default function App() {
             )}
 
             {screen === 'offerNew' && (
-              <TextInput 
-                placeholder="Müşteri Adı"
-                placeholderTextColor={theme.ink}
-                value={formCustomerId}
-                onChangeText={setFormCustomerId}
-                style={[styles.input, { backgroundColor: theme.cardBg, color: theme.text, borderColor: theme.border }]}
-              />
+              <View style={{ gap: 10 }}>
+                <TextInput 
+                  placeholder="Müşteri Adı"
+                  placeholderTextColor={theme.ink}
+                  value={formCustomerId}
+                  onChangeText={setFormCustomerId}
+                  style={[styles.input, { backgroundColor: theme.cardBg, color: theme.text, borderColor: theme.border }]}
+                />
+                
+                <Text style={{ fontSize: 13, fontWeight: '700', color: theme.text, marginTop: 5 }}>Teklif Kalemleri</Text>
+                {offerItems.map((item, index) => {
+                  const updateItem = (field: keyof typeof item, value: any) => {
+                    const newItems = [...offerItems];
+                    newItems[index] = { ...newItems[index], [field]: value };
+                    setOfferItems(newItems);
+                  };
+                  const removeItem = () => {
+                    if (offerItems.length > 1) {
+                      setOfferItems(offerItems.filter((_, i) => i !== index));
+                    }
+                  };
+                  return (
+                    <View key={index} style={{ padding: 10, borderRadius: 10, borderWidth: 1, borderColor: theme.border, backgroundColor: theme.bg, gap: 6 }}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 11, fontWeight: '800', color: theme.ink }}>KALEM #{index + 1}</Text>
+                        {offerItems.length > 1 && (
+                          <TouchableOpacity onPress={removeItem}>
+                            <Text style={{ color: '#E03131', fontSize: 12, fontWeight: '800' }}>Sil</Text>
+                          </TouchableOpacity>
+                        )}
+                      </View>
+                      <TextInput 
+                        placeholder="Ürün / Hizmet Açıklaması"
+                        placeholderTextColor={theme.ink}
+                        value={item.name}
+                        onChangeText={(val) => updateItem('name', val)}
+                        style={[styles.input, { height: 35, backgroundColor: theme.cardBg, color: theme.text, borderColor: theme.border, fontSize: 12 }]}
+                      />
+                      <View style={{ flexDirection: 'row', gap: 6 }}>
+                        <TextInput 
+                          placeholder="Miktar"
+                          placeholderTextColor={theme.ink}
+                          value={String(item.qty || '')}
+                          keyboardType="numeric"
+                          onChangeText={(val) => updateItem('qty', parseInt(val) || 0)}
+                          style={[styles.input, { flex: 1, height: 35, backgroundColor: theme.cardBg, color: theme.text, borderColor: theme.border, fontSize: 12 }]}
+                        />
+                        <TextInput 
+                          placeholder="Birim Fiyat"
+                          placeholderTextColor={theme.ink}
+                          value={String(item.price || '')}
+                          keyboardType="numeric"
+                          onChangeText={(val) => updateItem('price', parseFloat(val) || 0)}
+                          style={[styles.input, { flex: 2, height: 35, backgroundColor: theme.cardBg, color: theme.text, borderColor: theme.border, fontSize: 12 }]}
+                        />
+                        <TextInput 
+                          placeholder="KDV %"
+                          placeholderTextColor={theme.ink}
+                          value={String(item.kdv || '')}
+                          keyboardType="numeric"
+                          onChangeText={(val) => updateItem('kdv', parseFloat(val) || 0)}
+                          style={[styles.input, { flex: 1, height: 35, backgroundColor: theme.cardBg, color: theme.text, borderColor: theme.border, fontSize: 12 }]}
+                        />
+                      </View>
+                    </View>
+                  );
+                })}
+                <TouchableOpacity 
+                  onPress={() => setOfferItems([...offerItems, { name: '', qty: 1, price: 0, kdv: 20 }])}
+                  style={[styles.secondaryButton, { height: 35, borderStyle: 'dashed', borderWidth: 1 }]}
+                >
+                  <Text style={styles.secondaryButtonText}>+ Yeni Satır Ekle</Text>
+                </TouchableOpacity>
+
+                {/* Real-time Summary Card */}
+                {(() => {
+                  const subtotal = offerItems.reduce((acc, curr) => acc + (curr.qty * curr.price), 0);
+                  const totalKdv = offerItems.reduce((acc, curr) => acc + (curr.qty * curr.price * (curr.kdv / 100)), 0);
+                  const grandTotal = subtotal + totalKdv;
+                  return (
+                    <View style={{ padding: 10, borderRadius: 10, backgroundColor: theme.cardBg, borderStyle: 'solid', borderWidth: 1, borderColor: theme.border, gap: 4 }}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ color: theme.ink, fontSize: 11 }}>KDV Hariç Tutar:</Text>
+                        <Text style={{ color: theme.text, fontSize: 11, fontWeight: '700' }}>{subtotal.toLocaleString('tr-TR')} ₺</Text>
+                      </View>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ color: theme.ink, fontSize: 11 }}>Toplam KDV:</Text>
+                        <Text style={{ color: theme.text, fontSize: 11, fontWeight: '700' }}>{totalKdv.toLocaleString('tr-TR')} ₺</Text>
+                      </View>
+                      <View style={{ height: 1, backgroundColor: theme.border, marginVertical: 3 }} />
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                        <Text style={{ color: theme.text, fontSize: 12, fontWeight: '800' }}>Genel Toplam:</Text>
+                        <Text style={{ color: Colors.coral, fontSize: 13, fontWeight: '800' }}>{grandTotal.toLocaleString('tr-TR')} ₺</Text>
+                      </View>
+                    </View>
+                  );
+                })()}
+              </View>
             )}
 
             {screen === 'finNew' && (
@@ -948,7 +1057,7 @@ export default function App() {
               />
             )}
 
-            {screen !== 'finNew' && (
+            {screen !== 'finNew' && screen !== 'offerNew' && (
               <TextInput 
                 placeholder={screen === 'msgNew' ? 'Mesaj içeriği...' : screen === 'servNew' ? 'Arıza detayı ve açıklaması...' : 'Detaylar / Açıklama'}
                 placeholderTextColor={theme.ink}
@@ -965,7 +1074,10 @@ export default function App() {
             ) : (
               <TouchableOpacity 
                 onPress={handleSaveForm}
-                style={styles.primaryButton}
+                style={[
+                  styles.primaryButton,
+                  screen === 'finNew' && { backgroundColor: formType === 'income' ? '#2B8A3E' : '#EE6C5A' }
+                ]}
               >
                 <Text style={styles.buttonText}>Kaydet</Text>
               </TouchableOpacity>
